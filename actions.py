@@ -58,6 +58,17 @@ def selfTest():
     moveArm(c.armStartbox, 30)
     ao()
 
+def driveAndSquareUp():
+    moveArm(c.armTram, 20)
+    drive_timed(165, 155, 6500)
+    drive_timed(-100, -100, 1000)
+    drive_timed(75, -75, 2000)
+    drive_timed(75, 75, 2500)
+    #drive_timed(-150, -150, 6500)
+    driveTillBump(-75, -75)
+    drive_timed(100,100,1000)
+    drive_timed(75, -75, 4000)
+
 def driveToBotguy():
     drive_timed(100, 100, 3)
 

@@ -29,7 +29,6 @@ def rotate(power, time):
     else:
         spin_cw(abs(power), time)
 
-
 def split_drive(left, right, time, increments, turnTime):
     power = -100
     if turnTime < 0:
@@ -314,4 +313,9 @@ def moveCog_position (inches,speed):
     #print (ticks)
     #print (get_motor_position_counter(c.cogMotor))
 
-
+def driveTillBump (lspeed, rspeed ):
+    create_drive_direct(-lspeed, -rspeed)
+    while get_create_rbump() == 0:
+       pass
+    create_stop()
+    print("rbump press")
