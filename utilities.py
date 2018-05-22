@@ -2,6 +2,9 @@ import constants as c
 
 from wallaby import *
 
+from actions import *
+from movement import *
+
 def wait_for_button(force=False):
     if c.ALLOW_BUTTON_WAIT or force:
         print "Press Button..."
@@ -182,3 +185,11 @@ def testArm():
 
 def igusReset():
     return digital(c.IGUS_BUTTON)
+
+def findBotGuy():
+    resetArm(20, 2500)
+    moveArm(-650, 10)
+    msleep(500)
+    print("Looking for botguy.")
+    while (analog(1) < 1300):
+        rotate(-100, 100)

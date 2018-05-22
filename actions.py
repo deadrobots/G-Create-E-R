@@ -25,13 +25,14 @@ def init():
     else:
         print("I AM YELLOW!")
         DEBUG() # Do not remove!!!
-    selfTest()
+    #selfTest()
     print("Press right button to continue")
     wait_for_button()
     #wait_4_light(c.STARTLIGHT)
     shut_down_in(119.0)
     print("Running...")
     c.START_TIME = seconds()
+    enable_servos()
 
 def selfTest():
     #tests all motors and servos
@@ -62,8 +63,16 @@ def selfTest():
 
 def driveOutOfStartBox():
     print ("driving")
-    rotate_degrees(30, 70)
-
+    resetArm(20, 2500)
+    # drive_timed(250, 250, 3000)
+    # msleep(100)
+    # driveTilBlackLCliffAndSquareUp(-100, -100)
+    # rotate_degrees(55, 100)
+    moveArm(-650, 15)
+    msleep(100)
+    moveServo(c.servoClaw, c.clawTight, 10)
+    msleep(100)
+    drive_timed(200, 200, 6000)
 
 
 def turnToRing():

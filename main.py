@@ -9,8 +9,8 @@ import movement as m
 def main():
     print ("hello")
     act.init()
-    act.driveOutOfStartBox()
-
+    # act.driveOutOfStartBox()
+    u.findBotGuy()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)

@@ -23,6 +23,7 @@ IGUS_BUTTON = 9
 
 #Analog Ports
 STARTLIGHT = 0
+ET = 1
 
 IS_YELLOW_BOT = digital(ROBOT_ID_YELLOW)
 IS_BLUE_BOT = digital(ROBOT_ID_BLUE)
@@ -81,6 +82,7 @@ elif IS_BLUE_BOT:
 
     #Claw Servo Values
     clawClosed = 230
+    clawTight = 500
     clawMid = 550
     clawBotguy = 785
     clawTram = 900  # Position to move tram
@@ -112,4 +114,4 @@ elif IS_BLUE_BOT:
 
     armBotguyDelivery = 420
     armBotguyPickUp = 50  # -630
-armScore = 310
+    armScore = 310
