@@ -25,14 +25,13 @@ def init():
     else:
         print("I AM YELLOW!")
         DEBUG() # Do not remove!!!
-    #selfTest()
+    selfTest()
     print("Press right button to continue")
     wait_for_button()
     #wait_4_light(c.STARTLIGHT)
     shut_down_in(119.0)
     print("Running...")
     c.START_TIME = seconds()
-    enable_servos()
 
 def selfTest():
     #tests all motors and servos
@@ -241,3 +240,7 @@ def deliverBotguy():
     moveArm(c.armScore, 7)
     msleep(500)
     ao()
+    DEBUG()
+
+
+

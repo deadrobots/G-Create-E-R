@@ -311,7 +311,4 @@ def moveCog_position (inches,speed):
             pass
     motor(c.cogMotor, 0)
     #print (ticks)
-#print (get_motor_position_counter(c.cogMotor))
-
-
-
+    #print (get_motor_position_counter(c.cogMotor))
