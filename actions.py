@@ -38,25 +38,43 @@ def selfTest():
     testArm()
     resetArm(30, 2000)
     # open/close claw
-    enable_servo(c.servoClaw)
-    moveServo(c.servoClaw, c.clawClosed, 15)
-    moveServo(c.servoClaw, c.clawStart, 15)
+    enable_servo(c.servoBotGuyClaw)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    moveServo(c.servoBotGuyClaw, c.clawStart, 15)
     # test drive
     drive_timed(100, 100, 2500)
     msleep(250)
     drive_timed(-100, -100, 2500)
     # lower ramp
-    enable_servo(c.servoIgus)
-    moveServo(c.servoIgus, c.cogStart - 300, 10)
-    # move the chain
-    moveCog(100, 1500)# enables cog
-    resetChain()
-    # raise ramp
-    moveServo(c.servoIgus, c.cogStartBox, 10)
-    msleep(250)
+    enable_servo(c.servoHayArm)
+    moveServo(c.servoHayArm, c.hayArmDown, 10)
+    enable_servo(c.servoHayClaw)
+    moveServo(c.servoHayClaw, c.hayClawClosed, 10)
+    moveServo(c.servoHayClaw, c.hayClawOpen, 10)
+    moveServo(c.servoHayArm, c.hayArmUp, 10)
     # lower the arm
     moveArm(c.armStartbox, 30)
     ao()
+
+def getOutOfstartBox ():
+    driveTillBump2(-250,-250)
+    if get_create_lbump() == 1:
+        print("left bumped")
+    if get_create_rbump() == 1:
+        print("right bumped")
+
+    while get_create_rbump() == 0 or get_create_lbump() == 0:
+        print(" been bumped")
+        if get_create_lbump() == 1:
+            print('left bump')
+           # drive_timed(70, 70, 250)
+           # drive_timed(70,-70,500)
+        if get_create_rbump() == 1:
+            print('right bump')
+
+
+
+
 
 def driveAndSquareUp():
     moveArm(c.armTram, 20)
@@ -70,13 +88,15 @@ def driveAndSquareUp():
     drive_timed(75, -75, 4000)
 
 def driveToBotguy():
-    drive_timed(100, 100, 3)
+    rotate_degrees(-30, 100)
+    drive_timed(-250, -250, 3)
+    #SQUARE UP ON BLACK TAPE NEXT!
 
 def turnToRing():
     #squares up on south wall then west wall
     print ("turnToRing")
     resetArm(30, 2000)
-    moveServo(c.servoClaw, c.clawClosed, 35)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 35)
     drive_timed(100, 100, 2000) #squares up to west wall
     if c.IS_ORANGE_BOT:
         drive_timed(-100, -75, 1375)
@@ -188,7 +208,7 @@ def approachCenter():
     drive_timed(100,100,1900)
     driveTilBlackLCliffAndSquareUp(-100, -100)
     msleep(500)
-    moveServo(c.servoClaw, c.clawTram, 20)
+    moveServo(c.servoBotGuyClaw, c.clawTram, 20)
     resetArm(30, 500)
     drive_timed(-100, -100, 500)
     rotate_degrees(-90, 100)
@@ -196,7 +216,7 @@ def approachCenter():
     driveTilWhiteLCliff(-100)
     drive_timed(-100, -100, 1500)
     moveArm(c.armBotguy, 30)
-    moveServo(c.servoClaw, c.clawClosed, 20)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 20)
     msleep(250)
     driveTilBlackLCliffAndSquareUp(100, 100)
 
@@ -206,11 +226,11 @@ def approachBotguy():
     drive_timed(100, 110, 250)  #100, 105
     resetArmLowPosition()
     moveArm(c.armBotguyPickUp, 8)
-    moveServo(c.servoClaw, c.clawBotguy, 12)  # was clawTram
+    moveServo(c.servoBotGuyClaw, c.clawBotguy, 12)  # was clawTram
     msleep(150)
     drive_timed(100, 110, 1550) #100, 105
     #moveArm(c.armBotguyPickUp, 5)
-    moveServo(c.servoClaw, c.clawClosed, 12)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 12)
     print("Grabbed botguy")
     msleep(150)
     #Move create forward to let lego drop cubes in middle

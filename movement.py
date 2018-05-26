@@ -319,3 +319,10 @@ def driveTillBump (lspeed, rspeed ):
        pass
     create_stop()
     print("rbump press")
+
+def driveTillBump2(lspeed, rspeed):
+   # create_drive_direct(-lspeed, -rspeed)
+    while get_create_rbump() == 0 and  get_create_lbump() == 0:
+        pass
+    create_stop()
+    print("bumped")

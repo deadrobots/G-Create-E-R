@@ -9,7 +9,8 @@ import movement as m
 def main():
     print("Running!")
     act.init()
-    act.driveAndSquareUp()
+    act.driveToBotguy()
+    # act.driveAndSquareUp()
     #act.driveToBotguy()
 
 

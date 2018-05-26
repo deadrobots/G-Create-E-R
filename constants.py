@@ -33,8 +33,8 @@ IS_ORANGE_BOT = not IS_BLUE_BOT and not IS_YELLOW_BOT
 
 if IS_ORANGE_BOT:
 
-    servoIgus = 0
-    servoClaw = 1
+    servoHayArm = 0
+    servoBotGuyClaw = 1
 
 
     INCHES_TO_TICKS = 600
@@ -75,8 +75,9 @@ if IS_ORANGE_BOT:
 
 elif IS_BLUE_BOT:
     #Servo Ports
-    servoIgus = 2
-    servoClaw = 3
+    servoHayClaw = 1
+    servoHayArm = 2
+    servoBotGuyClaw = 3
 
     INCHES_TO_TICKS = 560
 
@@ -114,4 +115,10 @@ elif IS_BLUE_BOT:
     armBotguyDelivery = 420
     armBotguyPickUp = 50  # -630
     armScore = 310
+
+    hayArmUp = 560
+    hayArmDown = 1820
+
+    hayClawClosed = 380
+    hayClawOpen = 1060
 
