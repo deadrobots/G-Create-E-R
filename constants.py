@@ -70,7 +70,7 @@ if IS_ORANGE_BOT:
     armStartbox = -700
 
     armBotguyDelivery = 400
-    armBotguyPickUp = 60    #-630
+    armBotguyPickUp = 450    #-630
     armScore = 230     #-415
 
 elif IS_BLUE_BOT:
@@ -82,9 +82,10 @@ elif IS_BLUE_BOT:
     INCHES_TO_TICKS = 560
 
     #Claw Servo Values
-    clawClosed = 230
+    clawClosed = 200
     clawMid = 550
-    clawBotguy = 785
+    clawBotguy = 430#785
+    clawbotguyArea = 650
     clawTram = 900  # Position to move tram
     clawOpen = 1400
     clawStart = 2047 #All the way back
@@ -113,12 +114,13 @@ elif IS_BLUE_BOT:
     armStartbox = -700
 
     armBotguyDelivery = 420
-    armBotguyPickUp = 50  # -630
+    armBotguyPickUp =  90
     armScore = 310
 
     hayArmUp = 560
+    hayArmCarry = 1100
     hayArmDown = 1820
 
-    hayClawClosed = 380
+    hayClawClosed = 350 #380
     hayClawOpen = 1060
 

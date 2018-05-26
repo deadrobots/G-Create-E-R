@@ -4,6 +4,37 @@ import constants as c
 from wallaby import *
 
 
+def getCrates():
+    resetArm(30, 2000)
+    moveServo(c.servoHayArm, c.hayArmDown, 10)
+    moveServo(c.servoHayClaw, c.hayClawOpen, 10)
+    driveTilBlackLCliffAndSquareUp(-150, -150)
+    msleep(250)
+    timedLineFollowRightFront(.4)
+    drive_timed(-65, -75, 1450)
+    moveServo(c.servoHayClaw, c.hayClawClosed, 10)
+    driveTilBlackLCliffAndSquareUp(250,250)
+    moveServo(c.servoHayArm, c.hayArmCarry, 10)
+    rotate_degrees(180, 100)
+    resetArmLowPosition()
+    msleep(1000)
+    moveArm(c.armBotguyPickUp, 8)
+    moveServo(c.servoBotGuyClaw, c.clawBotguy, 10)
+
+def getBotGuy():
+    moveArm(c.armBotguyPickUp, 40)
+    drive_timed(100, 100, 2000)
+    moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
+    drive_timed(100, 100, 1500)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
+    driveTilBlackLCliffAndSquareUp(-100, -100)
+    drive_timed(-100, -100, 1500)
+    msleep(4000)
+
+
+
+
+
 def init():
     '''For Setup:
     Make sure that both bumpers are touching the back edges of the starting box
@@ -57,23 +88,12 @@ def selfTest():
     ao()
 
 def getOutOfstartBox ():
-    driveTillBump2(-250,-250)
-    if get_create_lbump() == 1:
-        print("left bumped")
-    if get_create_rbump() == 1:
-        print("right bumped")
-
-    while get_create_rbump() == 0 or get_create_lbump() == 0:
-        print(" been bumped")
-        if get_create_lbump() == 1:
-            print('left bump')
-           # drive_timed(70, 70, 250)
-           # drive_timed(70,-70,500)
-        if get_create_rbump() == 1:
-            print('right bump')
-
-
-
+    rotate_degrees(-28, 100)
+    drive_timed(-100, -100, 3000)
+    rotate_degrees(90, 100)
+    timedLineFollowRightFront(3.25)
+    drive_timed(-100, -100, 6000)
+    rotate_degrees(-86, 200)
 
 
 def driveAndSquareUp():

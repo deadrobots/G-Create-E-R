@@ -217,6 +217,15 @@ def timedLineFollowLeftFront(time):
             create_drive_direct(50, 100)
     create_stop()
 
+def timedLineFollowRightFront(time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if get_create_rfcliff_amt() < 2000:
+            create_drive_direct(100, 50)
+        else:
+            create_drive_direct(50, 100)
+    create_stop()
+
 
 def lineFollowLeftFrontTilBlack():
     while get_create_lcliff_amt() > 2000:
@@ -225,6 +234,7 @@ def lineFollowLeftFrontTilBlack():
         else:
             create_drive_direct(50, 100)
     create_stop()
+
 
 
 def lineFollowLeftFrontTilWhite():
