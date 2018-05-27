@@ -198,7 +198,6 @@ def driveUntilBlue(speed):
         pass
     create_stop()
 
-
 def timedLineFollowLeft(time):
     sec = seconds()
     while(seconds() - sec<time):
@@ -217,13 +216,13 @@ def timedLineFollowLeftFront(time):
             create_drive_direct(50, 100)
     create_stop()
 
-def timedLineFollowRightFront(time):
+def timedLineFollowRightFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
         if get_create_rfcliff_amt() < 2000:
-            create_drive_direct(100, 50)
+            create_drive_direct(speed, (int)(speed/1.8))
         else:
-            create_drive_direct(50, 100)
+            create_drive_direct((int)(speed/1.8), speed)
     create_stop()
 
 
@@ -336,3 +335,16 @@ def driveTillBump2(lspeed, rspeed):
         pass
     create_stop()
     print("bumped")
+
+
+def driveTilWhiteLCliffAndSquareUp(lspeed, rspeed):
+    lspeed = -lspeed
+    rspeed = -rspeed
+    create_drive_direct(rspeed, lspeed)
+    while (lspeed or rspeed):
+        if get_create_lcliff_amt() > 2000:
+            lspeed = 0
+            create_drive_direct(lspeed, rspeed)
+        if get_create_rcliff_amt() > 2000:
+            rspeed = 0
+            create_drive_direct(lspeed, rspeed)

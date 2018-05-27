@@ -5,11 +5,16 @@ import constants as c
 from wallaby import *
 import utilities as u
 import movement as m
+from camera import determineOrder
 
 def main():
     print("Running!")
     act.init()
     act.getOutOfstartBox()
+    act.seeBlocks()
+    u.DEBUG()
+    act.goToSecondBlock()
+    act.seeBlocks2()
     u.DEBUG()
     act.getCrates()
     act.getBotGuy()

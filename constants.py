@@ -124,3 +124,11 @@ elif IS_BLUE_BOT:
     hayClawClosed = 350 #380
     hayClawOpen = 1060
 
+    ORANGE = 0
+    RED = 1
+    GREEN = 2
+    YELLOW = 3
+
+    COLOR_PROXIMITY = 20
+    ORANGE_AREA = 500
+    RGY_AREA = 60
