@@ -11,14 +11,13 @@ def main():
     print("Running!")
     act.init()
     act.getOutOfstartBox()
-    act.seeBlocks()
-    u.DEBUG()
-    act.goToSecondBlock()
-    act.seeBlocks2()
-    u.DEBUG()
     act.getCrates()
     act.getBotGuy()
-
+    act.gotoSecondBlock()
+    act.seeBlocks2()
+    u.DEBUG()
+    act.goToBlock3()
+    act.seeBlocks3()
 
 
 

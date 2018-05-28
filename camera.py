@@ -38,6 +38,7 @@ def getCenterColorAvg():
         camera_update()
         msleep(50)
         if get_object_count(c.ORANGE) > 0 and get_object_area(c.ORANGE,0) > c.ORANGE_AREA:
+            print("Found orange")
             print(" ")
             print("color proximity:" + str(colorProximity(c.RED)))
             print("get obj area:" + str(get_object_area(c.RED,0)))
@@ -68,7 +69,7 @@ def getCenterColorAvg():
 
 def colorProximity(color):
     #Tests to see if the center of the colored block is within a certain proximity to the center of the orange card
-    if abs(get_object_center_x(color, 0)- get_object_center_x(c.ORANGE,0)) < c.COLOR_PROXIMITY and get_object_center_y(color,0) < get_object_center_y(c.ORANGE,0):
+    if abs(get_object_center_x(color, 0)- get_object_center_x(c.ORANGE,0)) < c.COLOR_PROXIMITY: # and get_object_center_y(color,0) < get_object_center_y(c.ORANGE,0):
         return True
     return False
 
@@ -115,6 +116,10 @@ def determineOrder(list):
         list.append(last)
     print(list)
     print("final order: " + str([colorDefine(list[0]), colorDefine(list[1]), colorDefine(list[2])]))
+    # Trying to reorder the colors because create looks at the second block first and the third block second.
+    list = [list[2], list[0], list[1]]
+    print("resorted final order: " + str([colorDefine(list[0]), colorDefine(list[1]), colorDefine(list[2])]))
+
 
 def checkColor(list):
     #Finds color and adds it to the list

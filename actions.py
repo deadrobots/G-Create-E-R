@@ -64,7 +64,8 @@ def getOutOfstartBox ():
     rotate_degrees(-28, 100)
     drive_timed(-100, -100, 3000)
     rotate_degrees(90, 100)
-    timedLineFollowRightFront(250, 2)
+    timedLineFollowRightFront(250, 4.85)
+
 
 def seeBlocks():
     s = p.checkColor(colorOrder)
@@ -81,7 +82,65 @@ def seeBlocks():
 def goToSecondBlock():
     timedLineFollowRightFront(200, 3.2)
 
+def getCrates():
+    rotate_degrees(-90,200)
+    drive_timed(75,75, 2000)
+    msleep(1000)
+    driveTilBlackLCliffAndSquareUp(-75,-75)
+    moveServo(c.servoHayArm, c.hayArmDown, 10)
+    moveServo(c.servoHayClaw, c.hayClawOpen, 10)
+    msleep(250)
+    drive_timed(-100, -100, 400)
+    resetArm(30, 2000)
+    drive_timed(-65, -75, 1450)
+    moveServo(c.servoHayClaw, c.hayClawClosed, 10)
+    msleep(500)
+    driveTilBlackLCliffAndSquareUp(250,250)
+    moveServo(c.servoHayArm, c.hayArmCarry, 10)
+    rotate_degrees(180, 100)
+    resetArmLowPosition()
+    msleep(1000)
+    moveArm(c.armBotguyPickUp, 8)
+    moveServo(c.servoBotGuyClaw, c.clawBotguy, 10)
+
+def getBotGuy():
+    moveArm(c.armBotguyPickUp, 20)
+    driveTilBlackLCliffAndSquareUp(250,250)
+    moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
+    msleep(500)
+    drive_timed(100, 100, 500)
+    msleep(100)
+    drive_timed(100, 100, 1500)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
+    driveTilBlackLCliffAndSquareUp(-100, -100)
+    drive_timed(-100, -100, 1500)
+    msleep(1000)
+
+
+def gotoSecondBlock():
+    moveArm(c.armUpbotguy, 40)
+    rotate_degrees(-80, 100)
+
+
+
 def seeBlocks2():
+    s = p.checkColor(colorOrder)
+    print(get_object_area(c.YELLOW, 0))
+    if s == c.RED:
+        print("found red")
+    elif s == c.YELLOW:
+        print("found yellow")
+        dropBlocksFirst()
+    elif s == c.GREEN:
+        print("found green")
+    else:
+        print("Did not find cube")
+
+def goToBlock3():
+    timedLineFollowRightFrontBlocks(200, 3)
+
+
+def seeBlocks3():
     s = p.checkColor(colorOrder)
     print(get_object_area(c.YELLOW, 0))
     if s == c.RED:
@@ -94,35 +153,11 @@ def seeBlocks2():
         print("Did not find cube")
     p.determineOrder(colorOrder)
 
-def getCrates():
-    rotate_degrees(-90,200)
-    drive_timed(75,75, 2000)
-    msleep(1000)
-    driveTilBlackLCliffAndSquareUp(-75,-75)
+
+def dropBlocksFirst():
+    rotate_degrees(70 , 150)
     moveServo(c.servoHayArm, c.hayArmDown, 10)
     moveServo(c.servoHayClaw, c.hayClawOpen, 10)
-    msleep(250)
-    timedLineFollowRightFront(100, .4)
-    resetArm(30, 2000)
-    drive_timed(-65, -75, 1450)
-    moveServo(c.servoHayClaw, c.hayClawClosed, 10)
-    driveTilBlackLCliffAndSquareUp(250,250)
-    moveServo(c.servoHayArm, c.hayArmCarry, 10)
-    rotate_degrees(180, 100)
-    resetArmLowPosition()
-    msleep(1000)
-    moveArm(c.armBotguyPickUp, 8)
-    moveServo(c.servoBotGuyClaw, c.clawBotguy, 10)
-
-def getBotGuy():
-    moveArm(c.armBotguyPickUp, 40)
-    drive_timed(100, 100, 2000)
-    moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
-    drive_timed(100, 100, 1500)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
-    driveTilBlackLCliffAndSquareUp(-100, -100)
-    drive_timed(-100, -100, 1500)
-    msleep(4000)
-
+    drive_timed(-75, -75, 750)
 
 

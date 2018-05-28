@@ -82,7 +82,7 @@ elif IS_BLUE_BOT:
     INCHES_TO_TICKS = 560
 
     #Claw Servo Values
-    clawClosed = 200
+    clawClosed = 0
     clawMid = 550
     clawBotguy = 430#785
     clawbotguyArea = 650
@@ -116,6 +116,7 @@ elif IS_BLUE_BOT:
     armBotguyDelivery = 420
     armBotguyPickUp =  90
     armScore = 310
+    armUpbotguy = 200
 
     hayArmUp = 560
     hayArmCarry = 1100
