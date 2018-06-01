@@ -20,6 +20,7 @@ ROBOT_NAME = "Create-17"
 # Digital ports
 ROBOT_ID_YELLOW = 0
 ROBOT_ID_BLUE = 1
+ROBOT_ID_GREEN = 2
 IGUS_BUTTON = 9
 
 #Analog Ports
@@ -27,7 +28,8 @@ STARTLIGHT = 0
 
 IS_YELLOW_BOT = digital(ROBOT_ID_YELLOW)
 IS_BLUE_BOT = digital(ROBOT_ID_BLUE)
-IS_ORANGE_BOT = not IS_BLUE_BOT and not IS_YELLOW_BOT
+IS_GREEN_BOT = digital(ROBOT_ID_GREEN)
+IS_ORANGE_BOT = not IS_BLUE_BOT and not IS_YELLOW_BOT and not IS_GREEN_BOT
 
 
 
@@ -124,6 +126,68 @@ elif IS_BLUE_BOT:
 
     hayClawClosed = 350 #380
     hayClawOpen = 1060
+
+    ORANGE = 0
+    RED = 1
+    GREEN = 2
+    YELLOW = 3
+
+    COLOR_PROXIMITY = 20
+    ORANGE_AREA = 500
+    RGY_AREA = 60
+
+elif IS_GREEN_BOT:
+    # Servo Ports
+    servoCrateClaw = 1
+    servoCrateArm = 2
+    servoBotGuyClaw = 3
+    servoBotGuyArm = 0
+
+    INCHES_TO_TICKS = 560
+
+    # Claw Servo Values
+    clawClosed = 0
+    clawMid = 550
+    clawBotguy = 430  # 785
+    clawbotguyArea = 650
+    clawTram = 900  # Position to move tram
+    clawOpen = 1400
+    clawStart = 2047  # All the way back
+
+    # Cog Servo Values
+    cogServoVeryHigh = 15
+    evenMoreCogLift = 150
+    cogLift = 225
+    cogRingDrop = 215
+    cogStartBox = 350
+    cogPegTwo = 500
+    cogStart = 800
+    cogGrab = 800
+
+    # current motor arm values
+    armVeryHigh = -150
+    # armBotguyDelivery = -260
+    armTram = -315  # -305
+    armHigh = -290
+    # armDelivery = -385
+    armUp = -410
+    armSlightlyUp = -570
+    armSandwich = -595
+    armBotguy = -640  # -615
+    # armBotguyPickUp = -675 #-665
+    armStartbox = -700
+
+    armBotguyDelivery = 420
+    armBotguyPickUp = 90
+    armScore = 310
+    armUpbotguy = 200
+
+    crateArmUp = 560
+    crateArmCarry = 1100
+    crateArmDown = 1820
+
+    crateClawClosed = 350  # 380
+    crateClawOpen = 1060
 
     ORANGE = 0
     RED = 1

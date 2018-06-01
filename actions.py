@@ -23,9 +23,12 @@ def init():
         print("I AM ORANGE")
     elif c.IS_BLUE_BOT:
         print("I AM BLUE")
+    elif c.IS_GREEN_BOT:
+        print("I AM GREEN!")
     else:
-        print("I AM YELLOW!")
+        print("I AM YELLOW")
         DEBUG() # Do not remove!!!
+    DEBUG()
     selfTest()
     p.cameraInit()
     print("Press right button to continue")
