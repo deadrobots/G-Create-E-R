@@ -28,9 +28,11 @@ def init():
     else:
         print("I AM YELLOW")
         DEBUG() # Do not remove!!!
-    DEBUG()
-    selfTest()
-    p.cameraInit()
+    #DEBUG()
+    ################################
+    selfTestDateGrab()
+    ################################
+    #p.cameraInit()
     print("Press right button to continue")
     wait_for_button()
     #wait_4_light(c.STARTLIGHT)
@@ -62,7 +64,53 @@ def selfTest():
     # lower the arm
     moveArm(c.armStartbox, 30)
     ao()
+####################################################################
+def selfTestDateGrab():
+    print ("Running Self Test")
+    enable_servo(c.servoBotGuyArm)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    msleep(1500)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
+    # open/close claw
+    enable_servo(c.servoBotGuyClaw)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    moveServo(c.servoBotGuyClaw, c.clawStart, 15)
+    # test drive
+    drive_timed(100, 100, 2500)
+    msleep(250)
+    drive_timed(-100, -100, 2500)
+    # lower ramp
+    enable_servo(c.servoCrateArm)
+    moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    enable_servo(c.servoCrateClaw)
+    moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
+    moveServo(c.servoCrateArm, c.crateArmUp, 10)
 
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    ao()
+
+def pickUpDateBinsExperiment():
+    #drive from start box to date bin
+    #drive_timed(-160, -160, 1400)
+    #rotate_degrees(86, 100)
+    #drive_timed(250, 250, 1800)
+
+    drive_timed(-250, -250, 1100)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    moveServo(c.servoBotGuyClaw, c.clawMid, 15)
+    drive_timed(100, 100, 1500)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown-150, 15)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    drive_timed(-40, -40, 3600)
+    # msleep(1000)
+    moveServo(c.servoBotGuyClaw, c.clawLoose, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
+    drive_timed(100, 100, 1800)
+
+
+####################################################################3
 def getOutOfstartBox ():
     rotate_degrees(-28, 100)
     drive_timed(-100, -100, 3000)

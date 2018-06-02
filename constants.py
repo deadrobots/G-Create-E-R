@@ -138,56 +138,32 @@ elif IS_BLUE_BOT:
 
 elif IS_GREEN_BOT:
     # Servo Ports
-    servoCrateClaw = 1
+    servoCrateClaw = 0
     servoCrateArm = 2
     servoBotGuyClaw = 3
-    servoBotGuyArm = 0
+    servoBotGuyArm = 1
 
     INCHES_TO_TICKS = 560
 
     # Claw Servo Values
-    clawClosed = 0
-    clawMid = 550
-    clawBotguy = 430  # 785
-    clawbotguyArea = 650
-    clawTram = 900  # Position to move tram
-    clawOpen = 1400
-    clawStart = 2047  # All the way back
+    clawClosed = 400
+    clawLoose = 1000
+    clawMid = 1200
+    clawOpen = 1850
+    clawStart = 2047
 
-    # Cog Servo Values
-    cogServoVeryHigh = 15
-    evenMoreCogLift = 150
-    cogLift = 225
-    cogRingDrop = 215
-    cogStartBox = 350
-    cogPegTwo = 500
-    cogStart = 800
-    cogGrab = 800
 
-    # current motor arm values
-    armVeryHigh = -150
-    # armBotguyDelivery = -260
-    armTram = -315  # -305
-    armHigh = -290
-    # armDelivery = -385
-    armUp = -410
-    armSlightlyUp = -570
-    armSandwich = -595
-    armBotguy = -640  # -615
-    # armBotguyPickUp = -675 #-665
-    armStartbox = -700
+    # Botguy Arm Servo Values
+    botGuyArmUp = 1400
+    botGuyArmDown = 500
 
-    armBotguyDelivery = 420
-    armBotguyPickUp = 90
-    armScore = 310
-    armUpbotguy = 200
+    # Crate Arm Servo Values
+    crateArmUp = 1400
+    crateArmDown = 200
 
-    crateArmUp = 560
-    crateArmCarry = 1100
-    crateArmDown = 1820
-
-    crateClawClosed = 350  # 380
-    crateClawOpen = 1060
+    #Crate Claw Servo Values
+    crateClawClosed = 825
+    crateClawOpen = 1500
 
     ORANGE = 0
     RED = 1

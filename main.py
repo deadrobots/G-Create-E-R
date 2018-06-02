@@ -10,6 +10,8 @@ from camera import determineOrder
 def main():
     print("Running!")
     act.init()
+    act.pickUpDateBinsExperiment()
+    u.DEBUG()
     act.getOutOfstartBox()
     act.getCrates()
     act.getBotGuy()
