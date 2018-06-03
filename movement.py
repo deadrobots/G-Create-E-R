@@ -217,12 +217,25 @@ def timedLineFollowLeftFront(time):
     create_stop()
 
 def timedLineFollowRightFront(speed, time):
+    # if c.IS_GREEN_BOT:
+    #     print("timedLineFollowRightFront")
+    #     sec = seconds()
+    #     while(seconds() - sec<time):
+    #         if  get_create_rfcliff_amt() < 2000:
+    #             create_drive_direct(speed, (int) (speed/3.0))  #on black, turn away!
+    #         else:
+    #             create_drive_direct((int) (speed/1.3), speed)
+    #         msleep(10) #do not remove!
+    #     create_stop()
+    # #elif c.IS_BLUE_BOT:
+    # else:
     sec = seconds()
     while(seconds() - sec<time):
         if get_create_rfcliff_amt() < 2000:
             create_drive_direct(speed, (int)(speed/1.8))
         else:
             create_drive_direct((int)(speed/1.8), speed)
+        msleep(10)
     create_stop()
 
 def timedLineFollowRightFrontBlocks(speed, time):

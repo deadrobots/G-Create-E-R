@@ -185,4 +185,11 @@ def testArm():
 def igusReset():
     return digital(c.IGUS_BUTTON)
 
+def getLinefollowvalues():
+    create_connect()
+    while 1:
+        print ("The right front line follow sensor sees: ")
+        print get_create_rfcliff_amt()
+
+
 

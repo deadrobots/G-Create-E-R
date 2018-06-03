@@ -8,10 +8,28 @@ import movement as m
 from camera import determineOrder
 
 def main():
+
+
+
+
+
+
+
+
+    #Switched create bases. Now the green robot needs to do the blue drives!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+
     print("Running!")
     act.init()
-    act.pickUpDateBinsExperiment()
-    u.DEBUG()
+    # act.pickUpDateBinsExperiment()
+    # u.DEBUG()
     act.getOutOfstartBox()
     act.getCrates()
     act.getBotGuy()

@@ -146,8 +146,10 @@ elif IS_GREEN_BOT:
     INCHES_TO_TICKS = 560
 
     # Claw Servo Values
-    clawClosed = 400
+    clawClosed = 450
     clawLoose = 1000
+    clawBotguy = 830
+    clawbotguyArea = 1050
     clawMid = 1200
     clawOpen = 1850
     clawStart = 2047
@@ -159,7 +161,8 @@ elif IS_GREEN_BOT:
 
     # Crate Arm Servo Values
     crateArmUp = 1400
-    crateArmDown = 200
+    crateArmMid = 500
+    crateArmDown = 50
 
     #Crate Claw Servo Values
     crateClawClosed = 825
