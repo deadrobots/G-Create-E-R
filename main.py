@@ -9,23 +9,6 @@ from camera import determineOrder
 
 def main():
 
-
-
-
-
-
-
-
-    #Switched create bases. Now the green robot needs to do the blue drives!!!!!!!!!!!!
-
-
-
-
-
-
-
-
-
     print("Running!")
     act.init()
     # act.pickUpDateBinsExperiment()
@@ -34,8 +17,8 @@ def main():
     act.getCrates()
     act.getBotGuy()
     act.gotoSecondBlock()
-    act.seeBlocks2()
     u.DEBUG()
+    act.seeBlocks2()
     act.goToBlock3()
     act.seeBlocks3()
 

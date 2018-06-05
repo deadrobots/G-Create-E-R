@@ -256,7 +256,23 @@ def lineFollowLeftFrontTilBlack():
             create_drive_direct(50, 100)
     create_stop()
 
+def lineFollowRightFrontTilBlack():
+    while get_create_rcliff_amt() > 2000:
+        if get_create_rfcliff_amt() < 2000:
+            create_drive_direct(100, 75)
+        else:
+            create_drive_direct(75, 100)
+    create_stop()
 
+# def lineFollowTilBlack():
+
+# front/center (right):
+# get_create_rfcliff_amt()
+#linefollowing with this sensor
+
+# cliff/edge (right):
+# get_create_rcliff_amt()
+# driving until sensor hits black
 
 def lineFollowLeftFrontTilWhite():
     while (get_create_lcliff_amt() < 2000):

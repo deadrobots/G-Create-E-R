@@ -28,10 +28,7 @@ def init():
     else:
         print("I AM YELLOW")
         DEBUG() # Do not remove!!!
-    #DEBUG()
-    ################################
     selfTestDateGrab()
-    ################################
     #p.cameraInit()
     print("Press right button to continue")
     wait_for_button()
@@ -40,31 +37,6 @@ def init():
     print("Running the robot.")
     c.START_TIME = seconds()
 
-def selfTest():
-    #tests all motors and servos
-    # raise arm
-    print ("Running Self Test")
-    testArm()
-    resetArm(30, 2000)
-    # open/close claw
-    enable_servo(c.servoBotGuyClaw)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    moveServo(c.servoBotGuyClaw, c.clawStart, 15)
-    # test drive
-    drive_timed(100, 100, 2500)
-    msleep(250)
-    drive_timed(-100, -100, 2500)
-    # lower ramp
-    enable_servo(c.servoHayArm)
-    moveServo(c.servoHayArm, c.hayArmDown, 10)
-    enable_servo(c.servoHayClaw)
-    moveServo(c.servoHayClaw, c.hayClawClosed, 10)
-    moveServo(c.servoHayClaw, c.hayClawOpen, 10)
-    moveServo(c.servoHayArm, c.hayArmUp, 10)
-    # lower the arm
-    moveArm(c.armStartbox, 30)
-    ao()
-####################################################################
 def selfTestDateGrab():
     print ("Running Self Test")
     enable_servo(c.servoBotGuyArm)
@@ -88,7 +60,7 @@ def selfTestDateGrab():
     moveServo(c.servoCrateArm, c.crateArmUp, 10)
 
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    # moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     ao()
 
 def pickUpDateBinsExperiment():
@@ -121,7 +93,11 @@ def getOutOfstartBox ():
         drive_timed(-100, -100, 3200)
         rotate_degrees(75, 100)
         msleep(2000)
-        timedLineFollowRightFront(250, 4.65)
+        #timedLineFollowRightFront(250, 4.65)
+        lineFollowRightFrontTilBlack()
+        wait_for_button()
+        drive_timed(-50, -50, 1000)
+        wait_for_button()
 
 
 def seeBlocks():
@@ -138,6 +114,13 @@ def seeBlocks():
 
 def goToSecondBlock():
     timedLineFollowRightFront(200, 3.2)
+    driveTilBlackLCliff()
+
+def goToSecondBlock():
+    lineFollowLeftFrontTilBlack()
+    wait_for_button()
+    drive_timed(50, 50, 1000)
+    wait_for_button()
 
 def getCrates():
     if c.IS_BLUE_BOT:
@@ -194,7 +177,7 @@ def getBotGuy():
 
 
 def gotoSecondBlock():
-    moveArm(c.armUpbotguy, 40)
+    moveArm(c.botGuyArmUp, 40)
     rotate_degrees(-80, 100)
 
 
