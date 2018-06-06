@@ -91,14 +91,11 @@ def getOutOfstartBox ():
         timedLineFollowRightFront(250, 4.85)
     elif c.IS_GREEN_BOT:
         drive_timed(-100, -100, 3200)
-        rotate_degrees(75, 100)
-        msleep(2000)
+        rotate_degrees(80, 100)
+        msleep(1000)
         #timedLineFollowRightFront(250, 4.65)
         lineFollowRightFrontTilBlack()
-        wait_for_button()
         drive_timed(-50, -50, 1000)
-        wait_for_button()
-
 
 def seeBlocks():
     s = p.checkColor(colorOrder)
@@ -118,9 +115,7 @@ def goToSecondBlock():
 
 def goToSecondBlock():
     lineFollowLeftFrontTilBlack()
-    wait_for_button()
     drive_timed(50, 50, 1000)
-    wait_for_button()
 
 def getCrates():
     if c.IS_BLUE_BOT:
@@ -128,59 +123,56 @@ def getCrates():
         drive_timed(75,75, 2000)
         msleep(1000)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        moveServo(c.servoHayArm, c.hayArmDown, 10)
-        moveServo(c.servoHayClaw, c.hayClawOpen, 10)
+        moveServo(c.servoHayArm, c.hayArmDown, 15)
+        moveServo(c.servoHayClaw, c.hayClawOpen, 15)
         msleep(250)
         drive_timed(-100, -100, 400)
         resetArm(30, 2000)
         drive_timed(-65, -75, 1450)
-        moveServo(c.servoHayClaw, c.hayClawClosed, 10)
+        moveServo(c.servoHayClaw, c.hayClawClosed, 15)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
-        moveServo(c.servoHayArm, c.hayArmCarry, 10)
+        moveServo(c.servoHayArm, c.hayArmCarry, 15)
         rotate_degrees(180, 100)
         msleep(1000)
-        moveServo(c.servoBotGuyClaw, c.clawBotguy, 10)
+        moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
     elif c.IS_GREEN_BOT:
         rotate_degrees(-90,200)
         drive_timed(75,75, 2000)
-        msleep(750)
+        msleep(450)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        moveServo(c.servoCrateArm, c.crateArmDown, 10)
-        moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
-        msleep(250)
+        moveServo(c.servoCrateArm, c.crateArmDown, 15)
+        moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
+        msleep(200)
         drive_timed(-100, -100, 700)
-        drive_timed(-75, -55, 1000)
-        drive_timed(-75, -75, 800)
+        drive_timed(-75, -55, 800)
+        drive_timed(-75, -75, 700)
         msleep(100)
-        moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
-        msleep(500)
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
+        moveServo(c.servoCrateArm, c.crateArmMid, 15)
+        msleep(350)
         driveTilBlackLCliffAndSquareUp(100, 100)
-        moveServo(c.servoCrateArm, c.crateArmMid, 10)
+        moveServo(c.servoCrateArm, c.crateArmMid, 15)
         rotate_degrees(180, 100)
-        msleep(1000)
-        moveServo(c.servoBotGuyClaw, c.clawBotguy, 10)
-
+        msleep(500)
+        moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 def getBotGuy():
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 10)
-    driveTilBlackLCliffAndSquareUp(250,250)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    driveTilBlackLCliffAndSquareUp(125,125)
     moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
-    msleep(500)
+    msleep(250)
     drive_timed(100, 100, 500)
     msleep(100)
     drive_timed(100, 100, 1500)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
     driveTilBlackLCliffAndSquareUp(-100, -100)
     drive_timed(-100, -100, 1500)
-    msleep(1000)
-
+    msleep(500)
 
 def gotoSecondBlock():
     moveArm(c.botGuyArmUp, 40)
     rotate_degrees(-80, 100)
-
-
 
 def seeBlocks2():
     s = p.checkColor(colorOrder)
@@ -218,5 +210,3 @@ def dropBlocksFirst():
     moveServo(c.servoHayArm, c.hayArmDown, 10)
     moveServo(c.servoHayClaw, c.hayClawOpen, 10)
     drive_timed(-75, -75, 750)
-
-

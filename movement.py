@@ -251,18 +251,20 @@ def timedLineFollowRightFrontBlocks(speed, time):
 def lineFollowLeftFrontTilBlack():
     while get_create_lcliff_amt() > 2000:
         if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(100, 50)
+            create_drive_direct(500, 250)
         else:
-            create_drive_direct(50, 100)
+            create_drive_direct(250, 500)
     create_stop()
+    DEBUG_with_wait()
 
 def lineFollowRightFrontTilBlack():
     while get_create_rcliff_amt() > 2000:
         if get_create_rfcliff_amt() < 2000:
-            create_drive_direct(100, 75)
+            create_drive_direct(200, 100)
         else:
-            create_drive_direct(75, 100)
+            create_drive_direct(100, 200)
     create_stop()
+    DEBUG_with_wait()
 
 # def lineFollowTilBlack():
 
