@@ -29,7 +29,7 @@ def init():
         print("I AM YELLOW")
         DEBUG() # Do not remove!!!
     selfTestDateGrab()
-    #p.cameraInit()
+    p.cameraInit()
     print("Press right button to continue")
     wait_for_button()
     #wait_4_light(c.STARTLIGHT)
@@ -113,9 +113,9 @@ def goToSecondBlock():
     timedLineFollowRightFront(200, 3.2)
     driveTilBlackLCliff()
 
-def goToSecondBlock():
-    lineFollowLeftFrontTilBlack()
-    drive_timed(50, 50, 1000)
+# def goToSecondBlock():
+#     lineFollowLeftFrontTilBlack()
+#     drive_timed(50, 50, 1000)
 
 def getCrates():
     if c.IS_BLUE_BOT:
@@ -145,8 +145,8 @@ def getCrates():
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(200)
         drive_timed(-100, -100, 700)
-        drive_timed(-75, -55, 800)
-        drive_timed(-75, -75, 700)
+        drive_timed(-75, -55, 1600)
+        # drive_timed(-75, -75, 100)
         msleep(100)
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
         moveServo(c.servoCrateArm, c.crateArmMid, 15)
@@ -171,10 +171,11 @@ def getBotGuy():
     msleep(500)
 
 def gotoSecondBlock():
-    moveArm(c.botGuyArmUp, 40)
+    print "gotoSecondBlock"
     rotate_degrees(-80, 100)
 
 def seeBlocks2():
+    print ("SeeBlocks2")
     s = p.checkColor(colorOrder)
     print(get_object_area(c.YELLOW, 0))
     if s == c.RED:
@@ -182,6 +183,7 @@ def seeBlocks2():
     elif s == c.YELLOW:
         print("found yellow")
         dropBlocksFirst()
+        DEBUG()
     elif s == c.GREEN:
         print("found green")
     else:
@@ -206,7 +208,10 @@ def seeBlocks3():
 
 
 def dropBlocksFirst():
-    rotate_degrees(70 , 150)
-    moveServo(c.servoHayArm, c.hayArmDown, 10)
-    moveServo(c.servoHayClaw, c.hayClawOpen, 10)
-    drive_timed(-75, -75, 750)
+    rotate_degrees(67 , 150)
+    drive_timed(-75, -75, 1500)
+    moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
+    drive_timed(-50, -50, 700)
+    drive_timed(50, 50, 900)
+    drive_timed(-50, -50, 750)

@@ -38,7 +38,6 @@ if IS_ORANGE_BOT:
     servoHayArm = 0
     servoBotGuyClaw = 1
 
-
     INCHES_TO_TICKS = 600
 
     #Claw Servo Values
@@ -77,9 +76,10 @@ if IS_ORANGE_BOT:
 
 elif IS_BLUE_BOT:
     #Servo Ports
-    servoHayClaw = 1
-    servoHayArm = 2
+    servoCrateClaw = 0
+    servoCrateArm = 2
     servoBotGuyClaw = 3
+    servoBotGuyArm = 1
 
     INCHES_TO_TICKS = 560
 
@@ -120,12 +120,15 @@ elif IS_BLUE_BOT:
     armScore = 310
     armUpbotguy = 200
 
-    hayArmUp = 560
-    hayArmCarry = 1100
-    hayArmDown = 1820
+    crateArmUp = 560
+    crateArmCarry = 1100
+    crateArmDown = 1820
 
-    hayClawClosed = 350 #380
-    hayClawOpen = 1060
+    botGuyArmUp = 1400
+    botGuyArmDown = 500
+
+    crateClawClosed = 350 #380
+    crateClawOpen = 1060
 
     ORANGE = 0
     RED = 1

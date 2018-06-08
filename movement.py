@@ -255,7 +255,7 @@ def lineFollowLeftFrontTilBlack():
         else:
             create_drive_direct(250, 500)
     create_stop()
-    DEBUG_with_wait()
+    #DEBUG_with_wait()
 
 def lineFollowRightFrontTilBlack():
     while get_create_rcliff_amt() > 2000:
@@ -264,7 +264,7 @@ def lineFollowRightFrontTilBlack():
         else:
             create_drive_direct(100, 200)
     create_stop()
-    DEBUG_with_wait()
+    #DEBUG_with_wait()
 
 # def lineFollowTilBlack():
 
