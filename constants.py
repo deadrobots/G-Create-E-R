@@ -11,6 +11,12 @@ leftMotor = 0
 rightMotor = 2
 cogMotor = 3
 
+# Servo Ports
+servoCrateClaw = 0
+servoCrateArm = 2
+servoBotGuyClaw = 3
+servoBotGuyArm = 1
+
 # Drive Info
 TURN_TIME = 0
 
@@ -31,12 +37,7 @@ IS_BLUE_BOT = digital(ROBOT_ID_BLUE)
 IS_GREEN_BOT = digital(ROBOT_ID_GREEN)
 IS_ORANGE_BOT = not IS_BLUE_BOT and not IS_YELLOW_BOT and not IS_GREEN_BOT
 
-
-
 if IS_ORANGE_BOT:
-
-    servoHayArm = 0
-    servoBotGuyClaw = 1
 
     INCHES_TO_TICKS = 600
 
@@ -75,11 +76,6 @@ if IS_ORANGE_BOT:
     armScore = 230     #-415
 
 elif IS_BLUE_BOT:
-    #Servo Ports
-    servoCrateClaw = 0
-    servoCrateArm = 2
-    servoBotGuyClaw = 3
-    servoBotGuyArm = 1
 
     INCHES_TO_TICKS = 560
 
@@ -102,33 +98,20 @@ elif IS_BLUE_BOT:
     cogStart = 800
     cogGrab = 800
 
-    #current motor arm values
-    armVeryHigh = -150
-    #armBotguyDelivery = -260
-    armTram = -315   #-305
-    armHigh = -290
-    #armDelivery = -385
-    armUp = -410
-    armSlightlyUp = -570
-    armSandwich = -595
-    armBotguy = -640    #-615
-    #armBotguyPickUp = -675 #-665
-    armStartbox = -700
-
-    armBotguyDelivery = 420
-    armBotguyPickUp =  90
-    armScore = 310
-    armUpbotguy = 200
-
     crateArmUp = 560
     crateArmCarry = 1100
     crateArmDown = 1820
+    crateArmStart= 1000
+    crateArmMid = 800
 
     botGuyArmUp = 1400
     botGuyArmDown = 500
+    botGuyArmStart = 1570
 
     crateClawClosed = 350 #380
     crateClawOpen = 1060
+    crateClawStart = 1250
+
 
     ORANGE = 0
     RED = 1
@@ -140,11 +123,6 @@ elif IS_BLUE_BOT:
     RGY_AREA = 60
 
 elif IS_GREEN_BOT:
-    # Servo Ports
-    servoCrateClaw = 0
-    servoCrateArm = 2
-    servoBotGuyClaw = 3
-    servoBotGuyArm = 1
 
     INCHES_TO_TICKS = 560
 

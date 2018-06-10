@@ -15,6 +15,7 @@ def main():
     # u.DEBUG()
     act.getOutOfstartBox()
     act.getCrates()
+    u.DEBUG()
     act.getBotGuy()
     act.gotoSecondBlock()
     act.seeBlocks2()

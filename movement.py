@@ -29,6 +29,16 @@ def rotate(power, time):
     else:
         spin_cw(abs(power), time)
 
+def rotateTillBlack(power):
+    if power > 0:
+        create_drive_direct(-power, power)
+    else:
+        create_drive_direct(power, -power)
+    while (get_create_rfcliff_amt() > 2000):
+        pass
+    create_stop()
+
+
 def split_drive(left, right, time, increments, turnTime):
     power = -100
     if turnTime < 0:

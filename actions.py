@@ -41,7 +41,7 @@ def selfTestDateGrab():
     print ("Running Self Test")
     enable_servo(c.servoBotGuyArm)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
-    msleep(1500)
+    msleep(500)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
     # open/close claw
     enable_servo(c.servoBotGuyClaw)
@@ -56,10 +56,10 @@ def selfTestDateGrab():
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
     enable_servo(c.servoCrateClaw)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
-    moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
-    moveServo(c.servoCrateArm, c.crateArmUp, 10)
+    moveServo(c.servoCrateClaw, c.crateClawStart, 10)
+    moveServo(c.servoCrateArm, c.crateArmStart, 10)
 
-    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmStart, 15)
     # moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     ao()
 
@@ -84,10 +84,9 @@ def pickUpDateBinsExperiment():
 
 ####################################################################3
 def getOutOfstartBox ():
-    rotate_degrees(-28, 100)
     if c.IS_BLUE_BOT:
-        drive_timed(-100, -100, 3000)
-        rotate_degrees(90, 100)
+        drive_timed(-100, -100, 3250)
+        rotateTillBlack(100)
         timedLineFollowRightFront(250, 4.85)
     elif c.IS_GREEN_BOT:
         drive_timed(-100, -100, 3200)
@@ -123,16 +122,16 @@ def getCrates():
         drive_timed(75,75, 2000)
         msleep(1000)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        moveServo(c.servoHayArm, c.hayArmDown, 15)
-        moveServo(c.servoHayClaw, c.hayClawOpen, 15)
+        moveServo(c.servoCrateArm, c.crateArmDown, 15)
+        moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(250)
         drive_timed(-100, -100, 400)
         resetArm(30, 2000)
         drive_timed(-65, -75, 1450)
-        moveServo(c.servoHayClaw, c.hayClawClosed, 15)
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
-        moveServo(c.servoHayArm, c.hayArmCarry, 15)
+        moveServo(c.servoCrateArm, c.crateArmMid, 15)
         rotate_degrees(180, 100)
         msleep(1000)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
