@@ -119,20 +119,20 @@ def goToSecondBlock():
 def getCrates():
     if c.IS_BLUE_BOT:
         rotate_degrees(-90,200)
-        drive_timed(75,75, 2000)
+        drive_timed(75,75, 1000)
         msleep(1000)
         driveTilBlackLCliffAndSquareUp(-75,-75)
+        rotate_degrees(2, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
-        msleep(250)
-        drive_timed(-100, -100, 400)
-        resetArm(30, 2000)
-        drive_timed(-65, -75, 1450)
+        msleep(500)
+        drive_timed(-100, -100, 500) #400
+        drive_timed(-85, -85, 1450)  #-65, -85
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
-        moveServo(c.servoCrateArm, c.crateArmMid, 15)
-        rotate_degrees(180, 100)
+        moveServo(c.servoCrateArm, c.crateArmMid, 5)
+        rotate_degrees(155, 50)
         msleep(1000)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
     elif c.IS_GREEN_BOT:
@@ -181,7 +181,7 @@ def seeBlocks2():
         print("found red")
     elif s == c.YELLOW:
         print("found yellow")
-        dropBlocksFirst()
+        dropBlocks()
         DEBUG()
     elif s == c.GREEN:
         print("found green")
@@ -206,11 +206,27 @@ def seeBlocks3():
     p.determineOrder(colorOrder)
 
 
-def dropBlocksFirst():
-    rotate_degrees(67 , 150)
-    drive_timed(-75, -75, 1500)
+def dropBlocks():
+    if c.IS_GREEN_BOT:
+        rotate_degrees(67, 150)
+        drive_timed(-75, -75, 1500)
+    elif c.IS_BLUE_BOT:
+        rotate_degrees(69, 150)
+        drive_timed(-75, -75, 1200)
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    rotate_degrees(5, 56)
     moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
-    drive_timed(-50, -50, 700)
-    drive_timed(50, 50, 900)
-    drive_timed(-50, -50, 750)
+    moveServo(c.servoCrateArm, c.crateArmDeStack, 10)
+    moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    moveServo(c.servoCrateArm, c.crateArmUp, 10)
+    if c.IS_GREEN_BOT:
+        drive_timed(75, 75, 1500)
+    elif c.IS_BLUE_BOT:
+        drive_timed(75, 75, 1200)
+    rotate_degrees(40, 65)
+    if c.IS_GREEN_BOT:
+        drive_timed(-75, -75, 1500)
+    elif c.IS_BLUE_BOT:
+        drive_timed(-75, -75, 1200)
+    moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    rotate_degrees(-5, 56)
