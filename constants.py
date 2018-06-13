@@ -112,6 +112,7 @@ elif IS_BLUE_BOT:
     crateClawClosed = 350 #380
     crateClawOpen = 1200  #1060
     crateClawStart = 1250
+    crateClawSlightlyOpen = 760
 
 
     ORANGE = 0

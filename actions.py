@@ -108,14 +108,6 @@ def seeBlocks():
     else:
         print("Did not find cube")
 
-def goToSecondBlock():
-    timedLineFollowRightFront(200, 3.2)
-    driveTilBlackLCliff()
-
-# def goToSecondBlock():
-#     lineFollowLeftFrontTilBlack()
-#     drive_timed(50, 50, 1000)
-
 def getCrates():
     if c.IS_BLUE_BOT:
         rotate_degrees(-90,200)
@@ -127,12 +119,12 @@ def getCrates():
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(500)
         drive_timed(-100, -100, 500) #400
-        drive_timed(-85, -85, 1450)  #-65, -85
+        drive_timed(-85, -85, 1350)  #-65, -85
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
         moveServo(c.servoCrateArm, c.crateArmMid, 5)
-        rotate_degrees(155, 50)
+        rotate_degrees(145, 50)
         msleep(1000)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
     elif c.IS_GREEN_BOT:
@@ -152,21 +144,23 @@ def getCrates():
         msleep(350)
         driveTilBlackLCliffAndSquareUp(100, 100)
         moveServo(c.servoCrateArm, c.crateArmMid, 15)
-        rotate_degrees(180, 100)
+        rotate_degrees(170, 100) #180
         msleep(500)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 def getBotGuy():
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
     driveTilBlackLCliffAndSquareUp(125,125)
+    drive_timed(100, 100, 200)
     moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
     msleep(250)
-    drive_timed(100, 100, 500)
+    drive_timed(100, 100, 300)
     msleep(100)
     drive_timed(100, 100, 1500)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10) #grab botguy
     driveTilBlackLCliffAndSquareUp(-100, -100)
-    drive_timed(-100, -100, 1500)
+    drive_timed(-100, -100, 1200)
     msleep(500)
 
 def gotoSecondBlock():
@@ -221,12 +215,14 @@ def dropBlocks():
     moveServo(c.servoCrateArm, c.crateArmUp, 10)
     if c.IS_GREEN_BOT:
         drive_timed(75, 75, 1500)
-    elif c.IS_BLUE_BOT:
-        drive_timed(75, 75, 1200)
-    rotate_degrees(40, 65)
-    if c.IS_GREEN_BOT:
+        rotate_degrees(35, 65) #40
         drive_timed(-75, -75, 1500)
     elif c.IS_BLUE_BOT:
+        drive_timed(75, 75, 1200)
+        rotate_degrees(35, 65) #40
         drive_timed(-75, -75, 1200)
-    moveServo(c.servoCrateArm, c.crateArmDown, 10)
-    rotate_degrees(-5, 56)
+        moveServo(c.servoCrateArm, c.crateArmDown, 10)
+        rotate_degrees(-5, 56)
+        drive_timed(-100, -100, 500)
+        moveServo(c.servoCrateClaw, c.crateClawSlightlyOpen, 10)
+        drive_timed(80, 80, 2000)
