@@ -18,10 +18,10 @@ def main():
     act.getCrates()
     act.getBotGuy()
     act.gotoSecondBlock()
-    act.seeBlocks2()
+    act.dropBlocks()
     ###############################
-    act.goToBlock3()
-    act.seeBlocks3()
+    # act.goToBlock3()
+    # act.seeBlocks3()
 
 
 
