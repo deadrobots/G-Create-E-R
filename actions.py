@@ -83,8 +83,10 @@ def pickUpDateBinsExperiment():
 
 
 ####################################################################3
-def getOutOfstartBox ():
+def getOutOfstartBox():
     if c.IS_BLUE_BOT:
+        seeBlocksWithoutOrange()
+        msleep(1000)
         drive_timed(-100, -100, 3250)
         rotateTillBlack(100)
         timedLineFollowRightFront(250, 4.85)
@@ -95,6 +97,18 @@ def getOutOfstartBox ():
         #timedLineFollowRightFront(250, 4.65)
         lineFollowRightFrontTilBlack()
         drive_timed(-50, -50, 1000)
+
+def seeBlocksWithoutOrange():
+    s = p.checkColorWithoutOrange(colorOrder)
+    print(get_object_area(c.YELLOW, 0))
+    if s == c.RED:
+        print("found red")
+    elif s == c.YELLOW:
+        print("found yellow")
+    elif s == c.GREEN:
+        print("found green")
+    else:
+        print("Did not find cube (Without Orange)")
 
 def seeBlocks():
     s = p.checkColor(colorOrder)
@@ -107,14 +121,15 @@ def seeBlocks():
         print("found green")
     else:
         print("Did not find cube")
+    p.determineOrder(colorOrder)
 
 def getCrates():
     if c.IS_BLUE_BOT:
-        rotate_degrees(-90,200)
+        rotate_degrees(-90, 200)
         drive_timed(75,75, 1000)
         msleep(1000)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        rotate_degrees(2, 50)
+        # rotate_degrees(2, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(500)
@@ -176,11 +191,12 @@ def seeBlocks2():
     elif s == c.YELLOW:
         print("found yellow")
         dropBlocks()
-        DEBUG()
+        #DEBUG()
     elif s == c.GREEN:
         print("found green")
     else:
         print("Did not find cube")
+    p.determineOrder(colorOrder)
 
 def goToBlock3():
     timedLineFollowRightFrontBlocks(200, 3)

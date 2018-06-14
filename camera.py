@@ -38,11 +38,11 @@ def getCenterColorAvg():
         camera_update()
         msleep(50)
         if get_object_count(c.ORANGE) > 0 and get_object_area(c.ORANGE,0) > c.ORANGE_AREA:
-            print("Found orange")
-            print(" ")
-            print("color proximity:" + str(colorProximity(c.RED)))
-            print("get obj area:" + str(get_object_area(c.RED,0)))
-            print("get obj count:" + str((get_object_count(c.RED) > 0)))
+            # print("Found orange")
+            # print(" ")
+            # print("color proximity:" + str(colorProximity(c.RED)))
+            # print("get obj area:" + str(get_object_area(c.RED,0)))
+            # print("get obj count:" + str((get_object_count(c.RED) > 0)))
 
             if get_object_count(c.YELLOW) > 0 and get_object_area(c.YELLOW,0) > c.RGY_AREA and colorProximity(c.YELLOW):
                 yellowCount += 1
@@ -66,6 +66,48 @@ def getCenterColorAvg():
         return c.RED
     elif max(redCount, greenCount, yellowCount) == yellowCount:
         return c.YELLOW
+
+def readColorWithoutOrange():
+    # Determines what color block is without orange card
+    # This uses mode of the returned colors..
+    i = 0
+    while (i < 5):
+        camera_update()
+        i += 1
+        msleep(60)
+    redCount = 0
+    greenCount = 0
+    yellowCount = 0
+    startTime = seconds()
+    while (seconds() - startTime < .5):
+        camera_update()
+        msleep(50)
+        # print(" ")
+        # print("color proximity:" + str(colorProximity(c.RED)))
+        # print("get obj area:" + str(get_object_area(c.RED, 0)))
+        # print("get obj count:" + str((get_object_count(c.RED) > 0)))
+
+        if get_object_count(c.YELLOW) > 0 and get_object_area(c.YELLOW, 0) > c.FIRST_RGY_AREA:
+            yellowCount += 1
+        if (get_object_count(c.GREEN) > 0) and get_object_area(c.GREEN, 0) > c.FIRST_RGY_AREA:
+            greenCount += 1
+        if (get_object_count(c.RED) > 0) and get_object_area(c.RED, 0) > c.FIRST_RGY_AREA:
+            redCount += 1
+    print("Colors are:")
+    print(redCount)
+    print(greenCount)
+    print(yellowCount)
+    print("what it returns is:")
+
+    if max(redCount, greenCount, yellowCount) == 0:
+        return 0
+    elif max(redCount, greenCount, yellowCount) == greenCount:
+        return c.GREEN
+    elif max(redCount, greenCount, yellowCount) == redCount:
+        return c.RED
+    elif max(redCount, greenCount, yellowCount) == yellowCount:
+        return c.YELLOW
+
 
 def colorProximity(color):
     #Tests to see if the center of the colored block is within a certain proximity to the center of the orange card
@@ -124,6 +166,12 @@ def determineOrder(list):
 def checkColor(list):
     #Finds color and adds it to the list
     s = getCenterColorAvg()
+    list.append(s)
+    print(list[-1])
+    return list[-1]
+
+def checkColorWithoutOrange(list):
+    s = readColorWithoutOrange()
     list.append(s)
     print(list[-1])
     return list[-1]

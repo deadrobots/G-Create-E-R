@@ -14,10 +14,12 @@ def main():
     # act.pickUpDateBinsExperiment()
     # u.DEBUG()
     act.getOutOfstartBox()
+    act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
     act.gotoSecondBlock()
     act.seeBlocks2()
+    ###############################
     act.goToBlock3()
     act.seeBlocks3()
 
