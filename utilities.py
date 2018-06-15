@@ -83,7 +83,7 @@ def DEBUG_with_wait():
     msleep(5000)
     DEBUG(False)
 
-def moveServo(servo, endPos, speed):
+def moveServo(servo, endPos, speed=10):
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default

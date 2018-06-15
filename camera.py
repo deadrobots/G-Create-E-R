@@ -159,8 +159,8 @@ def determineOrder(list):
     print(list)
     print("final order: " + str([colorDefine(list[0]), colorDefine(list[1]), colorDefine(list[2])]))
     # Trying to reorder the colors because create looks at the second block first and the third block second.
-    list = [list[2], list[0], list[1]]
-    print("resorted final order: " + str([colorDefine(list[0]), colorDefine(list[1]), colorDefine(list[2])]))
+    # list = [list[2], list[0], list[1]]
+    # print("resorted final order: " + str([colorDefine(list[0]), colorDefine(list[1]), colorDefine(list[2])]))
 
 
 def checkColor(list):

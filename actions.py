@@ -91,6 +91,7 @@ def getOutOfstartBox():
         rotateTillBlack(100)
         timedLineFollowRightFront(250, 4.85)
     elif c.IS_GREEN_BOT:
+        seeBlocksWithoutOrange()
         drive_timed(-100, -100, 3200)
         rotate_degrees(80, 100)
         msleep(1000)
@@ -112,7 +113,6 @@ def seeBlocksWithoutOrange():
 
 def seeBlocks():
     s = p.checkColor(colorOrder)
-    print(get_object_area(c.YELLOW, 0))
     if s == c.RED:
         print("found red")
     elif s == c.YELLOW:
@@ -136,6 +136,7 @@ def getCrates():
         drive_timed(-100, -100, 500) #400
         drive_timed(-85, -85, 1350)  #-65, -85
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
+        moveServo(c.servoCrateArm, c.crateArmMid, 10)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
         moveServo(c.servoCrateArm, c.crateArmMid, 5)
@@ -182,54 +183,33 @@ def gotoSecondBlock():
     print "gotoSecondBlock"
     rotate_degrees(-80, 100)
 
-def seeBlocks2():
-    print ("SeeBlocks2")
-    s = p.checkColor(colorOrder)
-    print(get_object_area(c.YELLOW, 0))
-    if s == c.RED:
-        print("found red")
-    elif s == c.YELLOW:
-        print("found yellow")
-        dropBlocks()
-        #DEBUG()
-    elif s == c.GREEN:
-        print("found green")
-    else:
-        print("Did not find cube")
-    p.determineOrder(colorOrder)
-
-def goToBlock3():
-    timedLineFollowRightFrontBlocks(200, 3)
-
-
-def seeBlocks3():
-    s = p.checkColor(colorOrder)
-    print(get_object_area(c.YELLOW, 0))
-    if s == c.RED:
-        print("found red")
-    elif s == c.YELLOW:
-        print("found yellow")
-    elif s == c.GREEN:
-        print("found green")
-    else:
-        print("Did not find cube")
-    p.determineOrder(colorOrder)
-
 
 def dropBlocks():
     if c.IS_GREEN_BOT:
-        rotate_degrees(67, 150)
+        rotate_degrees(113, 150)
         drive_timed(-75, -75, 1500)
     elif c.IS_BLUE_BOT:
-        rotate_degrees(69, 150)
+        rotate_degrees(-25, 150)
         drive_timed(-75, -75, 1200)
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
-    rotate_degrees(5, 56)
+    rotate_degrees(8, 56)
     moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
-    drive_timed(-60, -60, 300)
-    drive_timed(60, 60, 300)
+    # if colorOrder[0] == c.YELLOW:
+    #     drive_timed(-60, -60, 1500)
+    #     drive_timed(60, 60, 1500)
+    # elif colorOrder[1] == c.YELLOW:
+    #     drive_timed(-60, -60, 900)
+    #     drive_timed(60, 60, 900)
+    # elif colorOrder[2] == c.YELLOW:
+    #     drive_timed(-60, -60, 1100)
+    #     drive_timed(60, 60, 1100)
     moveServo(c.servoCrateArm, c.crateArmDeStack, 10)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    drive_timed(60, 60 , 1000)
+    moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    msleep(500)
+    # drive_timed(-60, -60, 1500)
+    drive_timed(-60, -60, 1500)
     moveServo(c.servoCrateArm, c.crateArmUp, 10)
     if c.IS_GREEN_BOT:
         drive_timed(75, 75, 1500)
@@ -238,9 +218,34 @@ def dropBlocks():
     elif c.IS_BLUE_BOT:
         drive_timed(75, 75, 1200)
         rotate_degrees(35, 65) #40
-        drive_timed(-75, -75, 1200)
+        drive_timed(-75, -75, 1400)
         moveServo(c.servoCrateArm, c.crateArmDown, 10)
-        rotate_degrees(-5, 56)
-        drive_timed(-100, -100, 500)
+        if colorOrder[0] == c.YELLOW:
+            rotate_degrees(-15, 56)
+        elif colorOrder[1] == c.YELLOW:
+            rotate_degrees(-8, 56)
+        elif colorOrder[2] == c.YELLOW:
+            rotate_degrees(-8, 56)
+        drive_timed(-100, -100, 900)
         moveServo(c.servoCrateClaw, c.crateClawSlightlyOpen, 10)
         drive_timed(80, 80, 2000)
+
+def driveToYellow(): # Starts from the middle or it won't work and that's not our fault!
+    if colorOrder[0] == c.YELLOW:
+        goYellowFirst()
+    elif colorOrder[1] == c.YELLOW:
+        goYellowSecond()
+    elif colorOrder[2] == c.YELLOW:
+        goYellowThird()
+
+def goYellowFirst():
+    rotate_degrees(90, 100)
+    timedLineFollowLeftFront(250, 2.5)
+    rotate_degrees(-72, 100)
+    dropBlocks()
+
+def goYellowSecond():
+    dropBlocks()
+
+def goYellowThird():
+    pass

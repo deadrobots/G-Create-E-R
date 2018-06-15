@@ -217,13 +217,13 @@ def timedLineFollowLeft(time):
             create_drive_direct(50, 100)
     create_stop()
 
-def timedLineFollowLeftFront(time):
+def timedLineFollowLeftFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
         if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(100, 50)
+            create_drive_direct(speed, speed/2)
         else:
-            create_drive_direct(50, 100)
+            create_drive_direct(speed/2, speed)
     create_stop()
 
 def timedLineFollowRightFront(speed, time):

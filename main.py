@@ -17,8 +17,8 @@ def main():
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
-    act.gotoSecondBlock()
-    act.dropBlocks()
+    # act.gotoSecondBlock()
+    act.driveToYellow()
     ###############################
     # act.goToBlock3()
     # act.seeBlocks3()
