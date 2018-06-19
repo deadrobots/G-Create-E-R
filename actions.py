@@ -92,7 +92,7 @@ def getOutOfstartBox():
         timedLineFollowRightFront(250, 4.85)
     elif c.IS_GREEN_BOT:
         seeBlocksWithoutOrange()
-        drive_timed(-100, -100, 3200)
+        drive_timed(-100, -100, 3300)
         rotate_degrees(80, 100)
         msleep(1000)
         #timedLineFollowRightFront(250, 4.65)
@@ -129,7 +129,7 @@ def getCrates():
         drive_timed(75,75, 1000)
         msleep(1000)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        rotate_degrees(1, 50)
+        # rotate_degrees(1, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(500)
@@ -152,7 +152,7 @@ def getCrates():
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(200)
         drive_timed(-100, -100, 700)
-        drive_timed(-75, -55, 1600)
+        drive_timed(-75, -75, 1350)
         # drive_timed(-75, -75, 100)
         msleep(100)
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
@@ -160,7 +160,7 @@ def getCrates():
         msleep(350)
         driveTilBlackLCliffAndSquareUp(100, 100)
         moveServo(c.servoCrateArm, c.crateArmMid, 15)
-        rotate_degrees(170, 100) #180
+        rotate_degrees(180, 100) #180
         msleep(500)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
@@ -241,8 +241,10 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
 def goYellowFirst():
     rotate_degrees(90, 100)
     timedLineFollowLeftFront(250, 2.5)
-    rotate_degrees(-72, 100)
-    dropBlocks()
+    rotate_degrees(-68, 100)
+    drive_timed(-50, -50, 3000)
+    msleep(7000)
+
 
 def goYellowSecond():
     dropBlocks()

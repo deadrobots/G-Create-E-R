@@ -6,6 +6,12 @@ FRONT_BUMPED = 0
 ALLOW_BUTTON_WAIT = True
 START_TIME = 0
 
+#camera channels
+ORANGE = 0
+RED = 1
+GREEN = 2
+YELLOW = 3
+
 #Motor Ports
 leftMotor = 0
 rightMotor = 2
@@ -117,10 +123,6 @@ elif IS_BLUE_BOT:
     crateClawSlightlyOpen = 760
 
 
-    ORANGE = 0
-    RED = 1
-    GREEN = 2
-    YELLOW = 3
 
     COLOR_PROXIMITY = 20
     ORANGE_AREA = 500
@@ -134,7 +136,7 @@ elif IS_GREEN_BOT:
     clawClosed = 450
     clawLoose = 1000
     clawBotguy = 830
-    clawbotguyArea = 1050
+    clawbotguyArea = 1150
     clawMid = 1200
     clawOpen = 1850
     clawStart = 2047
@@ -142,21 +144,21 @@ elif IS_GREEN_BOT:
 
     # Botguy Arm Servo Values
     botGuyArmUp = 1400
-    botGuyArmDown = 500
+    botGuyArmDown = 450
+    botGuyArmStart = 1570
 
     # Crate Arm Servo Values
-    crateArmUp = 1400
-    crateArmMid = 200
-    crateArmDown = 50
+    crateArmUp = 2047
+    crateArmMid = 1050
+    crateArmDown = 818
+    crateArmStart = 1600
+
 
     #Crate Claw Servo Values
     crateClawClosed = 825
     crateClawOpen = 1700
+    crateClawStart = 1800
 
-    ORANGE = 0
-    RED = 1
-    GREEN = 2
-    YELLOW = 3
 
     COLOR_PROXIMITY = 20
     ORANGE_AREA = 500
