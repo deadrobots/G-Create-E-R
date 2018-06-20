@@ -12,16 +12,11 @@ def main():
     print("Running!")
     act.init()
     # act.pickUpDateBinsExperiment()
-    # u.DEBUG()
     act.getOutOfstartBox()
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
-    # act.gotoSecondBlock()
     act.driveToYellow()
-    ###############################
-    # act.goToBlock3()
-    # act.seeBlocks3()
 
 
 
