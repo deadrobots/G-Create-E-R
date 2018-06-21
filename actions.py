@@ -4,7 +4,6 @@ import constants as c
 from wallaby import *
 import camera as p
 
-
 colorOrder = []
 
 def init():
@@ -37,8 +36,7 @@ def init():
     print("Running the robot.")
     c.START_TIME = seconds()
 
-def selfTestDateGrab():
-    #tests servos and motors
+def selfTestDateGrab(): #Are we using this function anymore? Can we delete it?
     print ("Running Self Test")
     enable_servo(c.servoBotGuyArm)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
@@ -59,17 +57,15 @@ def selfTestDateGrab():
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
     moveServo(c.servoCrateClaw, c.crateClawStart, 10)
     moveServo(c.servoCrateArm, c.crateArmStart, 10)
-
     moveServo(c.servoBotGuyArm, c.botGuyArmStart, 15)
     # moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     ao()
 
-def pickUpDateBinsExperiment():
+def pickUpDateBinsExperiment(): #Are we using this function anymore? Can we delete it?
     #drive from start box to date bin
     #drive_timed(-160, -160, 1400)
     #rotate_degrees(86, 100)
     #drive_timed(250, 250, 1800)
-
     drive_timed(-250, -250, 1100)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     moveServo(c.servoBotGuyClaw, c.clawMid, 15)
@@ -82,10 +78,8 @@ def pickUpDateBinsExperiment():
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
     drive_timed(100, 100, 1800)
 
-
-####################################################################3
 def getOutOfstartBox():
-    #sees first block and drives out of start box
+    #looks at first block from the side then drives to black line and line follows to the second block area
     if c.IS_BLUE_BOT:
         seeBlocksWithoutOrange()
         msleep(1000)
@@ -102,7 +96,7 @@ def getOutOfstartBox():
         drive_timed(-50, -50, 1000)
 
 def seeBlocksWithoutOrange():
-    #sees first block color from starting position
+    #allows robot to check color of first cube from the startbox
     s = p.checkColorWithoutOrange(colorOrder)
     print(get_object_area(c.YELLOW, 0))
     if s == c.RED:
@@ -115,6 +109,7 @@ def seeBlocksWithoutOrange():
         print("Did not find cube (Without Orange)")
 
 def seeBlocks():
+    #allows robot to determine color of second cube and then determine color of third cube
     s = p.checkColor(colorOrder)
     if s == c.RED:
         print("found red")
@@ -126,20 +121,20 @@ def seeBlocks():
         print("Did not find cube")
     p.determineOrder(colorOrder)
 
-def getCrates():
-    #grabs crates and sets up claw for botguy grab
+def getCrates(): #break this function into smaller bites... make driveToCrates, getCrates, turnAround,etc
+    #drives center area grabs cube and turns around to prep for botguy grab
     if c.IS_BLUE_BOT:
         rotate_degrees(-90, 200)
         drive_timed(75,75, 1000)
         msleep(1000)
-        driveTilBlackLCliffAndSquareUp(-75,-75)
+        driveTilBlackLCliffAndSquareUp(-75,-75) #end of func. 1
         # rotate_degrees(1, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(500)
         drive_timed(-100, -100, 500) #400
         drive_timed(-85, -85, 1350)  #-65, -85
-        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15) #grab crates #end of func.2
         moveServo(c.servoCrateArm, c.crateArmMid, 10)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
@@ -152,12 +147,11 @@ def getCrates():
         drive_timed(75,75, 2000)
         msleep(450)
         driveTilBlackLCliffAndSquareUp(-75,-75)
-        rotate_degrees(1, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
         msleep(200)
         drive_timed(-100, -100, 700)
-        drive_timed(-75, -75, 1250)
+        drive_timed(-75, -75, 1350)
         # drive_timed(-75, -75, 100)
         msleep(100)
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
@@ -170,7 +164,7 @@ def getCrates():
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 def getBotGuy():
-    #grab botguy
+    #grabs botguys and backs out of area
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
     driveTilBlackLCliffAndSquareUp(125,125)
@@ -185,16 +179,13 @@ def getBotGuy():
     drive_timed(-100, -100, 1200)
     msleep(500)
 
-def gotoSecondBlock():
+def gotoSecondBlock(): #can we delete this?
     print "gotoSecondBlock"
     rotate_degrees(-80, 100)
 
-
-def dropBlocks():
-    #drop crates in yellow section
+def dropBlocks(): #can we break this function up?
     if c.IS_GREEN_BOT:
         rotate_degrees(113, 150)
-
         drive_timed(-75, -75, 1500)
     elif c.IS_BLUE_BOT:
         rotate_degrees(-25, 150)
@@ -202,7 +193,7 @@ def dropBlocks():
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
     rotate_degrees(8, 56)
     moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
-    # if colorOrder[0] == c.YELLOW:
+    # if colorOrder[0] == c.YELLOW:         #can we get rid of this?
     #     drive_timed(-60, -60, 1500)
     #     drive_timed(60, 60, 1500)
     # elif colorOrder[1] == c.YELLOW:
@@ -247,30 +238,18 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
         goYellowThird()
 
 def goYellowFirst():
-    #delivers crates when yellow block is in first zone
-    if c.IS_GREEN_BOT:
-        rotate_degrees(90, 100)
-        timedLineFollowLeftFront(250, 2.5)
-        rotate_degrees(-65, 60)
-        drive_timed(-50, -50, 2900)
-        rotate_degrees(2, 70)
-        moveServo(c.servoCrateArm, c.crateArmAlmostDown)
-        moveServo(c.servoCrateClaw, c.crateClawOpen)
-        moveServo(c.servoCrateArm, c.crateArmDeStack)
-        moveServo(c.servoCrateClaw, c.crateClawClosed)
-        moveServo(c.servoCrateArm, c.crateArmLiftCrate)
-        drive_timed(-80, -80, 700)
-        drive_timed(80, 80, 1500)
-        rotate_degrees(-35, 70)
-        moveServo(c.servoCrateArm, c.crateArmDown)
-        moveServo(c.servoCrateClaw, c.crateClawOpen)
-        moveServo(c.servoCrateArm, c.crateArmUp)
-        drive_timed(-80, -80, 1800)
-        msleep(7000)
+    #if yellow cube is in the area closest to create startbox
+    rotate_degrees(90, 100)
+    timedLineFollowLeftFront(250, 2.5)
+    rotate_degrees(-68, 100)
+    drive_timed(-50, -50, 3000)
+    msleep(7000)
 
 
 def goYellowSecond():
+    #if yellow cube is in middle area
     dropBlocks()
 
 def goYellowThird():
+    #if yellow cube is in area furthesr from create startbox
     pass
