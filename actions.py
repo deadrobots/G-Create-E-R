@@ -240,12 +240,26 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
         goYellowThird()
 
 def goYellowFirst():
-    #if yellow cube is in the area closest to create startbox
-    rotate_degrees(90, 100)
-    timedLineFollowLeftFront(250, 2.5)
-    rotate_degrees(-68, 100)
-    drive_timed(-50, -50, 3000)
-    msleep(7000)
+    #delivers crates when yellow block is in first zone
+    if c.IS_GREEN_BOT:
+        rotate_degrees(90, 100)
+        timedLineFollowLeftFront(250, 2.5)
+        rotate_degrees(-65, 60)
+        drive_timed(-50, -50, 2900)
+        rotate_degrees(2, 70)
+        moveServo(c.servoCrateArm, c.crateArmAlmostDown)
+        moveServo(c.servoCrateClaw, c.crateClawOpen)
+        moveServo(c.servoCrateArm, c.crateArmDeStack)
+        moveServo(c.servoCrateClaw, c.crateClawClosed)
+        moveServo(c.servoCrateArm, c.crateArmLiftCrate)
+        drive_timed(-80, -80, 700)
+        drive_timed(80, 80, 1500)
+        rotate_degrees(-35, 70)
+        moveServo(c.servoCrateArm, c.crateArmDown)
+        moveServo(c.servoCrateClaw, c.crateClawOpen)
+        moveServo(c.servoCrateArm, c.crateArmUp)
+        drive_timed(-80, -80, 1800)
+        msleep(7000)
 
 
 def goYellowSecond():
