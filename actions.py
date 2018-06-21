@@ -78,14 +78,15 @@ def pickUpDateBinsExperiment(): #Are we using this function anymore? Can we dele
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
     drive_timed(100, 100, 1800)
 
-def getOutOfstartBox():
+def getOutOfStartBox():
     #looks at first block from the side then drives to black line and line follows to the second block area
     if c.IS_BLUE_BOT:
         seeBlocksWithoutOrange()
         msleep(1000)
-        drive_timed(-100, -100, 3250)
+        drive_timed(-130, -100, 3250)
         rotateTillBlack(100)
-        timedLineFollowRightFront(250, 4.85)
+        lineFollowRightFrontTilBlack()
+        drive_timed(-50, -50, 1000)
     elif c.IS_GREEN_BOT:
         seeBlocksWithoutOrange()
         drive_timed(-100, -100, 3300)
@@ -130,10 +131,10 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         driveTilBlackLCliffAndSquareUp(-75,-75) #end of func. 1
         # rotate_degrees(1, 50)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
-        moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
+        moveServo(c.servoCrateClaw, c.crateGrab, 15)
         msleep(500)
         drive_timed(-100, -100, 500) #400
-        drive_timed(-85, -85, 1350)  #-65, -85
+        drive_timed(-100, -85, 1350)  #-65, -85
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15) #grab crates #end of func.2
         moveServo(c.servoCrateArm, c.crateArmMid, 10)
         msleep(500)
@@ -173,8 +174,9 @@ def getBotGuy():
     msleep(250)
     drive_timed(100, 100, 300)
     msleep(100)
-    drive_timed(100, 100, 1500)
+    drive_timed(120, 100, 1500)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10) #grab botguy
+    DEBUG()
     driveTilBlackLCliffAndSquareUp(-100, -100)
     drive_timed(-100, -100, 1200)
     msleep(500)

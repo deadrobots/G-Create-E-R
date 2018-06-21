@@ -8,14 +8,14 @@ import movement as m
 from camera import determineOrder
 
 def main():
-
     print("Running!")
     act.init()
     # act.pickUpDateBinsExperiment()
-    act.getOutOfstartBox()
+    act.getOutOfStartBox()
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
+    u.DEBUG()
     act.driveToYellow()
 
 
