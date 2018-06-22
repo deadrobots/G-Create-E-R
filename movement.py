@@ -226,19 +226,16 @@ def timedLineFollowLeftFront(speed, time):
             create_drive_direct(speed/2, speed)
     create_stop()
 
+def timedLineFollowFrontTophat(time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if analog(c.FRONT_TOPHAT) < 1500:
+            create_drive_direct(-100, -50)
+        else:
+            create_drive_direct(-50, -100)
+    create_stop()
+
 def timedLineFollowRightFront(speed, time):
-    # if c.IS_GREEN_BOT:
-    #     print("timedLineFollowRightFront")
-    #     sec = seconds()
-    #     while(seconds() - sec<time):
-    #         if  get_create_rfcliff_amt() < 2000:
-    #             create_drive_direct(speed, (int) (speed/3.0))  #on black, turn away!
-    #         else:
-    #             create_drive_direct((int) (speed/1.3), speed)
-    #         msleep(10) #do not remove!
-    #     create_stop()
-    # #elif c.IS_BLUE_BOT:
-    # else:
     sec = seconds()
     while(seconds() - sec<time):
         if get_create_rfcliff_amt() < 2000:
@@ -336,42 +333,6 @@ def driveAndLift(time):
     moveCog(50, time)
     stop()
 
-
-def moveCog(speed, time):
-    motor(c.cogMotor, speed)
-    msleep(time)
-    motor(c.cogMotor, 0)
-
-def resetChain():
-    startTime = seconds()
-    print('retracting')
-    motor(c.cogMotor, -100)
-    while (seconds() - startTime < 10):
-        if igusReset():
-            freeze(c.cogMotor)
-            print('stopping')
-            break
-    freeze(c.cogMotor)
-
-
-
-def moveCog_position (inches,speed):
-    #print ("extending exact distance")
-    clear_motor_position_counter(c.cogMotor)
-    ticks = c.INCHES_TO_TICKS * inches
-    if inches >= 0:
-        motor(c.cogMotor, speed)
-        while get_motor_position_counter(c.cogMotor) <= ticks:
-            pass
-    else:
-        speed = -speed
-        motor(c.cogMotor, speed)
-        while get_motor_position_counter(c.cogMotor) >= ticks:
-            pass
-    motor(c.cogMotor, 0)
-    #print (ticks)
-    #print (get_motor_position_counter(c.cogMotor))
-
 def driveTillBump (lspeed, rspeed ):
     create_drive_direct(-lspeed, -rspeed)
     while get_create_rbump() == 0:
@@ -398,3 +359,4 @@ def driveTilWhiteLCliffAndSquareUp(lspeed, rspeed):
         if get_create_rcliff_amt() > 2000:
             rspeed = 0
             create_drive_direct(lspeed, rspeed)
+

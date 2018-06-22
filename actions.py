@@ -134,8 +134,11 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         moveServo(c.servoCrateClaw, c.crateGrab, 15)
         msleep(500)
         drive_timed(-100, -100, 500) #400
-        drive_timed(-100, -85, 1350)  #-65, -85
-        moveServo(c.servoCrateClaw, c.crateClawClosed, 15) #grab crates #end of func.2
+        if c.IS_BLUE_BOT:
+            drive_timed(-100,-85,1100)
+        else:
+            drive_timed(-100, -85, 1350)  #-65, -85
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
         moveServo(c.servoCrateArm, c.crateArmMid, 10)
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
@@ -165,18 +168,20 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 def getBotGuy():
-    #grabs botguys and backs out of area
+    # grabs botguys and backs out of area
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
-    driveTilBlackLCliffAndSquareUp(125,125)
+    driveTilBlackLCliffAndSquareUp(100,100)
     drive_timed(100, 100, 200)
     moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
-    msleep(250)
-    drive_timed(100, 100, 300)
-    msleep(100)
-    drive_timed(120, 100, 1500)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 10) #grab botguy
-    DEBUG()
+    if c.IS_BLUE_BOT:
+        timedLineFollowFrontTophat(3)
+    else:
+        msleep(250)
+        drive_timed(100, 100, 300)
+        msleep(100)
+        drive_timed(120, 100, 1500)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)  # grab botguy
     driveTilBlackLCliffAndSquareUp(-100, -100)
     drive_timed(-100, -100, 1200)
     msleep(500)
@@ -242,6 +247,25 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
 def goYellowFirst():
     #delivers crates when yellow block is in first zone
     if c.IS_GREEN_BOT:
+        rotate_degrees(90, 100)
+        timedLineFollowLeftFront(250, 2.5)
+        rotate_degrees(-65, 60)
+        drive_timed(-50, -50, 2900)
+        rotate_degrees(2, 70)
+        moveServo(c.servoCrateArm, c.crateArmAlmostDown)
+        moveServo(c.servoCrateClaw, c.crateClawOpen)
+        moveServo(c.servoCrateArm, c.crateArmDeStack)
+        moveServo(c.servoCrateClaw, c.crateClawClosed)
+        moveServo(c.servoCrateArm, c.crateArmLiftCrate)
+        drive_timed(-80, -80, 700)
+        drive_timed(80, 80, 1500)
+        rotate_degrees(-35, 70)
+        moveServo(c.servoCrateArm, c.crateArmDown)
+        moveServo(c.servoCrateClaw, c.crateClawOpen)
+        moveServo(c.servoCrateArm, c.crateArmUp)
+        drive_timed(-80, -80, 1800)
+        msleep(7000)
+    elif c.IS_BLUE_BOT:
         rotate_degrees(90, 100)
         timedLineFollowLeftFront(250, 2.5)
         rotate_degrees(-65, 60)

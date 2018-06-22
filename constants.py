@@ -37,6 +37,7 @@ IGUS_BUTTON = 9
 
 #Analog Ports
 STARTLIGHT = 0
+FRONT_TOPHAT = 5
 
 IS_YELLOW_BOT = digital(ROBOT_ID_YELLOW)
 IS_BLUE_BOT = digital(ROBOT_ID_BLUE)
@@ -107,17 +108,19 @@ elif IS_BLUE_BOT:
     cogGrab = 800
 
     crateArmUp = 1400
+    crateArmMid = 1000
     crateArmDeStack = 1200
     crateArmCarry = 1200
     crateArmDown = 830
+    crateArmAlmostDown = 962
+    crateArmLiftCrate = 1500
     crateArmStart= 1000
-    crateArmMid = 1000
 
     botGuyArmUp = 1400
     botGuyArmDown = 500
     botGuyArmStart = 1570
 
-    crateClawClosed = 350 #380
+    crateClawClosed = 300 #380
     crateGrab = 900
     crateClawOpen = 1200  #1060
     crateClawStart = 1250
