@@ -38,42 +38,6 @@ def rotateTillBlack(power):
         pass
     create_stop()
 
-
-def split_drive(left, right, time, increments, turnTime):
-    power = -100
-    if turnTime < 0:
-        turnTime = abs(turnTime)
-        power = abs(power)
-    if turnTime == 0:
-        drive_timed(left, right, time)
-    else:
-        for _ in range(0, increments):
-            drive_timed(left, right, int(time / increments))
-            rotate(power, turnTime)
-
-
-def split_drive_condition(left, right, min, time, turnTime, condition, state=True):
-    start = seconds() + time
-    create_drive_direct(-left, -right)
-    msleep(min)
-    while condition() is state:
-        current = seconds()
-        if current > start:
-            print turnTime
-            start = current + time
-            rotate(-100, turnTime)
-            create_drive_direct(left, right)
-            msleep(min)
-    create_drive_direct(0, 0)
-
-
-def drive_conditional(left, right, testFunction, state=True):
-    create_drive_direct(-right, -left)
-    while testFunction() is state:
-        pass
-    stop()
-
-
 def drive_forever(left, right):
     create_drive_direct(-right, -left)
 
@@ -101,35 +65,6 @@ def rotate_degrees(degrees, speed):
         pass
     stop()
 
-def drive_accel(speed, time):
-    for sub_speed in range(0, speed+1, 100):
-        create_drive_direct(-sub_speed, -sub_speed)
-        msleep(100)
-    msleep(time)
-    create_drive_direct(0, 0)
-
-def timedLineFollow(time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(200, 150)
-        else:
-            create_drive_direct(150, 200)
-    create_stop()
-
-def lineFollowTilCrossBlack():
-    while(get_create_lcliff_amt() > 2000):
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(200, 150)
-        else:
-            create_drive_direct(150, 200)
-    while (get_create_lcliff_amt() < 2000):
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(200, 150)
-        else:
-            create_drive_direct(150, 200)
-    create_stop()
-
 def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
     lspeed = -lspeed
     rspeed = -rspeed
@@ -142,80 +77,7 @@ def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
             rspeed = 0
             create_drive_direct(lspeed, rspeed)
 
-def driveTilBlackLCliff(speed):
-    create_drive_direct(-speed, -speed)
-    while (get_create_lcliff_amt() > 2000):
-        pass
-    create_stop()
 
-def driveTilBlackLFCliff(speed):
-    create_drive_direct(-speed, -speed)
-    while (get_create_lfcliff_amt() > 2000):
-        pass
-    create_stop()
-
-def driveTilWhiteLCliff(speed):
-    create_drive_direct(-speed, -speed)
-    while (get_create_lcliff_amt() < 2000):
-        pass
-    create_stop()
-
-def driveTilWhiteLFCliff(speed):
-    create_drive_direct(-speed, -speed)
-    while (get_create_lfcliff_amt() < 2000):
-        pass
-    create_stop()
-
-def driveTilBlackRCliff(speed):
-    create_drive_direct(speed, speed)
-    while (get_create_rcliff_amt() > 2000):
-        pass
-    create_stop()
-
-def turnTilBlackLCliff(left, right):
-    create_drive_direct(left, right)
-    while (get_create_lcliff_amt() > 2000):
-        pass
-    create_stop()
-
-def turnTilBlackRCliff(left, right):
-    create_drive_direct(left, right)
-    while (get_create_rcliff_amt() > 2000):
-        pass
-    create_stop()
-
-def driveAcrossBlack(speed):
-    create_drive_direct(speed, speed)
-    while (get_create_lcliff_amt() > 2000):
-        pass
-    while (get_create_lcliff_amt() < 2000):
-        pass
-    msleep(100)
-    create_stop()
-
-def turnAcrossBlack(left, right):
-    create_drive_direct(left, right)
-    while (get_create_lfcliff_amt() > 2000):
-        pass
-    while (get_create_lfcliff_amt() < 2000):
-        pass
-    msleep(200)
-    create_stop()
-
-def driveUntilBlue(speed):
-    create_drive_direct(speed, speed)
-    while (get_create_rfcliff_amt() > 2000):
-        pass
-    create_stop()
-
-def timedLineFollowLeft(time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if get_create_lcliff_amt() < 2000:
-            create_drive_direct(100, 50)
-        else:
-            create_drive_direct(50, 100)
-    create_stop()
 
 def timedLineFollowLeftFront(speed, time):
     sec = seconds()
@@ -235,34 +97,21 @@ def timedLineFollowFrontTophat(time):
             create_drive_direct(-50, -100)
     create_stop()
 
-def timedLineFollowRightFront(speed, time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if get_create_rfcliff_amt() < 2000:
-            create_drive_direct(speed, (int)(speed/1.8))
-        else:
-            create_drive_direct((int)(speed/1.8), speed)
-        msleep(10)
-    create_stop()
-
-def timedLineFollowRightFrontBlocks(speed, time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if get_create_rfcliff_amt() < 2000:
-            create_drive_direct((int)(speed / 1.8), speed)
-        else:
-            create_drive_direct(speed, (int)(speed / 1.8))
-    create_stop()
-
-
-def lineFollowLeftFrontTilBlack():
+def lineFollowLeftFrontTilLeftBlack(speed):
     while get_create_lcliff_amt() > 2000:
         if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(500, 250)
+            create_drive_direct(speed, speed/2)
         else:
-            create_drive_direct(250, 500)
+            create_drive_direct(speed/2, speed)
     create_stop()
-    #DEBUG_with_wait()
+
+def lineFollowLeftFrontTilRightFrontBlack(speed):
+    while get_create_rfcliff_amt() > 2000:
+        if get_create_lfcliff_amt() < 2000:
+            create_drive_direct(speed, speed/2)
+        else:
+            create_drive_direct(speed/2, speed)
+    create_stop()
 
 def lineFollowRightFrontTilBlack():
     while get_create_rcliff_amt() > 2000:
@@ -271,92 +120,213 @@ def lineFollowRightFrontTilBlack():
         else:
             create_drive_direct(100, 200)
     create_stop()
-    #DEBUG_with_wait()
 
-# def lineFollowTilBlack():
+#unused functions to be deleted
 
-# front/center (right):
-# get_create_rfcliff_amt()
-#linefollowing with this sensor
-
-# cliff/edge (right):
-# get_create_rcliff_amt()
-# driving until sensor hits black
-
-def lineFollowLeftFrontTilWhite():
-    while (get_create_lcliff_amt() < 2000):
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(100, 50)
-        else:
-            create_drive_direct(50, 100)
-    create_stop()
-
-
-def timedLineFollowRight(time):
-    # This is a line follow
-    # Needs to be less severe because final angle
-    # Center value? (Gray value in between White and Black)
-    sec = seconds()
-    while(seconds() - sec<time):
-        if get_create_rcliff_amt() < 2000:
-            create_drive_direct(50, 100)
-        else:
-            create_drive_direct(100, 80)
-    create_stop()
-
-
-def lineFollowRightAndLift(time):
-    sec = seconds()
-    while (seconds() - sec < time):
-        i = 0
-        if i < 1:
-            timedLineFollowRight(.1)
-            i += 1
-        else:
-            moveCog(50, 100)
-            i += 1
-
-def lineFollowLeftAndLift(time):
-    sec = seconds()
-    while (seconds() - sec < time):
-        i = 0
-        if i < 1:
-            timedLineFollowLeft(.1)
-            i += 1
-        else:
-            moveCog(50, 100)
-            i += 1
-
-
-def driveAndLift(time):
-    drive_timed(-100, -100, time)
-    moveCog(50, time)
-    stop()
-
-def driveTillBump (lspeed, rspeed ):
-    create_drive_direct(-lspeed, -rspeed)
-    while get_create_rbump() == 0:
-       pass
-    create_stop()
-    print("rbump press")
-
-def driveTillBump2(lspeed, rspeed):
-   # create_drive_direct(-lspeed, -rspeed)
-    while get_create_rbump() == 0 and  get_create_lbump() == 0:
-        pass
-    create_stop()
-    print("bumped")
-
-
-def driveTilWhiteLCliffAndSquareUp(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
-    create_drive_direct(rspeed, lspeed)
-    while (lspeed or rspeed):
-        if get_create_lcliff_amt() > 2000:
-            lspeed = 0
-            create_drive_direct(lspeed, rspeed)
-        if get_create_rcliff_amt() > 2000:
-            rspeed = 0
-            create_drive_direct(lspeed, rspeed)
+# def drive_accel(speed, time):   #cut
+#     for sub_speed in range(0, speed+1, 100):
+#         create_drive_direct(-sub_speed, -sub_speed)
+#         msleep(100)
+#     msleep(time)
+#     create_drive_direct(0, 0)
+#
+# def timedLineFollow(time):  #cut
+#     sec = seconds()
+#     while(seconds() - sec<time):
+#         if get_create_lfcliff_amt() < 2000:
+#             create_drive_direct(200, 150)
+#         else:
+#             create_drive_direct(150, 200)
+#     create_stop()
+#
+# def lineFollowTilCrossBlack():  #cut
+#     while(get_create_lcliff_amt() > 2000):
+#         if get_create_lfcliff_amt() < 2000:
+#             create_drive_direct(200, 150)
+#         else:
+#             create_drive_direct(150, 200)
+#     while (get_create_lcliff_amt() < 2000):
+#         if get_create_lfcliff_amt() < 2000:
+#             create_drive_direct(200, 150)
+#         else:
+#             create_drive_direct(150, 200)
+#     create_stop()
+#
+# def split_drive(left, right, time, increments, turnTime):   #cut
+#     power = -100
+#     if turnTime < 0:
+#         turnTime = abs(turnTime)
+#         power = abs(power)
+#     if turnTime == 0:
+#         drive_timed(left, right, time)
+#     else:
+#         for _ in range(0, increments):
+#             drive_timed(left, right, int(time / increments))
+#             rotate(power, turnTime)
+#
+#
+# def split_drive_condition(left, right, min, time, turnTime, condition, state=True): #cut
+#     start = seconds() + time
+#     create_drive_direct(-left, -right)
+#     msleep(min)
+#     while condition() is state:
+#         current = seconds()
+#         if current > start:
+#             print turnTime
+#             start = current + time
+#             rotate(-100, turnTime)
+#             create_drive_direct(left, right)
+#             msleep(min)
+#     create_drive_direct(0, 0)
+#
+#
+# def drive_conditional(left, right, testFunction, state=True):   #cut
+#     create_drive_direct(-right, -left)
+#     while testFunction() is state:
+#         pass
+#     stop()
+#
+# def driveTilBlackLCliff(speed):
+#     create_drive_direct(-speed, -speed)
+#     while (get_create_lcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+# def driveTilBlackLFCliff(speed):
+#     create_drive_direct(-speed, -speed)
+#     while (get_create_lfcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+# def driveTilWhiteLCliff(speed):
+#     create_drive_direct(-speed, -speed)
+#     while (get_create_lcliff_amt() < 2000):
+#         pass
+#     create_stop()
+#
+# def driveTilWhiteLFCliff(speed):
+#     create_drive_direct(-speed, -speed)
+#     while (get_create_lfcliff_amt() < 2000):
+#         pass
+#     create_stop()
+#
+# def driveTilBlackRCliff(speed):
+#     create_drive_direct(speed, speed)
+#     while (get_create_rcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+# def turnTilBlackLCliff(left, right):
+#     create_drive_direct(left, right)
+#     while (get_create_lcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+# def turnTilBlackRCliff(left, right):
+#     create_drive_direct(left, right)
+#     while (get_create_rcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+#
+# def driveAcrossBlack(speed):
+#     create_drive_direct(speed, speed)
+#     while (get_create_lcliff_amt() > 2000):
+#         pass
+#     while (get_create_lcliff_amt() < 2000):
+#         pass
+#     msleep(100)
+#     create_stop()
+#
+# def turnAcrossBlack(left, right):
+#     create_drive_direct(left, right)
+#     while (get_create_lfcliff_amt() > 2000):
+#         pass
+#     while (get_create_lfcliff_amt() < 2000):
+#         pass
+#     msleep(200)
+#     create_stop()
+#
+# def driveUntilBlue(speed):
+#     create_drive_direct(speed, speed)
+#     while (get_create_rfcliff_amt() > 2000):
+#         pass
+#     create_stop()
+#
+# def timedLineFollowLeft(time):
+#     sec = seconds()
+#     while(seconds() - sec<time):
+#         if get_create_lcliff_amt() < 2000:
+#             create_drive_direct(100, 50)
+#         else:
+#             create_drive_direct(50, 100)
+#     create_stop()
+#
+# def timedLineFollowRightFront(speed, time):
+#     sec = seconds()
+#     while(seconds() - sec<time):
+#         if get_create_rfcliff_amt() < 2000:
+#             create_drive_direct(speed, (int)(speed/1.8))
+#         else:
+#             create_drive_direct((int)(speed/1.8), speed)
+#         msleep(10)
+#     create_stop()
+#
+# def timedLineFollowRightFrontBlocks(speed, time):
+#     sec = seconds()
+#     while(seconds() - sec<time):
+#         if get_create_rfcliff_amt() < 2000:
+#             create_drive_direct((int)(speed / 1.8), speed)
+#         else:
+#             create_drive_direct(speed, (int)(speed / 1.8))
+#     create_stop()
+#
+# def lineFollowLeftFrontTilWhite():
+#     while (get_create_lcliff_amt() < 2000):
+#         if get_create_lfcliff_amt() < 2000:
+#             create_drive_direct(100, 50)
+#         else:
+#             create_drive_direct(50, 100)
+#     create_stop()
+#
+#
+#
+# def timedLineFollowRight(time):
+#     # This is a line follow
+#     # Needs to be less severe because final angle
+#     # Center value? (Gray value in between White and Black)
+#     sec = seconds()
+#     while(seconds() - sec<time):
+#         if get_create_rcliff_amt() < 2000:
+#             create_drive_direct(50, 100)
+#         else:
+#             create_drive_direct(100, 80)
+#     create_stop()
+#
+# def driveTillRightBump (lspeed, rspeed ):
+#     create_drive_direct(-lspeed, -rspeed)
+#     while get_create_rbump() == 0:
+#        pass
+#     create_stop()
+#     print("rbump press")
+#
+# def driveTillBump(lspeed, rspeed):
+#    # create_drive_direct(-lspeed, -rspeed)
+#     while get_create_rbump() == 0 and  get_create_lbump() == 0:
+#         pass
+#     create_stop()
+#     print("bumped")
+#
+#
+# def driveTilWhiteLCliffAndSquareUp(lspeed, rspeed):
+#     lspeed = -lspeed
+#     rspeed = -rspeed
+#     create_drive_direct(rspeed, lspeed)
+#     while (lspeed or rspeed):
+#         if get_create_lcliff_amt() > 2000:
+#             lspeed = 0
+#             create_drive_direct(lspeed, rspeed)
+#         if get_create_rcliff_amt() > 2000:
+#             rspeed = 0
+#             create_drive_direct(lspeed, rspeed)
 

@@ -120,7 +120,7 @@ elif IS_BLUE_BOT:
     botGuyArmDown = 500
     botGuyArmStart = 1570
 
-    crateClawClosed = 300 #380
+    crateClawClosed = 200 #380
     crateGrab = 900
     crateClawOpen = 1200  #1060
     crateClawStart = 1250
