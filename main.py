@@ -16,6 +16,7 @@ def main():
     act.getCrates()
     act.getBotGuy()
     act.driveToYellow()
+    u.DEBUG()
 
 
 

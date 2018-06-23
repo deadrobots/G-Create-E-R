@@ -169,18 +169,19 @@ def getBotGuy():
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
     driveTilBlackLCliffAndSquareUp(100,100)
-    drive_timed(100, 100, 200)
-    moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
     if c.IS_BLUE_BOT:
-        timedLineFollowFrontTophat(2.7)
+        timedLineFollowFrontTophat(0.4)
+        moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
+        timedLineFollowFrontTophat(2.2)
     else:
+        drive_timed(100, 100, 200)
         msleep(250)
         drive_timed(100, 100, 300)
         msleep(100)
         drive_timed(120, 100, 1500)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)  # grab botguy
     driveTilBlackLCliffAndSquareUp(-100, -100)
-    drive_timed(-100, -100, 1200)
+    drive_timed(-100, -100, 1000)
     msleep(500)
 
 def gotoSecondBlock(): #can we delete this?
@@ -266,13 +267,23 @@ def goYellowFirst():
         rotate_degrees(90, 100)
         lineFollowLeftFrontTilRightFrontBlack(250)
         rotate_degrees(-85,100)
-
-
+        driveTilFrontTophatBlack(-100,-100)
 
 def goYellowSecond():
     #if yellow cube is in middle area
+    turnTilRightFrontBlack(100,-100)
+    drive_distance(-3,100)
+    rotate_degrees(87, 100)
+    driveTilFrontTophatBlack(-100,-100)
+    DEBUG()
     dropBlocks()
 
 def goYellowThird():
+    if c.IS_GREEN_BOT:
+        pass
+    elif c.IS_BLUE_BOT:
+        rotate_degrees(-95, 100)
+        lineFollowRightFrontTilLeftFrontBlack(250)
+        rotate_degrees(85, 100)
+        driveTilFrontTophatBlack(-100, -100)
     #if yellow cube is in area furthesr from create startbox
-    pass

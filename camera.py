@@ -52,6 +52,7 @@ def getCenterColorAvg():
                 redCount += 1
         else:
             print("I see approximately no orange")
+
     print("Colors are:")
     print(redCount)
     print(greenCount)
@@ -100,7 +101,8 @@ def readColorWithoutOrange():
     print("what it returns is:")
 
     if max(redCount, greenCount, yellowCount) == 0:
-        return 0
+        print "No color seen in first block; ending run due to inconclusive reading"
+        u.DEBUG()
     elif max(redCount, greenCount, yellowCount) == greenCount:
         return c.GREEN
     elif max(redCount, greenCount, yellowCount) == redCount:

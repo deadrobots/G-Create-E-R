@@ -49,8 +49,10 @@ def stop():
 INCH_TO_MIL = 25.4
 
 def drive_distance(distance, speed):
+    if distance < 0:
+        speed = -speed
     dist_mil = INCH_TO_MIL * distance
-    time = dist_mil / speed
+    time = (int)((dist_mil / speed) * 1000)
     drive_timed(speed, speed, time)
 
 
@@ -77,7 +79,13 @@ def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
             rspeed = 0
             create_drive_direct(lspeed, rspeed)
 
-
+def driveTilFrontTophatBlack(lspeed, rspeed):
+    lspeed = -lspeed
+    rspeed = -rspeed
+    create_drive_direct(rspeed, lspeed)
+    while (analog(c.FRONT_TOPHAT) < 2000):
+        pass
+    create_stop()
 
 def timedLineFollowLeftFront(speed, time):
     sec = seconds()
@@ -113,12 +121,26 @@ def lineFollowLeftFrontTilRightFrontBlack(speed):
             create_drive_direct(speed/2, speed)
     create_stop()
 
+def lineFollowRightFrontTilLeftFrontBlack(speed):
+    while get_create_lfcliff_amt() > 2000:
+        if get_create_rfcliff_amt() < 2000:
+            create_drive_direct(speed/2, speed)
+        else:
+            create_drive_direct(speed, speed/2)
+    create_stop()
+
 def lineFollowRightFrontTilBlack():
     while get_create_rcliff_amt() > 2000:
         if get_create_rfcliff_amt() < 2000:
             create_drive_direct(200, 100)
         else:
             create_drive_direct(100, 200)
+    create_stop()
+
+def turnTilRightFrontBlack(left, right):
+    create_drive_direct(left, right)
+    while (get_create_rfcliff_amt() > 2000):
+        pass
     create_stop()
 
 #unused functions to be deleted
