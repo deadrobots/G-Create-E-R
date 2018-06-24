@@ -62,21 +62,24 @@ def selfTestDateGrab(): #Are we using this function anymore? Can we delete it?
     ao()
 
 def pickUpDateBinsExperiment(): #Are we using this function anymore? Can we delete it?
-    #drive from start box to date bin
-    #drive_timed(-160, -160, 1400)
-    #rotate_degrees(86, 100)
-    #drive_timed(250, 250, 1800)
-    drive_timed(-250, -250, 1100)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    drive_timed(-100, -100, 1250)
+    rotate_degrees(80, 100)
+    drive_timed(150, 150, 4000)
+    wait_for_button()
+    drive_timed(-115, -100, 1500)
     moveServo(c.servoBotGuyClaw, c.clawMid, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     drive_timed(100, 100, 1500)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown-150, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown-120, 15)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    drive_timed(-40, -40, 3600)
+    drive_timed(-55, -40, 5000)
     # msleep(1000)
-    moveServo(c.servoBotGuyClaw, c.clawLoose, 15)
-    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
-    drive_timed(100, 100, 1800)
+    drive_timed(50, 50, 700)
+    moveServo(c.servoBotGuyClaw, c.clawMid, 10)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp)
+    driveTilBlackLCliffAndSquareUp(-200, -200)
+
+    DEBUG()
 
 def getOutOfStartBox():
     #looks at first block from the side then drives to black line and line follows to the second block area
@@ -85,14 +88,19 @@ def getOutOfStartBox():
         msleep(1000)
         drive_timed(-130, -100, 3250)
         rotateTillBlack(100)
-        lineFollowRightFrontTilBlack()
-        drive_timed(-50, -50, 1000)
+        wait_for_button()
     elif c.IS_GREEN_BOT:
         seeBlocksWithoutOrange()
         drive_timed(-100, -100, 3300)
         rotate_degrees(80, 100)
         msleep(1000)
-        #timedLineFollowRightFront(250, 4.65)
+
+def driveToCenter():
+    #looks at first block from the side then drives to black line and line follows to the second block area
+    if c.IS_BLUE_BOT:
+        lineFollowRightFrontTilBlack()
+        drive_timed(-50, -50, 1000)
+    elif c.IS_GREEN_BOT:
         lineFollowRightFrontTilBlack()
         drive_timed(-50, -50, 1000)
 
@@ -140,7 +148,7 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         msleep(500)
         driveTilBlackLCliffAndSquareUp(250,250)
         moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
-        rotate_degrees(145, 50)
+        rotate_degrees(155, 50)  #145
         msleep(1000)
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
     elif c.IS_GREEN_BOT:
@@ -193,10 +201,10 @@ def dropBlocks(): #can we break this function up?
         rotate_degrees(113, 150)
         drive_timed(-75, -75, 1500)
     elif c.IS_BLUE_BOT:
-        rotate_degrees(-25, 150)
-        drive_timed(-75, -75, 1200)
+        # rotate_degrees(-25, 150)
+        drive_timed(-75, -75, 1100)
+        rotate_degrees(7, 56)
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
-    rotate_degrees(8, 56)
     moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
     # if colorOrder[0] == c.YELLOW:         #can we get rid of this?
     #     drive_timed(-60, -60, 1500)
@@ -209,29 +217,30 @@ def dropBlocks(): #can we break this function up?
     #     drive_timed(60, 60, 1100)
     moveServo(c.servoCrateArm, c.crateArmDeStack, 10)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    moveServo(c.servoCrateArm, c.crateArmLiftCrate, 10)
     drive_timed(60, 60 , 1000)
-    moveServo(c.servoCrateArm, c.crateArmDown, 10)
     msleep(500)
     # drive_timed(-60, -60, 1500)
+    rotate_degrees(37, 40)
     drive_timed(-60, -60, 1500)
-    moveServo(c.servoCrateArm, c.crateArmUp, 10)
     if c.IS_GREEN_BOT:
         drive_timed(75, 75, 1500)
-        rotate_degrees(35, 65) #40
+        rotate_degrees(40, 65) #40
         drive_timed(-75, -75, 1500)
     elif c.IS_BLUE_BOT:
-        drive_timed(75, 75, 1200)
-        rotate_degrees(35, 65) #40
-        drive_timed(-75, -75, 1400)
+        # drive_timed(75, 75, 1200)
+        # rotate_degrees(35, 65) #40
+        # drive_timed(-75, -75, 1400)
         moveServo(c.servoCrateArm, c.crateArmDown, 10)
         if colorOrder[0] == c.YELLOW:
             rotate_degrees(-15, 56)
         elif colorOrder[1] == c.YELLOW:
-            rotate_degrees(-8, 56)
+            wait_for_button()
         elif colorOrder[2] == c.YELLOW:
             rotate_degrees(-8, 56)
         drive_timed(-100, -100, 900)
-        moveServo(c.servoCrateClaw, c.crateClawSlightlyOpen, 10)
+        moveServo(c.servoCrateClaw, c.crateClawSlightlyOpen-200, 10)
+        moveServo(c.servoCrateArm, c.crateArmUp, 10)
         drive_timed(80, 80, 2000)
 
 def driveToYellow(): # Starts from the middle or it won't work and that's not our fault!
@@ -275,8 +284,6 @@ def goYellowSecond():
     drive_distance(-3,100)
     rotate_degrees(87, 100)
     driveTilFrontTophatBlack(-100,-100)
-    DEBUG()
-    dropBlocks()
 
 def goYellowThird():
     if c.IS_GREEN_BOT:

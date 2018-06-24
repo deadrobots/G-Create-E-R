@@ -10,13 +10,15 @@ from camera import determineOrder
 def main():
     print("Running!")
     act.init()
-    # act.pickUpDateBinsExperiment()
     act.getOutOfStartBox()
+    act.pickUpDateBinsExperiment()
+    u.DEBUG()
+    act.driveToCenter()
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
     act.driveToYellow()
-    u.DEBUG()
+    act.dropBlocks()
 
 
 
