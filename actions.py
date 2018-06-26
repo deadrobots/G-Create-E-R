@@ -62,11 +62,14 @@ def selfTestDateGrab(): #Are we using this function anymore? Can we delete it?
     ao()
 
 def pickUpDateBinsExperiment(): #Are we using this function anymore? Can we delete it?
-    drive_timed(-100, -100, 1250)
-    rotate_degrees(80, 100)
-    drive_timed(150, 150, 4000)
-    wait_for_button()
+    drive_timed(-100, -80, 3000)
+    rotate_degrees(160, 250)
+    driveTilBlackLCliffAndSquareUp(-250, -230)
+    rotate_degrees(10, 250)
+    drive_timed(115, 100, 4300)
     drive_timed(-115, -100, 1500)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
     moveServo(c.servoBotGuyClaw, c.clawMid, 15)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     drive_timed(100, 100, 1500)
@@ -77,7 +80,7 @@ def pickUpDateBinsExperiment(): #Are we using this function anymore? Can we dele
     drive_timed(50, 50, 700)
     moveServo(c.servoBotGuyClaw, c.clawMid, 10)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
-    driveTilBlackLCliffAndSquareUp(-200, -200)
+    driveTilBlackLCliffAndSquareUp(-300, -300)
 
     DEBUG()
 
@@ -86,9 +89,13 @@ def getOutOfStartBox():
     if c.IS_BLUE_BOT:
         seeBlocksWithoutOrange()
         msleep(1000)
-        drive_timed(-130, -100, 3250)
-        rotateTillBlack(100)
-        wait_for_button()
+        driveTilBlackLCliffAndSquareUp(-250, -230)
+              #code for head to head start
+        # seeBlocksWithoutOrange()
+        # msleep(1000)
+        # drive_timed(-130, -100, 3250)
+        # rotateTillBlack(100)
+        # wait_for_button()
     elif c.IS_GREEN_BOT:
         seeBlocksWithoutOrange()
         drive_timed(-100, -100, 3300)

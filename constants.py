@@ -90,7 +90,7 @@ elif IS_BLUE_BOT:
 
     #Claw Servo Values
     clawClosed = 0
-    clawMid = 550
+    clawMid = 600
     clawBotguy = 430#785
     clawbotguyArea = 650
     clawTram = 900  # Position to move tram
@@ -117,6 +117,7 @@ elif IS_BLUE_BOT:
     crateArmStart= 1000
 
     botGuyArmUp = 1400
+    botGuyArmMid = 600
     botGuyArmDown = 500
     botGuyArmStart = 1570
 
