@@ -143,6 +143,14 @@ def turnTilRightFrontBlack(left, right):
         pass
     create_stop()
 
+def driveTillBump(lspeed, rspeed):
+    lspeed = -lspeed
+    rspeed = -rspeed
+    create_drive_direct(rspeed, lspeed)
+    while (get_create_lbump() == 0 and get_create_rbump() == 0):
+        pass
+    create_stop()
+
 #unused functions to be deleted
 
 # def drive_accel(speed, time):   #cut

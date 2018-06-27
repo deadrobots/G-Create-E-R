@@ -115,6 +115,7 @@ elif IS_BLUE_BOT:
     crateArmAlmostDown = 962
     crateArmLiftCrate = 1500
     crateArmStart= 1000
+    crateArmVeryHigh = 2000
 
     botGuyArmUp = 1400
     botGuyArmMid = 600
