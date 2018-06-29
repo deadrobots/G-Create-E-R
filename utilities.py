@@ -12,6 +12,23 @@ def wait_for_button(force=False):
         print "Pressed"
         msleep(1000)
 
+def wait_for_selection(force=False):
+    #seeding= False
+    if c.ALLOW_BUTTON_WAIT or force:
+        print "Press Left Button for Seeding...\n Right Button for Head to Head"
+        while not right_button():
+            if left_button():
+                c.IS_SEEDING = True
+                #seeding = True
+                print "Pressed Left"
+                msleep(1000)
+                #return seeding
+            pass
+        msleep(1)
+        print "Pressed Right"
+        msleep(1000)
+        #return seeding
+
 def wait_4_light(ignore=False):
     if ignore:
         wait_for_button()
@@ -178,9 +195,6 @@ def testArm():
     ao()
     msleep(1000)
     # resetArm()
-
-
-
 
 def igusReset():
     return digital(c.IGUS_BUTTON)

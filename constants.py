@@ -5,6 +5,7 @@ from wallaby import digital
 FRONT_BUMPED = 0
 ALLOW_BUTTON_WAIT = True
 START_TIME = 0
+IS_SEEDING = False
 
 #camera channels
 ORANGE = 0

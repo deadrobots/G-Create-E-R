@@ -10,11 +10,12 @@ from camera import determineOrder
 def main():
     print("Running!")
     act.init()
+    if c.IS_SEEDING: #does not work yet
+        act.getOutOfStartBoxSeeding()
+        act.pickUpDateBinsExperiment()
+        act.driveToSecondDateBin()
+        act.driveToCenterSeeding()
     act.getOutOfStartBoxAndDriveToCenter()
-    # act.getOutOfStartBoxSeeding()
-    # act.pickUpDateBinsExperiment()
-    # act.driveToSecondDateBin()
-    # act.driveToCenterSeeding()
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
