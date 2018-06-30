@@ -29,7 +29,7 @@ def connect():
     _set_initial_counts()
 
 
-def drive(left, right, time):
+def drive_timed(left, right, time):
     """Drive normally"""
     left *= 5
     right *= 5
