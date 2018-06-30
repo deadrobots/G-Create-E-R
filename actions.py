@@ -32,10 +32,10 @@ def init():
     print("Press a button to continue")
     wait_for_selection()
     #wait_4_light(c.STARTLIGHT)
-    shut_down_in(119.0)
+    # shut_down_in(119.0)
     c.START_TIME = seconds()
 
-def selfTest(): #separated from init for the sake of legibility and organization
+def selfTest(): #separated from init for the sake of legibility
     print ("Running Self Test")
     enable_servo(c.servoBotGuyArm)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
@@ -74,6 +74,7 @@ def getOutOfStartBoxSeeding():
         msleep(1000)
 
 def pickUpDateBinsExperiment():
+    print "Picking up first date bin"
     moveServo(c.servoCrateArm, c.crateArmVeryHigh, 10)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
     driveTillBump(-125, -100)
@@ -112,6 +113,7 @@ def pickUpDateBinsExperiment():
     # moveServo(c.servoBotGuyClaw, c.clawMid, 10)
 
 def driveToSecondDateBin():
+    print "Picking up second date bin"
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     driveTilBlackLCliffAndSquareUp(-150, -150)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
@@ -135,6 +137,7 @@ def driveToSecondDateBin():
     rotate_degrees(-80, 100)
 
 def driveToCenterSeeding():
+    print "Trying to drive to center"
     #looks at first block from the side then drives to black line and line follows to the second block area
     if c.IS_BLUE_BOT:
         lineFollowRightFrontTilBlack()
@@ -190,6 +193,7 @@ def seeBlocks():
     p.determineOrder(colorOrder)
 
 def getCrates(): #break this function into smaller bites... make driveToCrates, getCrates, turnAround,etc
+    print "Picking up crates"
     #drives center area grabs cube and turns around to prep for botguy grab
     if c.IS_BLUE_BOT:
         rotate_degrees(-90, 200)
@@ -234,6 +238,7 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 def getBotGuy():
+    print "Picking up Botguy"
     # grabs botguys and backs out of area
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
@@ -254,6 +259,7 @@ def getBotGuy():
     msleep(500)
 
 def driveToYellow(): # Starts from the middle or it won't work and that's not our fault!
+    print "Driving to yellow"
     if colorOrder[0] == c.YELLOW:
         goYellowFirst()
     elif colorOrder[1] == c.YELLOW:
@@ -262,6 +268,7 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
         goYellowThird()
 
 def goYellowFirst():
+    print "Yellow is in first position"
     #delivers crates when yellow block is in first zone
     if c.IS_GREEN_BOT:
         rotate_degrees(90, 100)
@@ -289,6 +296,7 @@ def goYellowFirst():
         driveTilFrontTophatBlack(-100,-100)
 
 def goYellowSecond():
+    print "Yellow is in second position"
     #if yellow cube is in middle area
     turnTilRightFrontBlack(100,-100)
     drive_distance(-3,100)
@@ -296,16 +304,16 @@ def goYellowSecond():
     driveTilFrontTophatBlack(-100,-100)
 
 def goYellowThird():
+    print "Yellow is in third position"
     #if yellow cube is in third zone (farthest from startbox)
-    if c.IS_GREEN_BOT:
-        pass
-    elif c.IS_BLUE_BOT:
-        rotate_degrees(-95, 100)
-        lineFollowRightFrontTilLeftFrontBlack(250)
-        rotate_degrees(85, 100)
-        driveTilFrontTophatBlack(-100, -100)
+    rotate_degrees(-85, 100)
+    wait_for_button()
+    lineFollowRightFrontTilLeftFrontBlack(250)
+    rotate_degrees(85, 100)
+    driveTilFrontTophatBlack(-100, -100)
 
 def dropBlocks(): #can we break this function up?
+    print "Delivering crates"
     if c.IS_GREEN_BOT:
         rotate_degrees(113, 150)
         drive_timed(-75, -75, 1500)

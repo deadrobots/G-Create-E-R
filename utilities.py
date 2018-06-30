@@ -13,21 +13,20 @@ def wait_for_button(force=False):
         msleep(1000)
 
 def wait_for_selection(force=False):
-    #seeding= False
+    seeding1= False
     if c.ALLOW_BUTTON_WAIT or force:
-        print "Press Left Button for Seeding...\n Right Button for Head to Head"
+        print "Press Left Button for Seeding...\nPress Right Button for Head-to-Head"
         while not right_button():
             if left_button():
-                c.IS_SEEDING = True
-                #seeding = True
+                seeding1 = True
                 print "Pressed Left"
                 msleep(1000)
-                #return seeding
+                return seeding1
             pass
         msleep(1)
         print "Pressed Right"
         msleep(1000)
-        #return seeding
+        return seeding1
 
 def wait_4_light(ignore=False):
     if ignore:

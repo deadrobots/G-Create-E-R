@@ -10,16 +10,18 @@ from camera import determineOrder
 def main():
     print("Running!")
     act.init()
-    if c.IS_SEEDING: #does not work yet
+    if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
         act.getOutOfStartBoxSeeding()
         act.pickUpDateBinsExperiment()
         act.driveToSecondDateBin()
         act.driveToCenterSeeding()
-    act.getOutOfStartBoxAndDriveToCenter()
+    else:
+        act.getOutOfStartBoxAndDriveToCenter()
     act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
     act.driveToYellow()
+    u.DEBUG()
     act.dropBlocks()
     u.DEBUG()
 
