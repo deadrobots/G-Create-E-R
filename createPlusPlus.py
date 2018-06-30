@@ -29,6 +29,16 @@ def connect():
     _set_initial_counts()
 
 
+def drive(left, right, time):
+    """Drive normally"""
+    left *= 5
+    right *= 5
+    _verify()  # Check if create is connected
+    robot.drive_direct(left, right)
+    msleep(time)
+    robot.drive_direct(0, 0)
+
+
 def drive_distance(distance, base_speed, diff=25, refresh_rate=0):
     """Drive straight a distance"""
     _verify()  # Check if create is connected
