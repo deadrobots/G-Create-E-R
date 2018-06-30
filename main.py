@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os, sys
 import actions as act
+import createPlusPlus as cpp
 import constants as c
 from wallaby import *
 import utilities as u
@@ -9,6 +10,7 @@ from camera import determineOrder
 
 def main():
     print("Running!")
+    cpp.connect()   #takes a second to connect to robot
     act.init()
     if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
         act.getOutOfStartBoxSeeding()
@@ -21,7 +23,6 @@ def main():
     act.getCrates()
     act.getBotGuy()
     act.driveToYellow()
-    u.DEBUG()
     act.dropBlocks()
     u.DEBUG()
 

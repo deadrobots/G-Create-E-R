@@ -128,8 +128,6 @@ elif IS_BLUE_BOT:
     crateClawStart = 1250
     crateClawSlightlyOpen = 760
 
-
-
     COLOR_PROXIMITY = 20
     ORANGE_AREA = 500
     RGY_AREA = 60
@@ -165,7 +163,7 @@ elif IS_GREEN_BOT:
 
 
     #Crate Claw Servo Values
-    crateClawClosed = 825
+    crateClawClosed = 500 #825
     crateClawOpen = 1650
     crateClawStart = 1800
 

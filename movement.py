@@ -48,7 +48,7 @@ def stop():
 
 INCH_TO_MIL = 25.4
 
-def drive_distance(distance, speed):
+def drive_distance2(distance, speed):
     if distance < 0:
         speed = -speed
     dist_mil = INCH_TO_MIL * distance
@@ -105,6 +105,16 @@ def timedLineFollowFrontTophat(time):
             create_drive_direct(-50, -100)
     create_stop()
 
+def timedLineFollowRightFront(speed, time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if get_create_rfcliff_amt() < 2000:
+            create_drive_direct(speed, (int)(speed/1.8))
+        else:
+            create_drive_direct((int)(speed/1.8), speed)
+        msleep(10)
+    create_stop()
+
 def lineFollowLeftFrontTilLeftBlack(speed):
     while get_create_lcliff_amt() > 2000:
         if get_create_lfcliff_amt() < 2000:
@@ -129,7 +139,7 @@ def lineFollowRightFrontTilLeftFrontBlack(speed):
             create_drive_direct(speed, speed/2)
     create_stop()
 
-def lineFollowRightFrontTilBlack():
+def lineFollowRightFrontTilRightBlack():
     while get_create_rcliff_amt() > 2000:
         if get_create_rfcliff_amt() < 2000:
             create_drive_direct(200, 100)
@@ -292,15 +302,6 @@ def driveTillBump(lspeed, rspeed):
 #             create_drive_direct(50, 100)
 #     create_stop()
 #
-# def timedLineFollowRightFront(speed, time):
-#     sec = seconds()
-#     while(seconds() - sec<time):
-#         if get_create_rfcliff_amt() < 2000:
-#             create_drive_direct(speed, (int)(speed/1.8))
-#         else:
-#             create_drive_direct((int)(speed/1.8), speed)
-#         msleep(10)
-#     create_stop()
 #
 # def timedLineFollowRightFrontBlocks(speed, time):
 #     sec = seconds()
