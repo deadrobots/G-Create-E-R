@@ -3,12 +3,18 @@ from wallaby import *
 from math import pi
 from utilities import *
 import constants as c
+import createPlusPlus as cpp
 
 
 def drive_timed(left, right, time): #DRS forward is opposite of create forward
-    create_drive_direct(-right, -left)
-    msleep(time)
-    create_drive_direct(0, 0)
+    cpp.drive_timed(left/5,right/5, time)
+    # create_drive_direct(-right, -left)
+    # msleep(time)
+    # create_drive_direct(0, 0)
+
+
+def create_drive_direct(left, right):
+    cpp.drive(int(left/5), int(right/5))
 
 
 def spin_cw(power, time):
@@ -34,21 +40,22 @@ def rotateTillBlack(power):
         create_drive_direct(-power, power)
     else:
         create_drive_direct(power, -power)
-    while (get_create_rfcliff_amt() > 2000):
+    while (onBlackFrontRight()):
         pass
     create_stop()
 
-def drive_forever(left, right):
+def drive_forever(left, right): #not used... remove?
     create_drive_direct(-right, -left)
 
 
-def stop():
+def stop(): #not used; no longer needed with new API
+    #update with new API?
     create_stop()
 
 
 INCH_TO_MIL = 25.4
 
-def drive_distance2(distance, speed):
+def drive_distance(distance, speed):
     if distance < 0:
         speed = -speed
     dist_mil = INCH_TO_MIL * distance
@@ -57,44 +64,62 @@ def drive_distance2(distance, speed):
 
 
 def rotate_degrees(degrees, speed):
-    if degrees < 0:
-        speed = -speed
-        degrees = abs(degrees)
-    degrees = degrees * 1.13
-    set_create_total_angle(0)
-    drive_forever(-speed, speed)
-    while abs(get_create_total_angle()) < degrees:
-        pass
-    stop()
+    cpp.rotate(degrees,speed/5)
+    # if degrees < 0:
+    #     speed = -speed
+    #     degrees = abs(degrees)
+    # degrees = degrees * 1.13
+    # set_create_total_angle(0)
+    # drive_forever(-speed, speed)
+    # while abs(get_create_total_angle()) < degrees:
+    #     pass
+    # cpp.drive(0,0)
 
 def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
     create_drive_direct(rspeed, lspeed)
     while (lspeed or rspeed):
-        if get_create_lcliff_amt() < 2000:
+        if not onBlackLeft():
             lspeed = 0
             create_drive_direct(lspeed, rspeed)
-        if get_create_rcliff_amt() < 2000:
+        if not onBlackRight():
             rspeed = 0
             create_drive_direct(lspeed, rspeed)
 
+def driveTilBlackLRCliffAndSquareUp(lspeedInit, rspeedInit):
+    lspeed = -rspeedInit
+    rspeed = -lspeedInit
+    #print(cpp.TEMP_GET_ROBOT().cliff_right_signal)
+    cpp.drive(lspeed, rspeed)
+    while not onBlackLeft() or not onBlackRight():
+        if onBlackLeft():
+            cpp.drive(abs(lspeed)/lspeed * 5, 0)
+            print('black on left')
+        elif onBlackRight():
+            cpp.drive(0, abs(rspeed)/rspeed * 5)
+            print('black on right')
+        else:
+            print('on white')
+
 def driveTilFrontTophatBlack(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
     create_drive_direct(rspeed, lspeed)
     while (analog(c.FRONT_TOPHAT) < 2000):
         pass
-    create_stop()
+    cpp.drive(0,0)
 
 def timedLineFollowLeftFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
-        if get_create_lfcliff_amt() < 2000:
+        if not onBlackFrontLeft():
             create_drive_direct(speed, speed/2)
         else:
             create_drive_direct(speed/2, speed)
-    create_stop()
+    cpp.drive(0,0)
 
 def timedLineFollowFrontTophat(time):
     sec = seconds()
@@ -103,63 +128,64 @@ def timedLineFollowFrontTophat(time):
             create_drive_direct(-100, -50)
         else:
             create_drive_direct(-50, -100)
-    create_stop()
+    cpp.drive(0,0)
 
 def timedLineFollowRightFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
-        if get_create_rfcliff_amt() < 2000:
+        if not onBlackFrontRight():
             create_drive_direct(speed, (int)(speed/1.8))
         else:
             create_drive_direct((int)(speed/1.8), speed)
         msleep(10)
-    create_stop()
+    cpp.drive(0,0)
 
 def lineFollowLeftFrontTilLeftBlack(speed):
-    while get_create_lcliff_amt() > 2000:
-        if get_create_lfcliff_amt() < 2000:
+    while onBlackLeft():
+        if not onBlackFrontLeft():
             create_drive_direct(speed, speed/2)
         else:
             create_drive_direct(speed/2, speed)
-    create_stop()
+    cpp.drive(0,0)
 
 def lineFollowLeftFrontTilRightFrontBlack(speed):
-    while get_create_rfcliff_amt() > 2000:
-        if get_create_lfcliff_amt() < 2000:
+    while onBlackFrontRight():
+        if not onBlackFrontLeft():
             create_drive_direct(speed, speed/2)
         else:
             create_drive_direct(speed/2, speed)
-    create_stop()
+    cpp.drive(0,0)
 
 def lineFollowRightFrontTilLeftFrontBlack(speed):
-    while get_create_lfcliff_amt() > 2000:
-        if get_create_rfcliff_amt() < 2000:
+    while onBlackFrontLeft():
+        if not onBlackFrontRight():
             create_drive_direct(speed/2, speed)
         else:
             create_drive_direct(speed, speed/2)
-    create_stop()
+    cpp.drive(0,0)
 
 def lineFollowRightFrontTilRightBlack():
-    while get_create_rcliff_amt() > 2000:
-        if get_create_rfcliff_amt() < 2000:
+    while onBlackRight():
+        if not onBlackFrontRight():
             create_drive_direct(200, 100)
         else:
             create_drive_direct(100, 200)
-    create_stop()
+    cpp.drive(0,0)
 
 def turnTilRightFrontBlack(left, right):
     create_drive_direct(left, right)
-    while (get_create_rfcliff_amt() > 2000):
+    while onBlackFrontRight():
         pass
-    create_stop()
+    cpp.drive(0,0)
 
 def driveTillBump(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
     create_drive_direct(rspeed, lspeed)
-    while (get_create_lbump() == 0 and get_create_rbump() == 0):
+    while not cpp.left_bump() and not cpp.right_bump():
         pass
-    create_stop()
+    cpp.drive(0,0)
 
 #unused functions to be deleted
 

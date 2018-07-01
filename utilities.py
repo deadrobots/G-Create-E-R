@@ -1,6 +1,6 @@
 
 import constants as c
-
+import createPlusPlus as cpp
 from wallaby import *
 
 def wait_for_button(force=False):
@@ -12,7 +12,8 @@ def wait_for_button(force=False):
         print "Pressed"
         msleep(1000)
 
-def wait_for_selection(force=False):
+def wait_for_selection(force=False):    #asks for prompt twice... FIX THIS
+    #asks for response; used to determine running seeding or head-to-head code
     seeding1= False
     if c.ALLOW_BUTTON_WAIT or force:
         print "Press Left Button for Seeding...\nPress Right Button for Head-to-Head"
@@ -115,6 +116,18 @@ def moveServo(servo, endPos, speed=10):
         msleep(10)
     set_servo_position(servo, endPos)
     msleep(10)
+
+def onBlackRight():
+    return cpp.TEMP_GET_ROBOT().cliff_right_signal < 2200
+
+def onBlackLeft():
+    return cpp.TEMP_GET_ROBOT().cliff_left_signal < 2200
+
+def onBlackFrontLeft():
+    return cpp.TEMP_GET_ROBOT().cliff_front_left_signal < 2200
+
+def onBlackFrontRight():
+    return cpp.TEMP_GET_ROBOT().cliff_front_right_signal < 2200
 
 # def moveArm(servoMain, servoAssist, endPos, speed):
 #     # speed of 1 is slow

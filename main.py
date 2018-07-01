@@ -9,8 +9,6 @@ import movement as m
 from camera import determineOrder
 
 def main():
-    print("Running!")
-    cpp.connect()   #takes a second to connect to robot
     act.init()
     if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
         act.getOutOfStartBoxSeeding()
@@ -24,6 +22,8 @@ def main():
     act.getBotGuy()
     act.driveToYellow()
     act.dropBlocks()
+    cpp.disconnect()
+    exit(0)
     u.DEBUG()
 
 

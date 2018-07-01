@@ -39,19 +39,34 @@ def drive_timed(left, right, time):
     robot.drive_direct(0, 0)
 
 
+def drive(left, right):
+    """Drive normally without stopping"""
+    left *= 5
+    right *= 5
+    _verify()  # Check if create is connected
+    robot.drive_direct(left, right)
+
+
 def drive_distance(distance, base_speed, diff=25, refresh_rate=0):
     """Drive straight a distance"""
     _verify()  # Check if create is connected
     # save initial encoder vals (they'll roll over, so we need to adjust for this eventually
     _set_initial_counts()
     base_speed *= 5
+    if distance < 0:
+        distance = abs(distance)
+        base_speed *= -1
+    if base_speed <  -475:
+        base_speed = -475
     if base_speed > 475:
         base_speed = 475
+    if base_speed < 0:
+        diff *= -1
     # master is left wheel
     left_speed = base_speed
-    while _convert_to_inches(_left_encoder()) < distance - 0.75:
-        r_encoder = _right_encoder()
-        l_encoder = _left_encoder()
+    while abs(_convert_to_inches(_left_encoder())) < distance - 0.75:
+        r_encoder = abs(_right_encoder())
+        l_encoder = abs(_left_encoder())
         if r_encoder > l_encoder:
             left_speed = base_speed - diff
         if l_encoder > r_encoder:
@@ -121,10 +136,29 @@ def pivot_on_right(degrees, speed):
     robot.drive_direct(0, 0)
 
 
+def TEMP_GET_ROBOT():
+    """temporary
+    used for getting info on robot"""
+    _verify()
+    return robot
+
+
 def disconnect():
     """Disconnect from the create"""
     _verify()  # Check if create is connected
     robot.stop()
+
+
+def right_bump():
+    """Returns condition of right create bumper"""
+    _verify()
+    return robot.bumps_and_wheel_drops.bump_right
+
+
+def left_bump():
+    """Returns condition of left create bumper"""
+    _verify()
+    return robot.bumps_and_wheel_drops.bump_left
 
 
 def _set_initial_counts():
