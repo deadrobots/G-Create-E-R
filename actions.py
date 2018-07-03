@@ -5,6 +5,7 @@ from createPlusPlus import drive_timed as new_drive_timed
 import constants as c
 from wallaby import *
 import camera as p
+import createPlusPlus as cpp
 
 colorOrder = []
 
@@ -14,12 +15,8 @@ def init():
     Point the "arm" at the opposite corner of starting box (intersection of black tape)
     Use pencil marks on table to check alignment
     Line up the block of wood with the straight line to perfect the setup'''
-    create_disconnect()
-    if not create_connect_once():
-        print("Create not connected...")
-        exit(0)
+    cpp.connect()
     print("Create connected...")
-    create_full()
     if c.IS_ORANGE_BOT:
         print("I AM ORANGE")
     elif c.IS_BLUE_BOT:
@@ -29,10 +26,11 @@ def init():
     else:
         print("I AM YELLOW")
         DEBUG() # Do not remove!!!
+
     selfTest()  #tests each function of the robot
     p.cameraInit()
     print("Press a button to continue")
-    wait_for_selection()
+    cpp.connect()
     #wait_4_light(c.STARTLIGHT)
     # shut_down_in(119.0)
     c.START_TIME = seconds()
@@ -48,9 +46,9 @@ def selfTest(): #separated from init for the sake of legibility
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     moveServo(c.servoBotGuyClaw, c.clawStart, 15)
     # test drive
-    drive_timed(100, 100, 2500)
+    cpp.drive_distance(10, 40)
     msleep(250)
-    drive_timed(-100, -100, 2500)
+    cpp.drive_distance(-10, 40)
     # lower ramp
     enable_servo(c.servoCrateArm)
     moveServo(c.servoCrateArm, c.crateArmDown, 10)
@@ -66,13 +64,15 @@ def getOutOfStartBoxSeeding():
     print "Going to Date bin"
     #looks at first block from the side then drives to black line and line follows to the second block area
     if c.IS_BLUE_BOT:
+        print("blue")
         seeBlocksWithoutOrange()
+        drive_distance(-16, 80)
         msleep(1000)
-        driveTilBlackLCliffAndSquareUp(-250, -230)
+        driveTilBlackLCliffAndSquareUp(20, 20)
     elif c.IS_GREEN_BOT:
         seeBlocksWithoutOrange()
-        drive_timed(-100, -100, 3300)
-        rotate_degrees(80, 100)
+        cpp.drive_timed(-20, -20, 3300)
+        cpp.rotate(80, 20)
         msleep(1000)
 
 def pickUpDateBinsExperiment():

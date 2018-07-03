@@ -3,6 +3,7 @@ from wallaby import *
 from math import pi
 from utilities import *
 import constants as c
+import createPlusPlus as cpp
 
 
 def drive_timed(left, right, time): #DRS forward is opposite of create forward
@@ -68,16 +69,16 @@ def rotate_degrees(degrees, speed):
     stop()
 
 def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
-    create_drive_direct(rspeed, lspeed)
+    cpp.drive(lspeed, rspeed)
+    print ("1")
     while (lspeed or rspeed):
-        if get_create_lcliff_amt() < 2000:
+        if cpp.get_black_left():
             lspeed = 0
-            create_drive_direct(lspeed, rspeed)
-        if get_create_rcliff_amt() < 2000:
+            cpp.drive(0, rspeed)
+        if cpp.get_black_right():
             rspeed = 0
-            create_drive_direct(lspeed, rspeed)
+            cpp.drive(lspeed, 0)
+    print ("2")
 
 def driveTilFrontTophatBlack(lspeed, rspeed):
     lspeed = -lspeed
@@ -154,12 +155,13 @@ def turnTilRightFrontBlack(left, right):
     create_stop()
 
 def driveTillBump(lspeed, rspeed):
-    lspeed = -lspeed
-    rspeed = -rspeed
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
     create_drive_direct(rspeed, lspeed)
-    while (get_create_lbump() == 0 and get_create_rbump() == 0):
+    while not cpp.left_bump() and not cpp.right_bump():
         pass
-    create_stop()
+    cpp.drive(0,0)
 
 #unused functions to be deleted
 
