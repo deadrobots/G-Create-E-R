@@ -88,20 +88,28 @@ def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
             rspeed = 0
             create_drive_direct(lspeed, rspeed)
 
-def driveTilBlackLRCliffAndSquareUp(lspeedInit, rspeedInit):
+def driveTilWhiteLRCliffAndSquareUp(lspeedInit, rspeedInit):
     lspeed = -rspeedInit
     rspeed = -lspeedInit
+    leftSawBlack = 0
+    rightSawBlack = 0
     #print(cpp.TEMP_GET_ROBOT().cliff_right_signal)
     cpp.drive(lspeed, rspeed)
-    while not onBlackLeft() or not onBlackRight():
-        if onBlackLeft():
-            cpp.drive(abs(lspeed)/lspeed * 5, 0)
-            print('black on left')
-        elif onBlackRight():
-            cpp.drive(0, abs(rspeed)/rspeed * 5)
-            print('black on right')
-        else:
-            print('on white')
+    while onBlackLeft():
+        cpp.drive(0, abs(rspeed) / rspeed * 5)
+        print('black on right')
+    while onBlackRight():
+        cpp.drive(abs(lspeed) / lspeed * 5, 0)
+        print('black on left')
+    cpp.drive(0,0)
+
+def driveTilBlackFrontLRCliffAndSquareUp(lspeedInit, rspeedInit):
+    lspeed = -rspeedInit
+    rspeed = -lspeedInit
+    cpp.drive(lspeed, rspeed)
+    while not onBlackFrontLeft() and not onBlackFrontRight():
+        pass
+    cpp.drive(0,0)
 
 def driveTilFrontTophatBlack(lspeed, rspeed):
     temp = -lspeed

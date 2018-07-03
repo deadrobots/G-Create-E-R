@@ -33,10 +33,21 @@ def init():
     selfTest()  #tests each function of the robot
     p.cameraInit()
     print("Press a button to continue")
-    wait_for_selection()
     #wait_4_light(c.STARTLIGHT)
     # shut_down_in(119.0)
     c.START_TIME = seconds()
+
+def centerPipeRunTest():
+    cpp.connect()
+    cpp.rotate(35, 50)
+    cpp.drive_distance(-42, 50)
+    cpp.drive_distance(1.5,50)
+    cpp.rotate(90, 75)
+    cpp.drive_distance(-11, 50)
+    cpp.disconnect()
+    exit(0)
+    DEBUG
+
 
 def selfTest(): #separated from init for the sake of legibility
     print ("Running Self Test")
