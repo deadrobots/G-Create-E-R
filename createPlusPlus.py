@@ -216,6 +216,10 @@ def get_black_left():
     return robot.cliff_left_signal < 2200
 
 
+def get_black_front_left():
+    return robot.cliff_front_left_signal < 2200
+
+
 def _set_initial_counts():
     """Set the initial encoder counts."""
     _verify()  # Check if create is connected

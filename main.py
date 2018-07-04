@@ -19,7 +19,7 @@ def main():
         act.driveToCenterSeeding()
     else:
         act.getOutOfStartBoxAndDriveToCenter()
-    act.seeBlocks()
+    # act.seeBlocks()
     act.getCrates()
     act.getBotGuy()
     act.driveToYellow()

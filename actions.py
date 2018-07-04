@@ -65,15 +65,10 @@ def getOutOfStartBoxSeeding():
     #looks at first block from the side then drives to black line and line follows to the second block area
     if c.IS_BLUE_BOT:
         print("blue")
-        seeBlocksWithoutOrange()
+        p.set_first_position()
         drive_distance(-16, 80)
         msleep(200)
         # driveTilBlackLCliffAndSquareUp(20)
-    elif c.IS_GREEN_BOT:
-        seeBlocksWithoutOrange()
-        cpp.drive_timed(-20, -20, 3300)
-        cpp.rotate(80, 20)
-        msleep(1000)
 
 
 def pickUpDateBinsExperiment():
@@ -83,7 +78,7 @@ def pickUpDateBinsExperiment():
     cpp.drive_conditional(cpp.get_bump_left, -20, state=False)
     cpp.drive_distance(2, 50)
     cpp.rotate(80, 20)
-    cpp.drive_distance(5, 40)
+    cpp.drive_distance(6, 40)
     cpp.drive_distance(-8, 55)
     cpp.rotate(84, 50)
     cpp.drive_distance(6, 50)
@@ -121,11 +116,11 @@ def driveToSecondDateBin():
     # driveTilBlackLCliffAndSquareUp(-30)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     cpp.rotate(90, 20)
-    cpp.drive_distance(14, 30)
+    cpp.drive_distance(14, 50)
     cpp.rotate(-89, 20)
     moveServo(c.servoCrateArm, c.crateArmVeryHigh, 10)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
-    cpp.drive_distance(12, 50)
+    cpp.drive_distance(15, 30)
     cpp.drive_distance(-5, 50)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
@@ -137,6 +132,8 @@ def driveToSecondDateBin():
     cpp.drive_distance(-11.5, 10)
     cpp.drive_distance(2, 10)
     moveServo(c.servoBotGuyClaw, c.clawMid, 10)
+    cpp.drive_conditional(cpp.get_black_left, -40, state=False)
+    cpp.drive_distance(-3, 50)
     # cpp.drive_distance(-5, 30)
     # moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
     # moveServo(c.servoBotGuyClaw, c.clawMid, 15)
@@ -147,17 +144,17 @@ def driveToSecondDateBin():
     # cpp.drive_distance(-11.5, 10)
     # cpp.drive_distance(2, 10)
     # moveServo(c.servoBotGuyClaw, c.clawMid, 10)
-    DEBUG()
 
 def driveToCenterSeeding():
     print "Trying to drive to center"
     #looks at first block from the side then drives to black line and line follows to the second block area
-    if c.IS_BLUE_BOT:
-        lineFollowRightFrontTilRightBlack()
-        drive_timed(-50, -50, 1000)
-    elif c.IS_GREEN_BOT:
-        lineFollowRightFrontTilRightBlack()
-        drive_timed(-50, -50, 1000)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 10)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
+    cpp.rotate(-90, 20)
+    cpp.drive_conditional(cpp.get_black_right, -40, state=False)
+    p.set_second_position()
+    p.set_final_positions()
+    cpp.drive_distance(-3, 40)
 
 def getOutOfStartBoxAndDriveToCenter():
     print ("Driving out of start box and going to center")
@@ -209,14 +206,11 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
     print "Picking up crates"
     #drives center area grabs cube and turns around to prep for botguy grab
     if c.IS_BLUE_BOT:
-        rotate_degrees(-90, 200)
-        drive_timed(75, 75, 1000)
-        msleep(1000)
-        driveTilBlackLCliffAndSquareUp(-75,-75) #end of func. 1
-        # rotate_degrees(1, 50)
+        cpp.rotate(-95, 20)
+        cpp.drive_distance(2, 40)
         moveServo(c.servoCrateArm, c.crateArmDown, 15)
         moveServo(c.servoCrateClaw, c.crateGrab, 15)
-        timedLineFollowRightFront(100,1.6)
+        cpp.drive_distance(-7, 30)
         # rotate(2,50)
         # msleep(500)
         # drive_timed(-100, -80, 1600)
@@ -224,7 +218,7 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
         # drive_timed(-100, -85, 1100)
         moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
         moveServo(c.servoCrateArm, c.crateArmMid, 10)
-        msleep(500)
+        DEBUG()
         driveTilBlackLCliffAndSquareUp(250,250)
         moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
         rotate_degrees(155, 50)  #145
@@ -275,11 +269,12 @@ def getBotGuy():
 
 def driveToYellow(): # Starts from the middle or it won't work and that's not our fault!
     print "Driving to yellow"
-    if colorOrder[0] == c.YELLOW:
+    position = p.get_positions()
+    if position[1] == c.YELLOW:
         goYellowFirst()
-    elif colorOrder[1] == c.YELLOW:
+    elif position[2] == c.YELLOW:
         goYellowSecond()
-    elif colorOrder[2] == c.YELLOW:
+    elif position[3] == c.YELLOW:
         goYellowThird()
 
 def goYellowFirst():

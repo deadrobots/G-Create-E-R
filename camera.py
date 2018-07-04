@@ -22,7 +22,7 @@ def cameraInit():
         msleep(600)
 
 
-def getCenterColorAvg():
+def _getCenterColorAvg():
     #Determines what color block is within the orange card
     #This uses mode of the returned colors..
     i = 0
@@ -60,7 +60,7 @@ def getCenterColorAvg():
     print("what it returns is:")
 
     if max(redCount, greenCount, yellowCount)==0:
-        return 0
+        return None
     elif max(redCount, greenCount, yellowCount) == greenCount:
         return c.GREEN
     elif max(redCount, greenCount, yellowCount) == redCount:
@@ -68,7 +68,7 @@ def getCenterColorAvg():
     elif max(redCount, greenCount, yellowCount) == yellowCount:
         return c.YELLOW
 
-def readColorWithoutOrange():
+def _readColorWithoutOrange():
     # Determines what color block is without orange card
     # This uses mode of the returned colors..
     i = 0
@@ -102,7 +102,7 @@ def readColorWithoutOrange():
 
     if max(redCount, greenCount, yellowCount) == 0:
         print "No color seen in first block; ending run due to inconclusive reading"
-        u.DEBUG()
+        return None
     elif max(redCount, greenCount, yellowCount) == greenCount:
         return c.GREEN
     elif max(redCount, greenCount, yellowCount) == redCount:
@@ -139,7 +139,14 @@ def colorDefine(color):
 
 
 def determineOrder(list):
-    options=[c.GREEN,c.RED,c.YELLOW]
+    """
+    ORANGE = 0
+    RED = 1
+    GREEN = 2
+    YELLOW = 3
+    """
+    print(list)
+    options=[c.GREEN, c.RED, c.YELLOW]
     #Logic to determine which color block is in which place
     #(work in progress) If one of the first two spots checked is empty, robot drives to final scoring zone to check last color
     #Prints a list with order of colors
@@ -149,7 +156,7 @@ def determineOrder(list):
             options.remove(color)
 
     for i in range(len(list)):      #replaces any unknown colors
-        if list[i] == 0:
+        if list[i] == c.ORANGE and options:
             guess = options.pop()
             print("cannot see color, added " + str(guess))
             list[i]=guess
@@ -167,13 +174,51 @@ def determineOrder(list):
 
 def checkColor(list):
     #Finds color and adds it to the list
-    s = getCenterColorAvg()
+    s = _getCenterColorAvg()
     list.append(s)
     print(list[-1])
     return list[-1]
 
 def checkColorWithoutOrange(list):
-    s = readColorWithoutOrange()
+    s = _readColorWithoutOrange()
     list.append(s)
     print(list[-1])
     return list[-1]
+
+
+position = {1: None, 2: None, 3: None}
+colors = {c.GREEN: 'green', c.YELLOW: 'yellow', c.RED: 'red', c.ORANGE: 'orange', None:None}
+
+
+def set_first_position():
+    global position
+    position[1] = _readColorWithoutOrange()
+    print('position one is: {}'.format(colors[position[1]]))
+
+
+def set_second_position():
+    global position
+    position[2] = _getCenterColorAvg()
+    print('position two is: {}'.format(colors[position[2]]))
+
+
+def set_final_positions():
+    global position
+    options = [c.GREEN, c.RED, c.YELLOW]
+    if position[1] in options:
+        options.remove(position[1])
+    else:
+        position[1] = options.pop(0)
+    if position[2] in options:
+        options.remove(position[2])
+    else:
+        position[2] = options.pop(0)
+    position[3] = options[0]
+
+    print('final position one is: {}'.format(colors[position[1]]))
+    print('final position two is: {}'.format(colors[position[2]]))
+    print('final position three is: {}'.format(colors[position[3]]))
+
+
+def get_positions():
+    return position
