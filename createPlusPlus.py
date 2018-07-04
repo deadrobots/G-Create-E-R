@@ -16,7 +16,7 @@ create_initialized = False
 drs_forward = True
 
 
-def connect():
+def connect(full=True):
     """Connect to the create - must be called before anything else is used."""
     global robot
     global create_initialized
@@ -26,8 +26,21 @@ def connect():
     except Exception:
         print('The Create is either not connected or is powered off.')
         exit(1)
-    robot.oi_mode = MODES.SAFE
+    if full:
+        mode_full()
+    else:
+        mode_safe()
     _set_initial_counts()
+
+
+def mode_safe():
+    _verify()
+    robot.oi_mode = MODES.SAFE
+
+
+def mode_full():
+    _verify()
+    robot.oi_mode = MODES.FULL
 
 
 def drive_timed(left, right, time):
@@ -81,10 +94,39 @@ def drive_distance(distance, base_speed, diff=25, refresh_rate=0):
     robot.drive_direct(0, 0)
 
 
+def drive_conditional(condition, base_speed, state=True, diff=25, refresh_rate=0):
+    """Drive straight a distance"""
+    _verify()  # Check if create is connected
+    # save initial encoder vals (they'll roll over, so we need to adjust for this eventually
+    _set_initial_counts()
+    base_speed *= 5
+    if drs_forward:
+        base_speed *= -1
+    if base_speed <  -475:
+        base_speed = -475
+    if base_speed > 475:
+        base_speed = 475
+    if base_speed < 0:
+        diff *= -1
+    # master is left wheel
+    left_speed = base_speed
+    while condition() is state:
+        r_encoder = abs(_right_encoder())
+        l_encoder = abs(_left_encoder())
+        if r_encoder > l_encoder:
+            left_speed = base_speed - diff
+        if l_encoder > r_encoder:
+            left_speed = base_speed + diff
+        robot.drive_direct(int(left_speed), int(base_speed))
+        msleep(refresh_rate)
+    robot.drive_direct(0, 0)
+
+
 def rotate(degrees, speed):
     """Rotate using both wheels"""
     _verify()  # Check if create is connected
     _set_initial_counts()
+    speed *= 5
     if speed < 0:
         speed *= -1
     if degrees < 0:
@@ -119,17 +161,6 @@ def pivot_on_left(degrees, speed):
     while _convert_to_inches(abs(_right_encoder())) < dist:
         pass
     robot.drive_direct(0, 0)
-
-def right_bump():
-    """Returns condition of right create bumper"""
-    _verify()
-    return robot.bumps_and_wheel_drops.bump_right
-
-
-def left_bump():
-    """Returns condition of left create bumper"""
-    _verify()
-    return robot.bumps_and_wheel_drops.bump_left
 
 
 def pivot_on_right(degrees, speed):

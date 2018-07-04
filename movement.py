@@ -68,17 +68,17 @@ def rotate_degrees(degrees, speed):
         pass
     stop()
 
-def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
-    cpp.drive(lspeed, rspeed)
-    print ("1")
-    while (lspeed or rspeed):
+def black_left_or_right():
+    return cpp.get_black_left() or cpp.get_black_right()
+
+def driveTilBlackLCliffAndSquareUp(speed):
+    cpp.drive_conditional(black_left_or_right, speed, False)
+    while not cpp.get_black_left() or not cpp.get_black_right():
         if cpp.get_black_left():
-            lspeed = 0
-            cpp.drive(0, rspeed)
+            cpp.drive(0, speed)
         if cpp.get_black_right():
-            rspeed = 0
-            cpp.drive(lspeed, 0)
-    print ("2")
+            cpp.drive(speed, 0)
+
 
 def driveTilFrontTophatBlack(lspeed, rspeed):
     lspeed = -lspeed
@@ -91,11 +91,11 @@ def driveTilFrontTophatBlack(lspeed, rspeed):
 def timedLineFollowLeftFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(speed, speed/2)
+        if cpp.get_black_left():
+            cpp.drive(speed/2, speed)
         else:
-            create_drive_direct(speed/2, speed)
-    create_stop()
+            cpp.drive(speed, speed/2)
+    cpp.drive(0, 0)
 
 def timedLineFollowFrontTophat(time):
     sec = seconds()
@@ -153,15 +153,6 @@ def turnTilRightFrontBlack(left, right):
     while (get_create_rfcliff_amt() > 2000):
         pass
     create_stop()
-
-def driveTillBump(lspeed, rspeed):
-    temp = -lspeed
-    lspeed = -rspeed
-    rspeed = temp
-    create_drive_direct(rspeed, lspeed)
-    while not cpp.left_bump() and not cpp.right_bump():
-        pass
-    cpp.drive(0,0)
 
 #unused functions to be deleted
 

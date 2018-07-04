@@ -15,7 +15,6 @@ def main():
         print("0") # seeding (aka left)
         act.getOutOfStartBoxSeeding()
         act.pickUpDateBinsExperiment()
-        u.wait_for_button()
         act.driveToSecondDateBin()
         act.driveToCenterSeeding()
     else:
