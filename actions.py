@@ -137,7 +137,6 @@ def driveToSecondDateBin():
     cpp.drive_distance(-11.5, 10)
     cpp.drive_distance(2, 10)
     moveServo(c.servoBotGuyClaw, c.clawMid, 10)
-    driveTilBlackLCliffAndSquareUp(-40)
     # cpp.drive_distance(-5, 30)
     # moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
     # moveServo(c.servoBotGuyClaw, c.clawMid, 15)
