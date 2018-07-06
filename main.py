@@ -9,17 +9,19 @@ import movement as m
 from camera import determineOrder
 
 def main():
-    act.centerPipeRunTest()
-    # act.init()
-    # if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
+    act.init()
+    if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
+        act.getOutOfStartBoxAndDriveToCenter()
     #     act.getOutOfStartBoxSeeding()
     #     act.pickUpDateBinsExperiment()
     #     act.driveToSecondDateBin()
     #     act.driveToCenterSeeding()
-    # else:
-    #     act.getOutOfStartBoxAndDriveToCenter()
-    # act.seeBlocks()
-    # act.getCrates()
+    else:
+        act.centerPipeRun()
+        act.headToSecondBlock()
+    #act.seeBlocks()
+    act.getCrates()
+    u.DEBUG()
     # act.getBotGuy()
     # act.driveToYellow()
     # act.dropBlocks()

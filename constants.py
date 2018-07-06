@@ -80,9 +80,10 @@ if IS_ORANGE_BOT:
     armSandwich = -620
     armStartbox = -700
 
-    armBotguyDelivery = 400
-    armBotguyPickUp = 450    #-630
-    armScore = 230     #-415
+    # armBotguyDelivery = 400
+    # armBotguyPickUp = 850    #-630
+    # armScore = 230     #-415
+    # armBotguyUp = 0
 
 elif IS_BLUE_BOT:
 
@@ -137,9 +138,9 @@ elif IS_GREEN_BOT:
     INCHES_TO_TICKS = 560
 
     # Claw Servo Values
-    clawClosed = 400
+    clawClosed = 0
     clawLoose = 1000
-    clawBotguy = 830
+    clawBotguy = 700
     clawbotguyArea = 1150
     clawMid = 1200
     clawOpen = 1850
@@ -147,9 +148,10 @@ elif IS_GREEN_BOT:
 
 
     # Botguy Arm Servo Values
-    botGuyArmUp = 1400
-    botGuyArmDown = 450
-    botGuyArmStart = 1570
+    botGuyArmUp = 600
+    botGuyArmMid = 800
+    botGuyArmDown = 1075
+    botGuyArmStart = 0
 
     # Crate Arm Servo Values
     crateArmUp = 2047
@@ -160,10 +162,8 @@ elif IS_GREEN_BOT:
     crateArmLiftCrate = 1500
     crateArmStart = 1800
 
-
-
     #Crate Claw Servo Values
-    crateClawClosed = 500 #825
+    crateClawClosed = 200 #500
     crateClawOpen = 1650
     crateClawStart = 1800
 

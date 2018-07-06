@@ -37,16 +37,32 @@ def init():
     # shut_down_in(119.0)
     c.START_TIME = seconds()
 
-def centerPipeRunTest():
-    cpp.connect()
-    cpp.rotate(35, 50)
-    cpp.drive_distance(-42, 50)
-    cpp.drive_distance(1.5,50)
-    cpp.rotate(90, 75)
-    cpp.drive_distance(-11, 50)
-    cpp.disconnect()
-    exit(0)
-    DEBUG
+def centerPipeRun():
+    print "Heading to Botguy"
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown)
+    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmStart, 15)
+    cpp.rotate(25, 50)
+    cpp.drive_distance(-44, 50)
+    cpp.drive_distance(2,50)
+    cpp.rotate(83, 50)
+    cpp.drive_distance(-2,25)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 30)
+    moveServo(c.servoBotGuyClaw, c.clawBotguy, 30)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    cpp.drive_distance(-9, 30)
+    moveServo(c.servoBotGuyClaw,c.clawClosed,15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 5)
+
+def headToSecondBlock():
+    cpp.drive_distance(6,25)
+    moveServo(c.servoBotGuyArm, c.botGuyArmStart, 5)
+    cpp.rotate(90,50)
+    driveTilBlackLRCliffAndSquareUp(50,50)
+    cpp.rotate(55,50)
+    lineFollowRightFrontTilRightBlack()
+
+
 
 
 def selfTest(): #separated from init for the sake of legibility
@@ -199,27 +215,52 @@ def seeBlocks():
 def getCrates(): #break this function into smaller bites... make driveToCrates, getCrates, turnAround,etc
     print "Picking up crates"
     #drives center area grabs cube and turns around to prep for botguy grab
-    rotate_degrees(-90, 200)
-    drive_timed(75, 75, 1000)
-    msleep(1000)
-    driveTilBlackLCliffAndSquareUp(-75,-75) #end of func. 1
-    # rotate_degrees(1, 50)
-    moveServo(c.servoCrateArm, c.crateArmDown, 15)
-    moveServo(c.servoCrateClaw, c.crateGrab, 15)
-    timedLineFollowRightFront(100,1.6)
-    # rotate(2,50)
-    # msleep(500)
-    # drive_timed(-100, -80, 1600)
-    # drive_timed(-100, -100, 500) #400
-    # drive_timed(-100, -85, 1100)
-    moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
-    moveServo(c.servoCrateArm, c.crateArmMid, 10)
-    msleep(500)
-    driveTilBlackLCliffAndSquareUp(250,250)
-    moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
-    rotate_degrees(155, 50)  #145
-    msleep(1000)
-    moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
+    if c.IS_GREEN_BOT:
+        cpp.drive_distance(2, 50)
+        rotate_degrees(-85, 200)
+        drive_timed(75, 75, 1000)
+        msleep(1000)
+        driveTilBlackLCliffAndSquareUp(-75, -75)  # end of func. 1
+        # rotate_degrees(1, 50)
+        moveServo(c.servoCrateArm, c.crateArmDown, 15)
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
+        # timedLineFollowRightFront(100,1.6)
+        # rotate(2,50)
+        # msleep(500)
+        # drive_timed(-100, -80, 1600)
+        # drive_timed(-100, -100, 500) #400
+        # drive_timed(-100, -85, 1100)
+        # moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
+        moveServo(c.servoCrateArm, c.crateArmMid, 10)
+        msleep(500)
+        driveTilBlackLCliffAndSquareUp(-250, -250)
+        # moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
+        wait_for_button()
+        rotate_degrees(155, 50)  # 145
+        msleep(1000)
+        # moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
+    else:
+        rotate_degrees(-90, 200)
+        drive_timed(75, 75, 1000)
+        msleep(1000)
+        driveTilBlackLCliffAndSquareUp(-75,-75) #end of func. 1
+        # rotate_degrees(1, 50)
+        moveServo(c.servoCrateArm, c.crateArmDown, 15)
+        moveServo(c.servoCrateClaw, c.crateGrab, 15)
+        timedLineFollowRightFront(100,1.6)
+        # rotate(2,50)
+        # msleep(500)
+        # drive_timed(-100, -80, 1600)
+        # drive_timed(-100, -100, 500) #400
+        # drive_timed(-100, -85, 1100)
+        moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
+        moveServo(c.servoCrateArm, c.crateArmMid, 10)
+        msleep(500)
+        driveTilBlackLCliffAndSquareUp(250,250)
+        moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
+        rotate_degrees(155, 50)  #145
+        msleep(1000)
+        moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 
 def getBotGuy():

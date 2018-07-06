@@ -111,6 +111,14 @@ def driveTilBlackFrontLRCliffAndSquareUp(lspeedInit, rspeedInit):
         pass
     cpp.drive(0,0)
 
+def driveTilBlackLRCliffAndSquareUp(lspeedInit, rspeedInit):
+    lspeed = -rspeedInit
+    rspeed = -lspeedInit
+    cpp.drive(lspeed, rspeed)
+    while not onBlackLeft() and not onBlackRight():
+        pass
+    cpp.drive(0,0)
+
 def driveTilFrontTophatBlack(lspeed, rspeed):
     temp = -lspeed
     lspeed = -rspeed
@@ -173,7 +181,7 @@ def lineFollowRightFrontTilLeftFrontBlack(speed):
     cpp.drive(0,0)
 
 def lineFollowRightFrontTilRightBlack():
-    while onBlackRight():
+    while not onBlackRight():
         if not onBlackFrontRight():
             create_drive_direct(200, 100)
         else:
