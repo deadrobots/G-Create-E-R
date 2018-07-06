@@ -78,6 +78,7 @@ def driveTilBlackLCliffAndSquareUp(speed):
             cpp.drive(0, speed)
         if cpp.get_black_right():
             cpp.drive(speed, 0)
+    cpp.drive(0, 0)
 
 
 def driveTilFrontTophatBlack(lspeed, rspeed):
