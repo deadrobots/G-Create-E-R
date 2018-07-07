@@ -8,9 +8,9 @@ import createPlusPlus as cpp
 
 def drive_timed(left, right, time): #DRS forward is opposite of create forward
     cpp.drive_timed(left/5,right/5, time)
-    # create_drive_direct(-right, -left)
+    # cpp.drive(-right, -left)
     # msleep(time)
-    # create_drive_direct(0, 0)
+    # cpp.drive(0, 0)
 
 
 def create_drive_direct(left, right):
@@ -18,15 +18,15 @@ def create_drive_direct(left, right):
 
 
 def spin_cw(power, time):
-    create_drive_direct(power, -power)
+    cpp.drive(power, -power)
     msleep(time)
-    create_drive_direct(0, 0)
+    cpp.drive(0, 0)
 
 
 def spin_ccw(power, time):
-    create_drive_direct(-power, power)
+    cpp.drive(-power, power)
     msleep(time)
-    create_drive_direct(0, 0)
+    cpp.drive(0, 0)
 
 
 def rotate(power, time):
@@ -37,15 +37,15 @@ def rotate(power, time):
 
 def rotateTillBlack(power):
     if power > 0:
-        create_drive_direct(-power, power)
+        cpp.drive(-power, power)
     else:
-        create_drive_direct(power, -power)
+        cpp.drive(power, -power)
     while (onBlackFrontRight()):
         pass
     create_stop()
 
 def drive_forever(left, right): #not used... remove?
-    create_drive_direct(-right, -left)
+    cpp.drive(-right, -left)
 
 
 def stop(): #not used; no longer needed with new API
@@ -75,18 +75,103 @@ def rotate_degrees(degrees, speed):
     #     pass
     # cpp.drive(0,0)
 
+
+def driveTilFrontTophatBlack(lspeed, rspeed):
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
+    cpp.drive(rspeed, lspeed)
+    while (analog(c.FRONT_TOPHAT) < 2000):
+        pass
+    cpp.drive(0,0)
+
+def timedLineFollowLeftFront(speed, time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if not onBlackFrontLeft():
+            cpp.drive(speed, speed/2)
+        else:
+            cpp.drive(speed/2, speed)
+    cpp.drive(0,0)
+
+def timedLineFollowFrontTophat(time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if analog(c.FRONT_TOPHAT) < 1500:
+            cpp.drive(-100, -50)
+        else:
+            cpp.drive(-50, -100)
+    cpp.drive(0,0)
+
+def timedLineFollowRightFront(speed, time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if not onBlackFrontRight():
+            cpp.drive(speed, (int)(speed/1.8))
+        else:
+            cpp.drive((int)(speed/1.8), speed)
+        msleep(10)
+    cpp.drive(0,0)
+
+def lineFollowLeftFrontTilLeftBlack(speed):
+    while onBlackLeft():
+        if not onBlackFrontLeft():
+            cpp.drive(speed, speed/2)
+        else:
+            cpp.drive(speed/2, speed)
+    cpp.drive(0,0)
+
 def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
     temp = -lspeed
     lspeed = -rspeed
     rspeed = temp
-    create_drive_direct(rspeed, lspeed)
+    cpp.drive(rspeed, lspeed)
     while (lspeed or rspeed):
         if not onBlackLeft():
             lspeed = 0
-            create_drive_direct(lspeed, rspeed)
+            cpp.drive(lspeed, rspeed)
         if not onBlackRight():
             rspeed = 0
-            create_drive_direct(lspeed, rspeed)
+            cpp.drive(lspeed, rspeed)
+
+def lineFollowLeftFrontTilRightFrontBlack(speed):
+    while onBlackFrontRight():
+        if not onBlackFrontLeft():
+            cpp.drive(speed, speed/2)
+        else:
+            cpp.drive(speed/2, speed)
+    cpp.drive(0,0)
+
+def lineFollowRightFrontTilLeftFrontBlack(speed):
+    while onBlackFrontLeft():
+        if not onBlackFrontRight():
+            cpp.drive(speed/2, speed)
+        else:
+            cpp.drive(speed, speed/2)
+    cpp.drive(0,0)
+
+def lineFollowRightFrontTilRightBlack():
+    while not onBlackRight():
+        if not onBlackFrontRight():
+            cpp.drive(40, 20)
+        else:
+            cpp.drive(20, 40)
+    cpp.drive(0,0)
+
+def turnTilRightFrontBlack(left, right):
+    cpp.drive(left, right)
+    while onBlackFrontRight():
+        pass
+    cpp.drive(0,0)
+
+def driveTillBump(lspeed, rspeed):
+    temp = -lspeed
+    lspeed = -rspeed
+    rspeed = temp
+    cpp.drive(rspeed, lspeed)
+    while not cpp.left_bump() and not cpp.right_bump():
+        pass
+    cpp.drive(0,0)
 
 def driveTilWhiteLRCliffAndSquareUp(lspeedInit, rspeedInit):
     lspeed = -rspeedInit
@@ -116,90 +201,6 @@ def driveTilBlackLRCliffAndSquareUp(lspeedInit, rspeedInit):
     rspeed = -lspeedInit
     cpp.drive(lspeed, rspeed)
     while not onBlackLeft() and not onBlackRight():
-        pass
-    cpp.drive(0,0)
-
-def driveTilFrontTophatBlack(lspeed, rspeed):
-    temp = -lspeed
-    lspeed = -rspeed
-    rspeed = temp
-    create_drive_direct(rspeed, lspeed)
-    while (analog(c.FRONT_TOPHAT) < 2000):
-        pass
-    cpp.drive(0,0)
-
-def timedLineFollowLeftFront(speed, time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if not onBlackFrontLeft():
-            create_drive_direct(speed, speed/2)
-        else:
-            create_drive_direct(speed/2, speed)
-    cpp.drive(0,0)
-
-def timedLineFollowFrontTophat(time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if analog(c.FRONT_TOPHAT) < 1500:
-            create_drive_direct(-100, -50)
-        else:
-            create_drive_direct(-50, -100)
-    cpp.drive(0,0)
-
-def timedLineFollowRightFront(speed, time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if not onBlackFrontRight():
-            create_drive_direct(speed, (int)(speed/1.8))
-        else:
-            create_drive_direct((int)(speed/1.8), speed)
-        msleep(10)
-    cpp.drive(0,0)
-
-def lineFollowLeftFrontTilLeftBlack(speed):
-    while onBlackLeft():
-        if not onBlackFrontLeft():
-            create_drive_direct(speed, speed/2)
-        else:
-            create_drive_direct(speed/2, speed)
-    cpp.drive(0,0)
-
-def lineFollowLeftFrontTilRightFrontBlack(speed):
-    while onBlackFrontRight():
-        if not onBlackFrontLeft():
-            create_drive_direct(speed, speed/2)
-        else:
-            create_drive_direct(speed/2, speed)
-    cpp.drive(0,0)
-
-def lineFollowRightFrontTilLeftFrontBlack(speed):
-    while onBlackFrontLeft():
-        if not onBlackFrontRight():
-            create_drive_direct(speed/2, speed)
-        else:
-            create_drive_direct(speed, speed/2)
-    cpp.drive(0,0)
-
-def lineFollowRightFrontTilRightBlack():
-    while not onBlackRight():
-        if not onBlackFrontRight():
-            create_drive_direct(200, 100)
-        else:
-            create_drive_direct(100, 200)
-    cpp.drive(0,0)
-
-def turnTilRightFrontBlack(left, right):
-    create_drive_direct(left, right)
-    while onBlackFrontRight():
-        pass
-    cpp.drive(0,0)
-
-def driveTillBump(lspeed, rspeed):
-    temp = -lspeed
-    lspeed = -rspeed
-    rspeed = temp
-    create_drive_direct(rspeed, lspeed)
-    while not cpp.left_bump() and not cpp.right_bump():
         pass
     cpp.drive(0,0)
 

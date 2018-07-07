@@ -156,7 +156,7 @@ elif IS_GREEN_BOT:
     # Crate Arm Servo Values
     crateArmUp = 2047
     crateArmMid = 1050
-    crateArmDown = 818
+    crateArmDown = 880
     crateArmAlmostDown = 950
     crateArmDeStack = 1300
     crateArmLiftCrate = 1500
@@ -164,6 +164,7 @@ elif IS_GREEN_BOT:
 
     #Crate Claw Servo Values
     crateClawClosed = 200 #500
+    crateGrab = 800
     crateClawOpen = 1650
     crateClawStart = 1800
 

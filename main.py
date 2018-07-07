@@ -10,16 +10,8 @@ from camera import determineOrder
 
 def main():
     act.init()
-    if u.wait_for_selection(): #asks for button press twice; FIX THIS in method
-        act.getOutOfStartBoxAndDriveToCenter()
-    #     act.getOutOfStartBoxSeeding()
-    #     act.pickUpDateBinsExperiment()
-    #     act.driveToSecondDateBin()
-    #     act.driveToCenterSeeding()
-    else:
-        act.centerPipeRun()
-        act.headToSecondBlock()
-    #act.seeBlocks()
+    act.centerPipeRun()
+    act.headToSecondBlock()
     act.getCrates()
     u.DEBUG()
     # act.getBotGuy()
@@ -27,7 +19,6 @@ def main():
     # act.dropBlocks()
     # cpp.disconnect()
     # exit(0)
-    # u.DEBUG()
 
 
 
