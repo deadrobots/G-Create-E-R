@@ -1,15 +1,16 @@
 from movement import *
 from utilities import *
-from createPlusPlus import drive_distance, rotate, pivot_on_left, pivot_on_right
-from createPlusPlus import drive_timed as new_drive_timed
 import constants as c
 from wallaby import *
 import camera as p
 import createPlusPlus as cpp
+import motorz as m
 
 colorOrder = []
 
-def init():
+cpp = None
+
+def init(icpp):
     '''For Setup:
     Make sure that both bumpers are touching the back edges of the starting box
     Point the "arm" at the opposite corner of starting box (intersection of black tape)
@@ -21,6 +22,8 @@ def init():
     #     exit(0)
     # print("Create connected...")
     # create_full()
+    global cpp
+    cpp = icpp
     cpp.connect()
     if c.IS_ORANGE_BOT:
         print("I AM ORANGE")
@@ -32,7 +35,7 @@ def init():
         print("I AM YELLOW")
         DEBUG() # Do not remove!!!
     selfTest()  #tests each function of the robot
-    p.cameraInit()
+    # p.cameraInit()
     print("Press a button to continue")
     wait_for_button()
     #wait_4_light(c.STARTLIGHT)
@@ -46,9 +49,11 @@ def selfTest(): #separated from init for the sake of legibility
     msleep(500)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
     # open/close claw
-    enable_servo(c.servoBotGuyClaw)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    moveServo(c.servoBotGuyClaw, c.clawStart, 15)
+    m.rotate_until_stalled(20)
+    msleep(1000)
+    m.rotate_until_stalled(-20)
+    msleep(300)
+    m.set_claw_open()
     # test drive
     cpp.drive_timed(20, 20, 2500)
     msleep(250)
@@ -64,22 +69,27 @@ def selfTest(): #separated from init for the sake of legibility
     # moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     ao()
 
-def centerPipeRun():
+
+def centerPipeRunAndBotGuyGrab():
     print ("Heading to Botguy")
     moveServo(c.servoBotGuyArm, c.botGuyArmDown)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    m.rotate_until_stalled(20)
     moveServo(c.servoBotGuyArm, c.botGuyArmStart, 15)
     cpp.rotate(25, 50)
     cpp.drive_distance(-44, 50)
     cpp.drive_distance(2,50)
     cpp.rotate(83, 50)
-    cpp.drive_distance(-2,25)
+    cpp.drive_distance(-5,25)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 30)
-    moveServo(c.servoBotGuyClaw, c.clawBotguy, 30)
+    m.claw_to_position(c.clawBotguy, 30)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    wait_for_button()
     cpp.drive_distance(-9, 30)
-    moveServo(c.servoBotGuyClaw,c.clawClosed,15)
+    wait_for_button()
+    m.claw_move(20)
+    msleep(4000)
     moveServo(c.servoBotGuyArm, c.botGuyArmMid, 5)
+
 
 def headToSecondBlock():
     print ("Heading to second block!")
@@ -90,6 +100,7 @@ def headToSecondBlock():
     cpp.rotate(55,50)
     lineFollowRightFrontTilRightBlack()
     cpp.drive_distance(3.5, 40)
+
 
 def seeBlocksWithoutOrange():
     #allows robot to check color of first cube from the startbox
@@ -146,20 +157,6 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
     moveServo(c.servoBotGuyClaw, c.clawBotguy, 15)
 
 
-def getBotGuy():
-    print "Picking up Botguy"
-    # grabs botguys and backs out of area
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)
-    driveTilBlackLCliffAndSquareUp(20, 20)
-    timedLineFollowFrontTophat(0.4)
-    moveServo(c.servoBotGuyClaw, c.clawbotguyArea, 10)
-    timedLineFollowFrontTophat(2.7)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 10)  # grab botguy
-    driveTilBlackLCliffAndSquareUp(-20, -20)
-    drive_timed(-100, -100, 1000)
-    msleep(500)
-
 def driveToYellow(): # Starts from the middle or it won't work and that's not our fault!
     print "Driving to yellow"
     if colorOrder[0] == c.YELLOW:
@@ -168,6 +165,7 @@ def driveToYellow(): # Starts from the middle or it won't work and that's not ou
         goYellowSecond()
     elif colorOrder[2] == c.YELLOW:
         goYellowThird()
+
 
 def goYellowFirst():
     print "Yellow is in first position"
@@ -191,6 +189,7 @@ def goYellowSecond():
     rotate_degrees(87, 100)
     driveTilFrontTophatBlack(-20,-20)
 
+
 def goYellowThird():
     print "Yellow is in third position"
     #if yellow cube is in third zone (farthest from startbox)
@@ -198,6 +197,7 @@ def goYellowThird():
     lineFollowRightFrontTilLeftFrontBlack(50)
     rotate_degrees(85, 100)
     driveTilFrontTophatBlack(-20, -20)
+
 
 def dropBlocks(): #can we break this function up?
     print "Delivering crates"

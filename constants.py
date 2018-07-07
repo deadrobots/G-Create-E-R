@@ -136,19 +136,11 @@ elif IS_BLUE_BOT:
 elif IS_GREEN_BOT:
 
     INCHES_TO_TICKS = 560
-
-    # Claw Servo Values
-    clawClosed = 0
-    clawLoose = 1000
-    clawBotguy = 700
-    clawbotguyArea = 1150
-    clawMid = 1200
-    clawOpen = 1850
-    clawStart = 2047
-
+    # Botguy claw is now motor
+    clawBotguy = 500
 
     # Botguy Arm Servo Values
-    botGuyArmUp = 600
+    botGuyArmUp = 700
     botGuyArmMid = 800
     botGuyArmDown = 1075
     botGuyArmStart = 0
