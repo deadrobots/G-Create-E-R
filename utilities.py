@@ -1,6 +1,5 @@
 
 import constants as c
-import createPlusPlus as cpp
 from wallaby import *
 
 def wait_for_button(force=False):
@@ -73,11 +72,8 @@ def _wait_4(port):
         pass
 
 def DEBUG(PrintTime=True):
-    cpp.drive(0, 0)
     ao()
-    cpp.mode_safe()
     msleep(100)
-    cpp.disconnect()
     if PrintTime:
         print 'Program stop for DEBUG\nSeconds: ', seconds() - c.START_TIME
     disable_servos()
@@ -85,11 +81,8 @@ def DEBUG(PrintTime=True):
 
 
 def EXIT():
-    cpp.drive(0, 0)
     ao()
-    cpp.mode_safe()
     msleep(100)
-    cpp.disconnect()
     print 'Program finished!\nSeconds: ', seconds() - c.START_TIME
     exit(0)
 

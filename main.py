@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os, sys
 import actions as act
-import createPlusPlus as cpp
+import createPlusPlus
 import constants as c
 from wallaby import *
 import utilities as u
@@ -9,23 +9,21 @@ import movement as m
 from camera import determineOrder
 
 def main():
-    print("Running!")
-    act.init()
-    if u.wait_for_selection():  # asks for button press
+    with createPlusPlus.Create() as cpp:
+        print("Running!")
+        act.init(cpp)
         print("0") # seeding (aka left)
         act.getOutOfStartBoxSeeding()
         act.pickUpDateBinsExperiment()
         act.driveToSecondDateBin()
         act.driveToCenterSeeding()
-    else:
-        act.getOutOfStartBoxAndDriveToCenter()
-    # act.seeBlocks()
-    act.getCrates()
-    act.getBotGuy()
-    u.DEBUG()
-    act.driveToYellow()
-    act.dropBlocks()
-    u.DEBUG()
+        # act.seeBlocks()
+        act.getCrates()
+        act.getBotGuy()
+        u.DEBUG()
+        act.driveToYellow()
+        act.dropBlocks()
+        u.DEBUG()
 
 
 

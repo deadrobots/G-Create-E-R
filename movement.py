@@ -5,6 +5,13 @@ from utilities import *
 import constants as c
 import createPlusPlus as cpp
 
+cpp = None
+
+
+def init_movement(icpp):
+    global cpp
+    cpp = icpp
+
 
 def drive_timed(left, right, time): #DRS forward is opposite of create forward
     create_drive_direct(-right, -left)
@@ -72,12 +79,29 @@ def black_left_or_right():
     return cpp.get_black_left() or cpp.get_black_right()
 
 def driveTilBlackLCliffAndSquareUp(speed):
-    cpp.drive_conditional(black_left_or_right, speed, False)
-    while not cpp.get_black_left() or not cpp.get_black_right():
-        if cpp.get_black_left():
-            cpp.drive(0, speed)
-        if cpp.get_black_right():
-            cpp.drive(speed, 0)
+    if speed > 0:
+        cpp.drive_conditional(black_left_or_right, speed, False)
+        while not cpp.get_black_left() or not cpp.get_black_right():
+            if cpp.get_black_left():
+                cpp.drive(-speed, 0)
+                print ("left")
+            elif cpp.get_black_right():
+                cpp.drive(0, -speed)
+                print ("right")
+            else:
+                print ("None")
+    else:
+        cpp.drive_conditional(black_left_or_right, speed, False)
+        while not cpp.get_black_left() or not cpp.get_black_right():
+            if cpp.get_black_left():
+                cpp.drive(-speed, 0)
+                print ("left")
+            elif cpp.get_black_right():
+                cpp.drive(0, -speed)
+                print ("right")
+            else:
+                print ("None")
+    print ("done!")
     cpp.drive(0, 0)
 
 

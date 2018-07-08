@@ -108,10 +108,10 @@ elif IS_BLUE_BOT:
     cogGrab = 800
 
     crateArmUp = 1600  #1400
-    crateArmMid = 1000
+    crateArmMid = 1100
     crateArmDeStack = 1200
     crateArmCarry = 1200
-    crateArmDown = 750  #830
+    crateArmDown = 900  #830
     crateArmAlmostDown = 962
     crateArmLiftCrate = 1500
     crateArmStart= 1000
@@ -123,7 +123,7 @@ elif IS_BLUE_BOT:
     botGuyArmStart = 1570
 
     crateClawClosed = 300 #380
-    crateGrab = 650  #750
+    crateGrab =700  #750
     crateClawOpen = 1200  #1060
     crateClawStart = 1100  #1250
     crateClawSlightlyOpen = 760
