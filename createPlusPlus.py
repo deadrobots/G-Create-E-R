@@ -213,6 +213,12 @@ class Create:
         def get_black_left(self):
             return robot.cliff_left_signal < 2200
 
+        def get_black_front_left(self):
+            return robot.cliff_front_left_signal < 2200
+
+        def get_black_front_right(self):
+            return robot.cliff_front_right_signal < 2200
+
         def _set_initial_counts(self):
             """Set the initial encoder counts."""
             self._verify()  # Check if create is connected

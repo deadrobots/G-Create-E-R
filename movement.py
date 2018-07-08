@@ -3,8 +3,12 @@ from wallaby import *
 from math import pi
 from utilities import *
 import constants as c
-import createPlusPlus as cpp
 
+cpp = None
+
+def init_movement(icpp):
+    global cpp
+    cpp = icpp
 
 def drive_timed(left, right, time): #DRS forward is opposite of create forward
     cpp.drive_timed(left/5,right/5, time)

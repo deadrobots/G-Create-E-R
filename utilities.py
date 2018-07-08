@@ -117,18 +117,6 @@ def moveServo(servo, endPos, speed=10):
     set_servo_position(servo, endPos)
     msleep(10)
 
-def onBlackRight():
-    return cpp.TEMP_GET_ROBOT().cliff_right_signal < 2200
-
-def onBlackLeft():
-    return cpp.TEMP_GET_ROBOT().cliff_left_signal < 2200
-
-def onBlackFrontLeft():
-    return cpp.TEMP_GET_ROBOT().cliff_front_left_signal < 2200
-
-def onBlackFrontRight():
-    return cpp.TEMP_GET_ROBOT().cliff_front_right_signal < 2200
-
 # def moveArm(servoMain, servoAssist, endPos, speed):
 #     # speed of 1 is slow
 #     # speed of 2000 is fast

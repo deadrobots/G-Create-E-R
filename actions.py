@@ -24,7 +24,7 @@ def init(icpp):
     # create_full()
     global cpp
     cpp = icpp
-    cpp.connect()
+    init_movement(cpp)
     if c.IS_ORANGE_BOT:
         print("I AM ORANGE")
     elif c.IS_BLUE_BOT:
@@ -134,9 +134,7 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
     cpp.rotate(-90, 20)  #-90
     # drive_timed(75, 75, 1000)
     msleep(1000)
-    wait_for_button()
     driveTilBlackLCliffAndSquareUp(-15,-15) #end of func. 1
-    wait_for_button()
     # rotate_degrees(1, 50)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
     moveServo(c.servoCrateClaw, c.crateGrab, 15)
