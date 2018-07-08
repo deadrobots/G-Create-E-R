@@ -9,15 +9,13 @@ import movement as m
 from camera import determineOrder
 
 def main():
-    with createPlusPlus.Create(drs_forward=False) as cpp:
+    with createPlusPlus.Create() as cpp:
         act.init(cpp)
         act.centerPipeRunAndBotGuyGrab()
         act.headToSecondBlock()
         act.getCrates()
-        u.DEBUG()
-        # act.getBotGuy()
-        # act.driveToYellow()
-        # act.dropBlocks()
+        act.driveToYellow()
+        #act.dropBlocks()
         # cpp.disconnect()
         # exit(0)
 

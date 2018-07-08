@@ -1,7 +1,12 @@
 
 import constants as c
-import createPlusPlus as cpp
 from wallaby import *
+
+cpp = None
+
+def init_utilities(icpp):
+    global cpp
+    cpp = icpp
 
 def wait_for_button(force=False):
     if c.ALLOW_BUTTON_WAIT or force:

@@ -156,7 +156,7 @@ elif IS_GREEN_BOT:
 
     #Crate Claw Servo Values
     crateClawClosed = 200 #500
-    crateGrab = 800
+    crateGrab = 750
     crateClawOpen = 1650
     crateClawStart = 1800
 

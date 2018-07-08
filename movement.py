@@ -44,7 +44,7 @@ def rotateTillBlack(power):
         cpp.drive(-power, power)
     else:
         cpp.drive(power, -power)
-    while (onBlackFrontRight()):
+    while (cpp.get_black_front_right):
         pass
     create_stop()
 
@@ -92,25 +92,16 @@ def driveTilFrontTophatBlack(lspeed, rspeed):
 def timedLineFollowLeftFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
-        if not onBlackFrontLeft():
+        if not cpp.get_black_front_left():
             cpp.drive(speed, speed/2)
         else:
             cpp.drive(speed/2, speed)
     cpp.drive(0,0)
 
-def timedLineFollowFrontTophat(time):
-    sec = seconds()
-    while(seconds() - sec<time):
-        if analog(c.FRONT_TOPHAT) < 1500:
-            cpp.drive(-100, -50)
-        else:
-            cpp.drive(-50, -100)
-    cpp.drive(0,0)
-
 def timedLineFollowRightFront(speed, time):
     sec = seconds()
     while(seconds() - sec<time):
-        if not onBlackFrontRight():
+        if not cpp.get_black_front_right():
             cpp.drive(speed, (int)(speed/1.8))
         else:
             cpp.drive((int)(speed/1.8), speed)
@@ -118,8 +109,8 @@ def timedLineFollowRightFront(speed, time):
     cpp.drive(0,0)
 
 def lineFollowLeftFrontTilLeftBlack(speed):
-    while onBlackLeft():
-        if not onBlackFrontLeft():
+    while cpp.get_black_left():
+        if not cpp.get_black_front_left():
             cpp.drive(speed, speed/2)
         else:
             cpp.drive(speed/2, speed)
@@ -131,41 +122,50 @@ def driveTilBlackLCliffAndSquareUp(lspeed, rspeed):
     rspeed = temp
     cpp.drive(rspeed, lspeed)
     while (lspeed or rspeed):
-        if not onBlackLeft():
+        if not cpp.get_black_left():
             lspeed = 0
             cpp.drive(lspeed, rspeed)
-        if not onBlackRight():
+        if not cpp.get_black_right():
             rspeed = 0
             cpp.drive(lspeed, rspeed)
 
 def lineFollowLeftFrontTilRightFrontBlack(speed):
-    while onBlackFrontRight():
-        if not onBlackFrontLeft():
+    while cpp.get_black_front_right():
+        if not cpp.get_black_front_left():
             cpp.drive(speed, speed/2)
         else:
             cpp.drive(speed/2, speed)
     cpp.drive(0,0)
 
 def lineFollowRightFrontTilLeftFrontBlack(speed):
-    while onBlackFrontLeft():
-        if not onBlackFrontRight():
+    while cpp.get_black_front_left():
+        if not cpp.get_black_front_right():
             cpp.drive(speed/2, speed)
         else:
             cpp.drive(speed, speed/2)
     cpp.drive(0,0)
 
-def lineFollowRightFrontTilRightBlack():
-    while not onBlackRight():
-        if not onBlackFrontRight():
-            cpp.drive(40, 20)
+def lineFollowRightFrontTilRightBlack(speed):
+    while not cpp.get_black_right():
+        if not cpp.get_black_front_right():
+            cpp.drive(speed/2, speed)
         else:
-            cpp.drive(20, 40)
+            cpp.drive(speed, speed/2)
     cpp.drive(0,0)
 
 def turnTilRightFrontBlack(left, right):
     cpp.drive(left, right)
-    while onBlackFrontRight():
+    while cpp.get_black_front_right():
         pass
+    cpp.drive(0,0)
+
+def timedLineFollowFrontTophatForward(time):
+    sec = seconds()
+    while(seconds() - sec<time):
+        if analog(c.FRONT_TOPHAT) < 1500:
+            cpp.drive(25, 50)
+        else:
+            cpp.drive(50, 25)
     cpp.drive(0,0)
 
 def driveTillBump(lspeed, rspeed):
@@ -184,10 +184,10 @@ def driveTilWhiteLRCliffAndSquareUp(lspeedInit, rspeedInit):
     rightSawBlack = 0
     #print(cpp.TEMP_GET_ROBOT().cliff_right_signal)
     cpp.drive(lspeed, rspeed)
-    while onBlackLeft():
+    while cpp.get_black_left():
         cpp.drive(0, abs(rspeed) / rspeed * 5)
         print('black on right')
-    while onBlackRight():
+    while cpp.get_black_right():
         cpp.drive(abs(lspeed) / lspeed * 5, 0)
         print('black on left')
     cpp.drive(0,0)
@@ -196,7 +196,7 @@ def driveTilBlackFrontLRCliffAndSquareUp(lspeedInit, rspeedInit):
     lspeed = -rspeedInit
     rspeed = -lspeedInit
     cpp.drive(lspeed, rspeed)
-    while not onBlackFrontLeft() and not onBlackFrontRight():
+    while not cpp.get_black_front_left() and not cpp.get_black_front_right():
         pass
     cpp.drive(0,0)
 
@@ -204,7 +204,7 @@ def driveTilBlackLRCliffAndSquareUp(lspeedInit, rspeedInit):
     lspeed = -rspeedInit
     rspeed = -lspeedInit
     cpp.drive(lspeed, rspeed)
-    while not onBlackLeft() and not onBlackRight():
+    while not cpp.get_black_left() and not cpp.get_black_right():
         pass
     cpp.drive(0,0)
 

@@ -9,7 +9,7 @@ from irobot.openinterface.constants import MODES
 
 class Create:
 
-    def __init__(self, drs_forward=True, full=True):
+    def __init__(self, drs_forward=True, full=True):    #drs forward is flat side
         self.full = full
         self.robot = self.Create(drs_forward)
 
