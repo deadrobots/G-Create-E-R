@@ -108,7 +108,7 @@ elif IS_BLUE_BOT:
     cogGrab = 800
 
     crateArmUp = 1600  #1400
-    crateArmMid = 1100
+    crateArmMid = 950
     crateArmDeStack = 1200
     crateArmCarry = 1200
     crateArmDown = 900  #830

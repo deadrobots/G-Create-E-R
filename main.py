@@ -20,7 +20,6 @@ def main():
         # act.seeBlocks()
         act.getCrates()
         act.getBotGuy()
-        u.DEBUG()
         act.driveToYellow()
         act.dropBlocks()
         u.DEBUG()
