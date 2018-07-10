@@ -96,6 +96,7 @@ class Create:
                 diff *= -1
             # master is left wheel
             left_speed = base_speed
+            print "{}\t{}".format(self._convert_to_inches(abs(self._left_encoder())), self._convert_to_inches(abs(self._right_encoder())))
             while abs(self._convert_to_inches(self._left_encoder())) < distance - 0.75:
                 r_encoder = abs(self._right_encoder())
                 l_encoder = abs(self._left_encoder())
@@ -104,8 +105,10 @@ class Create:
                 if l_encoder > r_encoder:
                     left_speed = base_speed + diff
                 robot.drive_direct(int(left_speed), int(base_speed))
+                #print "{}\t{}".format(self._convert_to_inches(l_encoder), self._convert_to_inches(r_encoder))
                 msleep(refresh_rate)
             robot.drive_direct(0, 0)
+            print "{}\t{}".format(self._convert_to_inches(abs(self._left_encoder())), self._convert_to_inches(abs(self._right_encoder())))
 
         def drive_conditional(self, condition, base_speed, state=True, diff=25, refresh_rate=0):
             """Drive straight a distance"""

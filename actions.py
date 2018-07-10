@@ -72,7 +72,7 @@ def selfTest(): #separated from init for the sake of legibility
 
 
 def centerPipeRunAndBotGuyGrab():
-    print ("Heading to Botguy")
+    print ("Heading to Botguy test")
     p.set_first_position()
     moveServo(c.servoBotGuyArm, c.botGuyArmDown)
     m.rotate_until_stalled(20)
@@ -98,8 +98,9 @@ def headToSecondBlock():
     moveServo(c.servoBotGuyArm, c.botGuyArmStart, 5)
     cpp.rotate(90,50)
     driveTilBlackLRCliffAndSquareUp(-50,-50)
-    cpp.rotate(-80,50)
-    timedLineFollowFrontTophatForward(2.5)
+    cpp.rotate(-90,50)
+    cpp.drive_conditional(cpp.get_black_left, 40, state=False)
+    cpp.drive_distance(-1.5, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 5)
     #cpp.drive_distance(-3.5, 40)
 
@@ -109,15 +110,16 @@ def getCrates(): #break this function into smaller bites... make driveToCrates, 
     p.set_second_position()
     p.set_final_positions()
     #drives center area grabs cube and turns around to prep for botguy grab
-    wait_for_button()
-    cpp.rotate(90, 20)
+    cpp.rotate(85, 20)
     # drive_timed(75, 75, 1000)
     msleep(1000)
     driveTilBlackLCliffAndSquareUp(15,15) #end of func. 1
     # rotate_degrees(1, 50)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
     moveServo(c.servoCrateClaw, c.crateGrab, 15)
+    #timedLineFollowRightFront(-20,2)
     cpp.drive_distance(-5, 40)
+    wait_for_button()
     moveServo(c.servoBotGuyArm, c.botGuyArmMid)
     # rotate(2,50)
     # msleep(500)
