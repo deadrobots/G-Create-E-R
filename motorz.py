@@ -7,76 +7,74 @@ from wallaby import analog
 from wallaby import motor_power as motor
 from wallaby import motor_power
 from wallaby import digital
-
-
-CLAW = 0
+from constants import *
 
 def rotate_spinner(rotations, speed):
     full_rotation = 1400.0
-    start = get_motor_position_counter(CLAW)
-    motor_power(CLAW, speed)
+    start = get_motor_position_counter(clawMotor)
+    motor_power(clawMotor, speed)
 
     tries_remaining = 3
     previous = 0
     counter = 0
 
-    while abs(get_motor_position_counter(CLAW) - start) < abs(full_rotation * rotations) and tries_remaining > 0:
+    while abs(get_motor_position_counter(clawMotor) - start) < abs(full_rotation * rotations) and tries_remaining > 0:
         if counter >= 10:
             counter = 0
             if tries_remaining > 0:
-                motor_power(CLAW, int(-speed))
+                motor_power(clawMotor, int(-speed))
                 msleep(300)
-                motor_power(CLAW, speed)
+                motor_power(clawMotor, speed)
             tries_remaining -= 1
-        elif abs(get_motor_position_counter(CLAW)) == previous:
+        elif abs(get_motor_position_counter(clawMotor)) == previous:
             counter += 1
         else:
             counter = 0
-            previous = abs(get_motor_position_counter(CLAW))
+            previous = abs(get_motor_position_counter(clawMotor))
         msleep(10)
-    print "rotated {} out of {}".format(get_motor_position_counter(CLAW) - start, abs(full_rotation * rotations))
-    freeze(CLAW)
+    print "rotated {} out of {}".format(get_motor_position_counter(clawMotor) - start, abs(full_rotation * rotations))
+    freeze(clawMotor)
 
 
 def rotate_until_stalled(speed):
     counter = 0
-    motor_power(CLAW, speed)
-    previous = abs(get_motor_position_counter(CLAW))
+    motor_power(clawMotor, speed)
+    previous = abs(get_motor_position_counter(clawMotor))
     while counter < 10:
-        if abs(get_motor_position_counter(CLAW)) == previous:
+        if abs(get_motor_position_counter(clawMotor)) == previous:
             counter += 1
         else:
             counter = 0
-            previous = abs(get_motor_position_counter(CLAW))
+            previous = abs(get_motor_position_counter(clawMotor))
         msleep(10)
-    freeze(CLAW)
+    freeze(clawMotor)
 
 
 def wait_for_someone_to_rotate():
     print("please spin me back")
-    clear_motor_position_counter(CLAW)
-    while abs(get_motor_position_counter(CLAW)) < 350:
+    clear_motor_position_counter(clawMotor)
+    while abs(get_motor_position_counter(clawMotor)) < 350:
         pass
     print("good job")
 
 
 def claw_to_position(position, power):
     power = abs(power)
-    while get_motor_position_counter(CLAW) < position:
-        motor_power(CLAW, power)
-        print('+ {}/{}'.format(get_motor_position_counter(CLAW), position))
-    while get_motor_position_counter(CLAW) > position:
-        print('- {}/{}'.format(get_motor_position_counter(CLAW), position))
-        motor_power(CLAW, -power)
-    freeze(CLAW)
+    while get_motor_position_counter(clawMotor) < position:
+        motor_power(clawMotor, power)
+        print('+ {}/{}'.format(get_motor_position_counter(clawMotor), position))
+    while get_motor_position_counter(clawMotor) > position:
+        print('- {}/{}'.format(get_motor_position_counter(clawMotor), position))
+        motor_power(clawMotor, -power)
+    freeze(clawMotor)
 
 
 def set_claw_open():
-    clear_motor_position_counter(CLAW)
+    clear_motor_position_counter(clawMotor)
 
 
 def claw_move(power):
-    motor_power(CLAW, power)
+    motor_power(clawMotor, power)
 
 
 def test():
