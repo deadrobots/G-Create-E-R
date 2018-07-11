@@ -50,14 +50,7 @@ if IS_ORANGE_BOT:
 
     INCHES_TO_TICKS = 600
 
-    #Claw Servo Values
-    clawClosed = 0
-    clawFrisbeeTight = 397
-    clawMid = 517
-    clawBotguy = 620  #630
-    clawTram = 917 #Position to move tram
-    clawOpen = 1382
-    clawStart = 2047 #All the way back; used to be 1730
+    # Botguy claw is now motor
 
     #Cog Servo Values
     cogLiftContinued = 770
@@ -88,10 +81,12 @@ elif IS_BLUE_BOT:
 
     INCHES_TO_TICKS = 560
 
+    clawBin = 650
+
     #Claw Servo Values
     clawClosed = 0
     clawMid = 800
-    clawBotguy = 430#785
+    clawBin = 430#785
     clawbotguyArea = 650
     clawTram = 900  # Position to move tram
     clawOpen = 1400
@@ -139,7 +134,7 @@ elif IS_GREEN_BOT:
     # Claw Servo Values
     clawClosed = 400
     clawLoose = 1000
-    clawBotguy = 830
+    clawBin = 830
     clawbotguyArea = 1150
     clawMid = 1200
     clawOpen = 1850

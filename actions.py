@@ -4,6 +4,7 @@ import constants as c
 from wallaby import *
 import camera as p
 import createPlusPlus as cpp
+import motorz as m
 
 colorOrder = []
 
@@ -46,9 +47,11 @@ def selfTest(): #separated from init for the sake of legibility
     msleep(500)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
     # open/close claw
-    enable_servo(c.servoBotGuyClaw)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    moveServo(c.servoBotGuyClaw, c.clawStart, 15)
+    m.rotate_until_stalled(20)
+    msleep(1000)
+    m.rotate_until_stalled(-20)
+    msleep(300)
+    m.set_claw_open()
     # test drive
     cpp.drive_distance(10, 40)
     msleep(250)
@@ -70,6 +73,7 @@ def getOutOfStartBoxSeeding():
     if c.IS_BLUE_BOT:
         print("blue")
         p.set_first_position()
+        m.claw_move(40)
         cpp.drive_distance(-16, 80)
         msleep(200)
         # driveTilBlackLCliffAndSquareUp(20)
@@ -77,8 +81,8 @@ def getOutOfStartBoxSeeding():
 
 def pickUpDateBinsExperiment():
     print "Picking up first date bin"
-    moveServo(c.servoCrateArm, c.crateArmVeryHigh, 10)
-    moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    moveServo(c.servoCrateArm, c.crateArmVeryHigh, 20)
+    moveServo(c.servoCrateClaw, c.crateClawClosed, 20)
     cpp.drive_conditional(cpp.get_bump_left, -20, state=False)
     cpp.drive_distance(2, 50)
     cpp.rotate(80, 20)
@@ -87,17 +91,17 @@ def pickUpDateBinsExperiment():
     cpp.rotate(84, 50)
     cpp.drive_distance(6, 20)
     cpp.drive_distance(-5, 50)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
-    moveServo(c.servoBotGuyClaw, c.clawMid, 15)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 25)
+    m.claw_to_position(c.clawBin, 25)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 25)
     cpp.drive_distance(4, 20)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 15)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
-    cpp.drive_distance(-11.5, 10)
-    cpp.drive_distance(2, 10)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 25)
+    m.claw_move(25)
+    msleep(700)
+    cpp.drive_distance(-11.5, 20)
+    cpp.drive_distance(2, 20)
     # msleep(1000)
-    moveServo(c.servoBotGuyClaw, c.clawMid, 10)
+    m.claw_to_position(c.clawBin, 25)
     # driveTilBlackLCliffAndSquareUp(-250, -230)
     # rotate_degrees(4, 100)
     # drive_timed(110, 100, 4600)
@@ -118,6 +122,7 @@ def driveToSecondDateBin():
     print "Picking up second date bin"
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     # driveTilBlackLCliffAndSquareUp(-30)
+    m.claw_move(40)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
     cpp.rotate(90, 20)
     cpp.drive_distance(14, 50)
@@ -126,16 +131,17 @@ def driveToSecondDateBin():
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
     cpp.drive_distance(15, 30)
     cpp.drive_distance(-5, 50)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    m.claw_move(20)
     moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
-    moveServo(c.servoBotGuyClaw, c.clawMid, 15)
+    m.claw_to_position(c.clawBin, 20)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
     cpp.drive_distance(4, 20)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 15)
-    moveServo(c.servoBotGuyClaw, c.clawClosed, 15)
+    m.claw_move(20)
+    msleep(700)
     cpp.drive_distance(-11.5, 10)
     cpp.drive_distance(2, 10)
-    moveServo(c.servoBotGuyClaw, c.clawMid, 10)
+    m.claw_to_position(c.clawBin, 20)
     cpp.drive_conditional(cpp.get_black_left, -40, state=False)
     cpp.drive_distance(-3, 50)
 
@@ -184,11 +190,11 @@ def getBotGuy():
     driveTilBlackLCliffAndSquareUp(20)
     msleep(500)
     cpp.drive_distance(3.5, 35)
-    moveServo(c.servoBotGuyClaw, c.clawMid)
+    m.claw_to_position(c.clawBin, 20)
     msleep(500)
     cpp.drive_distance(6, 25)
     msleep(500)
-    moveServo(c.servoBotGuyClaw, c.clawClosed)
+    m.claw_move(40)
     msleep(1000)
     cpp.drive_distance(-15, 35)
 
