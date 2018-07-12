@@ -81,12 +81,12 @@ elif IS_BLUE_BOT:
 
     INCHES_TO_TICKS = 560
 
-    clawBin = 650
+    motorMid = 570 # how wide the claw opens of the botguy grabber
 
     #Claw Servo Values
     clawClosed = 0
     clawMid = 800
-    clawBin = 430#785
+    clawBin = 430 #785
     clawbotguyArea = 650
     clawTram = 900  # Position to move tram
     clawOpen = 1400
@@ -105,20 +105,21 @@ elif IS_BLUE_BOT:
     crateArmUp = 1600  #1400
     crateArmMid = 950
     crateArmDeStack = 1200
-    crateArmCarry = 1200
+    crateArmCarry = 1300
     crateArmDown = 900  #830
     crateArmAlmostDown = 962
-    crateArmLiftCrate = 1500
+    crateArmLiftCrate = 1600
     crateArmStart= 1000
     crateArmVeryHigh = 2000
+    crateArmGrab = 1200
 
     botGuyArmUp = 1400
     botGuyArmMid = 600
-    botGuyArmDown = 500
+    botGuyArmDown = 550
     botGuyArmStart = 1570
 
-    crateClawClosed = 300 #380
-    crateGrab =700  #750
+    crateClawClosed = 350 #380
+    crateGrab = 725  #750
     crateClawOpen = 1200  #1060
     crateClawStart = 1100  #1250
     crateClawSlightlyOpen = 760

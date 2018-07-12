@@ -6,10 +6,12 @@ import constants as c
 from wallaby import *
 import utilities as u
 import movement as m
+import motorz
 from camera import determineOrder
 
 def main():
-    with createPlusPlus.Create() as cpp:
+    # motorz.test()
+    with createPlusPlus.Create(full=False) as cpp:
         print("Running!")
         act.init(cpp)
         print("0") # seeding (aka left)

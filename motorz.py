@@ -64,9 +64,9 @@ def claw_to_position(position, power):
     power = abs(power)
     while get_motor_position_counter(CLAW) < position:
         motor_power(CLAW, power)
-        print('+ {}/{}'.format(get_motor_position_counter(CLAW), position))
+        # print('+ {}/{}'.format(get_motor_position_counter(CLAW), position))
     while get_motor_position_counter(CLAW) > position:
-        print('- {}/{}'.format(get_motor_position_counter(CLAW), position))
+        # print('- {}/{}'.format(get_motor_position_counter(CLAW), position))
         motor_power(CLAW, -power)
     freeze(CLAW)
 
@@ -83,5 +83,7 @@ def test():
     rotate_until_stalled(20)
     rotate_until_stalled(-20)
     set_claw_open()
-    claw_to_position(600, 20)
+    #claw_to_position(600, 20)
+    while True:
+        print(get_motor_position_counter(CLAW))
     exit(0)
