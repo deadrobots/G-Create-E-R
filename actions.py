@@ -85,19 +85,18 @@ def pickUpDateBinsExperiment():
     print "Picking up first date bin"
     moveServo(c.servoCrateArm, c.crateArmVeryHigh, 20)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 20)
-    cpp.drive_conditional(cpp.get_bump_left, -20, state=False)
+    cpp.drive_conditional(cpp.get_bump_left, -20, state=False) # Hit center wall at tree
     cpp.drive_distance(2, 50)
     cpp.rotate(80, 20)
     cpp.drive_distance(6, 40)
     cpp.drive_distance(-8, 55)
     cpp.rotate(84, 50)
-    cpp.drive_distance(6, 20)
+    cpp.drive_distance(6, 20) # square up
     cpp.drive_distance(-5, 50)
     moveServo(c.servoBotGuyArm, c.botGuyArmMid, 25)
     m.claw_to_position(c.motorMid, 25)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 25)
-    cpp.drive_distance(4, 20)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 25)
+    cpp.drive_distance(4, 20)
     m.claw_move(25) # close claw
     msleep(700)
     cpp.drive_distance(-11.5, 20)
@@ -117,13 +116,14 @@ def driveToSecondDateBin():
     cpp.rotate(-89, 20)
     moveServo(c.servoCrateArm, c.crateArmVeryHigh, 10)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
-    cpp.drive_distance(15, 30)
+    cpp.drive_distance(15, 30) # Square up infront of date bin
     cpp.drive_distance(-5, 50)
     m.claw_move(25)
-    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 15)
-    m.claw_to_position(c.motorMid, 20)
-    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 15)
+    moveServo(c.servoBotGuyArm, c.botGuyArmMid, 25)
+    m.claw_to_position(c.motorMid, 25)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 25)
     cpp.drive_distance(4, 20)
+    moveServo(c.servoBotGuyArm, c.botGuyArmDown, 25)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 15)
     m.claw_move(25) # close claw
     msleep(700)
@@ -156,11 +156,6 @@ def getCrates():  # break this function into smaller bites... make driveToCrates
     moveServo(c.servoCrateClaw, c.crateGrab, 15)
     moveServo(c.servoCrateArm, c.crateArmDown, 20)
     cpp.drive_distance(-6, 30)
-    # rotate(2,50)
-    # msleep(500)
-    # drive_timed(-100, -80, 1600)
-    # drive_timed(-100, -100, 500) #400
-    # drive_timed(-100, -85, 1100)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 15)  # grab crates # end of func.2
     moveServo(c.servoCrateArm, c.crateArmMid, 10)
     driveTilBlackLCliffAndSquareUp(50)
@@ -235,13 +230,18 @@ def goYellowFirst():
 
 def goYellowSecond():
     print "Yellow is in second position"
-    # if yellow cube is in middle area
-    # turnTilRightFrontBlack(100,-100)
-    # cpp.drive_distance(-3, 100)
-    # cpp.rotate(90, 100)
-    # driveTilFrontTophatBlack(-100, -100)
     cpp.rotate(15, 30)
-    cpp.drive_distance(-6, 15) # not exact distance
+    cpp.drive_distance(-8, 15) # not exact distance
+    # Deliver Blocks
+    cpp.drive_distance(1.5, 35)
+    moveServo(c.servoCrateArm, c.crateArmDown, 10)
+    moveServo(c.servoCrateClaw, c.crateClawOpen, 10)
+    moveServo(c.servoCrateArm, c.crateArmDeStack, 10)
+    moveServo(c.servoCrateClaw, c.crateClawClosed, 10)
+    moveServo(c.servoCrateArm, c.crateArmLiftCrate, 10)
+    moveServo(c.servoBotGuyArm, c.botGuyArmUp, 15)
+    cpp.rotate(-50, 30) # Not exact rotate distance
+    DEBUG()
 
 
 def goYellowThird():
