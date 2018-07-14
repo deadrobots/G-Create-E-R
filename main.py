@@ -19,11 +19,10 @@ def main():
         act.pickUpDateBinsExperiment()
         act.driveToSecondDateBin()
         act.driveToCenterSeeding()
-        # act.seeBlocks()
         act.getCrates()
         act.getBotGuy()
         act.driveToYellow()
-        act.dropBlocks()
+        act.driveToRed()
         u.DEBUG()
 
 

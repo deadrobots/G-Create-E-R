@@ -141,37 +141,22 @@ def timedLineFollowRightFront(speed, time):
         msleep(10)
     create_stop()
 
-def lineFollowLeftFrontTilLeftBlack(speed):
-    while get_create_lcliff_amt() > 2000:
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(speed, speed/2)
-        else:
-            create_drive_direct(speed/2, speed)
-    create_stop()
-
 def lineFollowLeftFrontTilRightFrontBlack(speed):
-    while get_create_rfcliff_amt() > 2000:
-        if get_create_lfcliff_amt() < 2000:
-            create_drive_direct(speed, speed/2)
+    while cpp.get_black_front_right():
+        if not cpp.get_black_front_left():
+            cpp.drive(speed, speed / 2)
         else:
-            create_drive_direct(speed/2, speed)
-    create_stop()
+            cpp.drive(speed / 2, speed)
+    cpp.drive(0, 0)
+
 
 def lineFollowRightFrontTilLeftFrontBlack(speed):
-    while get_create_lfcliff_amt() > 2000:
-        if get_create_rfcliff_amt() < 2000:
-            create_drive_direct(speed/2, speed)
+    while cpp.get_black_front_left():
+        if not cpp.get_black_front_right():
+            cpp.drive(speed / 2, speed)
         else:
-            create_drive_direct(speed, speed/2)
-    create_stop()
-
-def lineFollowRightFrontTilRightBlack():
-    while get_create_rcliff_amt() > 2000:
-        if get_create_rfcliff_amt() < 2000:
-            create_drive_direct(200, 100)
-        else:
-            create_drive_direct(100, 200)
-    create_stop()
+            cpp.drive(speed, speed / 2)
+    cpp.drive(0, 0)
 
 def turnTilRightFrontBlack(left, right):
     create_drive_direct(left, right)
