@@ -46,124 +46,51 @@ IS_ORANGE_BOT = not IS_BLUE_BOT and not IS_YELLOW_BOT and not IS_GREEN_BOT
 
 FIRST_RGY_AREA = 40
 
-if IS_ORANGE_BOT:
+INCHES_TO_TICKS = 560
 
-    INCHES_TO_TICKS = 600
+motorMid = 570 # how wide the claw opens of the botguy grabber
 
-    # Botguy claw is now motor
+#Claw Servo Values
+clawClosed = 0
+clawMid = 800
+clawBin = 430 #785
+clawbotguyArea = 650
+clawTram = 900  # Position to move tram
+clawOpen = 1400
+clawStart = 2047 #All the way back
 
-    #Cog Servo Values
-    cogLiftContinued = 770
-    cogServoVeryHigh = 920
-    evenMoreCogLift = 980
-    cogLift = 1090
-    cogRingDrop = 1100
-    cogStartBox = 1200
-    cogPegTwo = 1350
-    cogStart = 1650
-    cogGrab = 1725
+#Cog Servo Values
+cogServoVeryHigh = 15
+evenMoreCogLift = 150
+cogLift = 225
+cogRingDrop = 215
+cogStartBox = 350
+cogPegTwo = 500
+cogStart = 800
+cogGrab = 800
 
-    #current motor arm values
-    armVeryHigh = -150
-    armHigh = -290
-    armTram = -310 #was 300
-    armUp = -440
-    armBotguy = -590
-    armSlightlyUp = -600
-    armSandwich = -620
-    armStartbox = -700
+crateArmUp = 1600  #1400
+crateArmMid = 1100
+crateArmDeStack = 1400
+crateArmCarry = 1300
+crateArmDown = 1000  #830
+crateArmAlmostDown = 962
+crateArmLiftCrate = 1600
+crateArmStart= 1000
+crateArmVeryHigh = 2000
+crateArmGrab = 1200
 
-    armBotguyDelivery = 400
-    armBotguyPickUp = 450    #-630
-    armScore = 230     #-415
+botGuyArmUp = 1400
+botGuyArmMid = 600
+botGuyArmDown = 470
+botGuyArmStart = 1570
 
-elif IS_BLUE_BOT:
+crateClawClosed = 300 #380
+crateGrab = 700  #550
+crateClawOpen = 1200  #1060
+crateClawStart = 1100  #1250
+crateClawSlightlyOpen = 400
 
-    INCHES_TO_TICKS = 560
-
-    motorMid = 570 # how wide the claw opens of the botguy grabber
-
-    #Claw Servo Values
-    clawClosed = 0
-    clawMid = 800
-    clawBin = 430 #785
-    clawbotguyArea = 650
-    clawTram = 900  # Position to move tram
-    clawOpen = 1400
-    clawStart = 2047 #All the way back
-
-    #Cog Servo Values
-    cogServoVeryHigh = 15
-    evenMoreCogLift = 150
-    cogLift = 225
-    cogRingDrop = 215
-    cogStartBox = 350
-    cogPegTwo = 500
-    cogStart = 800
-    cogGrab = 800
-
-    crateArmUp = 1600  #1400
-    crateArmMid = 975
-    crateArmDeStack = 1200
-    crateArmCarry = 1300
-    crateArmDown = 900  #830
-    crateArmAlmostDown = 962
-    crateArmLiftCrate = 1600
-    crateArmStart= 1000
-    crateArmVeryHigh = 2000
-    crateArmGrab = 1200
-
-    botGuyArmUp = 1400
-    botGuyArmMid = 600
-    botGuyArmDown = 470
-    botGuyArmStart = 1570
-
-    crateClawClosed = 350 #380
-    crateGrab = 750  #750
-    crateClawOpen = 1200  #1060
-    crateClawStart = 1100  #1250
-    crateClawSlightlyOpen = 760
-
-    COLOR_PROXIMITY = 20
-    ORANGE_AREA = 500
-    RGY_AREA = 60
-
-elif IS_GREEN_BOT:
-
-    INCHES_TO_TICKS = 560
-
-    # Claw Servo Values
-    clawClosed = 400
-    clawLoose = 1000
-    clawBin = 830
-    clawbotguyArea = 1150
-    clawMid = 1200
-    clawOpen = 1850
-    clawStart = 2047
-
-
-    # Botguy Arm Servo Values
-    botGuyArmUp = 1400
-    botGuyArmDown = 450
-    botGuyArmStart = 1570
-
-    # Crate Arm Servo Values
-    crateArmUp = 2047
-    crateArmMid = 1050
-    crateArmDown = 818
-    crateArmAlmostDown = 950
-    crateArmDeStack = 1300
-    crateArmLiftCrate = 1500
-    crateArmStart = 1800
-
-
-
-    #Crate Claw Servo Values
-    crateClawClosed = 500 #825
-    crateClawOpen = 1650
-    crateClawStart = 1800
-
-
-    COLOR_PROXIMITY = 20
-    ORANGE_AREA = 500
-    RGY_AREA = 60
+COLOR_PROXIMITY = 20
+ORANGE_AREA = 500
+RGY_AREA = 60

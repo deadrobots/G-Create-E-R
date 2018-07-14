@@ -190,9 +190,12 @@ position = {1: None, 2: None, 3: None}
 colors = {c.GREEN: 'green', c.YELLOW: 'yellow', c.RED: 'red', c.ORANGE: 'orange', None:None}
 
 
-def set_first_position():
+def set_first_position(color=None):
     global position
-    position[1] = _readColorWithoutOrange()
+    if color:
+        position[1] = color
+    else:
+        position[1] = _readColorWithoutOrange()
     print('position one is: {}'.format(colors[position[1]]))
 
 
