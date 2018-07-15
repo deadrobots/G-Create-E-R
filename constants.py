@@ -48,7 +48,7 @@ FIRST_RGY_AREA = 40
 
 INCHES_TO_TICKS = 560
 
-motorMid = 570 # how wide the claw opens of the botguy grabber
+motorMid = 480 #570 # how wide the claw opens of the botguy grabber
 
 #Claw Servo Values
 clawClosed = 0
@@ -69,11 +69,11 @@ cogPegTwo = 500
 cogStart = 800
 cogGrab = 800
 
-crateArmUp = 1600  #1400
-crateArmMid = 1100
+crateArmUp = 1450  #1400
+crateArmMid = 1200
 crateArmDeStack = 1400
 crateArmCarry = 1300
-crateArmDown = 1000  #830
+crateArmDown = 1175  #830
 crateArmAlmostDown = 962
 crateArmLiftCrate = 1600
 crateArmStart= 1000
@@ -89,7 +89,7 @@ crateClawClosed = 300 #380
 crateGrab = 700  #550
 crateClawOpen = 1200  #1060
 crateClawStart = 1100  #1250
-crateClawSlightlyOpen = 400
+crateClawSlightlyOpen = 750
 
 COLOR_PROXIMITY = 20
 ORANGE_AREA = 500
