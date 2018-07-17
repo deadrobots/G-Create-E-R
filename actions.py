@@ -36,7 +36,7 @@ def init(icpp):
     selfTest()  #tests each function of the robot
     p.cameraInit()
     print("Press a button to continue")
-    wait_for_button()
+    wait_for_button_blink()
     #wait_4_light(c.STARTLIGHT)
     # shut_down_in(119.0)
     c.START_TIME = seconds()
@@ -98,7 +98,7 @@ def headToSecondBlock():
     driveTilBlackLRCliffAndSquareUp(50,50)
     cpp.rotate(-90,50)
     cpp.drive_conditional(cpp.get_black_left, 40, state=False)
-    cpp.drive_distance(-1.5, 40)
+    cpp.drive_distance(-2.5, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown, 5)
     #cpp.drive_distance(-3.5, 40)
 
@@ -111,7 +111,7 @@ def getCrates():
     cpp.rotate(85, 20)
     msleep(1000)
     cpp.drive_conditional(black_left_or_right, -20, state=True)     #work on fixing alignment here
-    driveTilBlackLCliffAndSquareUp(-15,-15) #end of func. 1
+    driveTilBlackLCliffAndSquareUp(-15,-15)#end of func. 1
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
     moveServo(c.servoCrateClaw, c.crateGrab, 15)
     #timedLineFollowRightFront(-20,2)
@@ -122,6 +122,7 @@ def getCrates():
     msleep(500)
     cpp.drive_distance(8, 40)
     moveServo(c.servoCrateArm, c.crateArmMid+200, 2)
+    DEBUG()
 
 def driveToYellow(): # Needs to start from the middle or it won't work
     print "Driving to yellow"

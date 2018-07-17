@@ -17,6 +17,21 @@ def wait_for_button(force=False):
         print "Pressed"
         msleep(1000)
 
+def wait_for_button_blink():
+    print "Press Button..."
+    state = False
+    while not right_button():
+        if state:
+            state = False
+            cpp.set_led(state)
+        else:
+            state = True
+            cpp.set_led(state)
+        msleep(500)
+    msleep(1)
+    print "Pressed"
+    msleep(1000)
+
 def wait_for_selection(force=False):    #asks for prompt twice... FIX THIS
     #asks for response; used to determine running seeding or head-to-head code
     seeding1= False
