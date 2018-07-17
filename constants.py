@@ -76,7 +76,7 @@ crateArmCarry = 1300
 crateArmDown = 1175  #830
 crateArmAlmostDown = 962
 crateArmLiftCrate = 1600
-crateArmStart= 1000
+crateArmStart= 1100
 crateArmVeryHigh = 2000
 crateArmGrab = 1200
 
@@ -88,7 +88,7 @@ botGuyArmStart = 1570
 crateClawClosed = 300 #380
 crateGrab = 700  #550
 crateClawOpen = 1200  #1060
-crateClawStart = 1100  #1250
+crateClawStart = 1300  #1250
 crateClawSlightlyOpen = 750
 
 COLOR_PROXIMITY = 20

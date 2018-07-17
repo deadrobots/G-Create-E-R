@@ -61,12 +61,24 @@ def wait_for_someone_to_rotate():
 
 
 def claw_to_position(position, power):
+    counter = 0
     power = abs(power)
-    while get_motor_position_counter(CLAW) < position:
+    previous = abs(get_motor_position_counter(CLAW))
+    while get_motor_position_counter(CLAW) < position and counter < 10:
         motor_power(CLAW, power)
+        if abs(get_motor_position_counter(CLAW)) == previous:
+            counter += 1
+        else:
+            counter = 0
+            previous = abs(get_motor_position_counter(CLAW))
         # print('+ {}/{}'.format(get_motor_position_counter(CLAW), position))
-    while get_motor_position_counter(CLAW) > position:
+    while get_motor_position_counter(CLAW) > position and counter < 10:
         # print('- {}/{}'.format(get_motor_position_counter(CLAW), position))
+        if abs(get_motor_position_counter(CLAW)) == previous:
+            counter += 1
+        else:
+            counter = 0
+            previous = abs(get_motor_position_counter(CLAW))
         motor_power(CLAW, -power)
     freeze(CLAW)
 
