@@ -97,7 +97,7 @@ class Create:
             # master is left wheel
             left_speed = base_speed
             print "{}\t{}".format(self._convert_to_inches(abs(self._left_encoder())), self._convert_to_inches(abs(self._right_encoder())))
-            while abs(self._convert_to_inches(self._left_encoder())) < distance - 0.75:
+            while min(abs(self._convert_to_inches(self._right_encoder())), abs(self._convert_to_inches(self._left_encoder()))) < distance - 0.75:
                 r_encoder = abs(self._right_encoder())
                 l_encoder = abs(self._left_encoder())
                 if r_encoder > l_encoder:
