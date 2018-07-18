@@ -45,7 +45,7 @@ def init(icpp):
     global cpp
     cpp = icpp
     init_movement(cpp)
-
+    init_utilities(cpp)
     print("Create connected...")
     if c.IS_ORANGE_BOT:
         print("I AM ORANGE")
@@ -60,9 +60,9 @@ def init(icpp):
     selfTest()  # tests each function of the robot
     p.cameraInit()
     print("Press a button to continue")
-    wait_for_button(force=True)
+    wait_for_button_blink()
     # wait_4_light(c.STARTLIGHT)
-    # shut_down_in(119.0)
+    shut_down_in(119.0)
     c.START_TIME = seconds()
 
 
@@ -108,16 +108,16 @@ def getOutOfStartBoxSeeding():
 
 def pickUpDateBinsExperiment():
     print "Picking up first date bin"
-    moveServo(c.servoCrateArm, c.crateArmVeryHigh, 20)
-    moveServo(c.servoCrateClaw, c.crateClawClosed, 20)
-    cpp.drive_conditional(cpp.get_bump_left, -20, state=False) # Hit center wall at tree
+    moveServo(c.servoCrateArm, c.crateArmVeryHigh, 30)
+    moveServo(c.servoCrateClaw, c.crateClawClosed, 30)
+    cpp.drive_conditional(cpp.get_bump_left, -40, state=False) # Hit center wall at tree
     cpp.drive_distance(2, 50)
-    cpp.rotate(80, 35)
+    cpp.rotate(80, 40)
     cpp.drive_distance(6, 45)
-    cpp.drive_distance(-8, 55)
+    cpp.drive_distance(-7, 55) #-8
     cpp.rotate(84, 45)
     cpp.drive_distance(6, 30) # square up
-    cpp.drive_distance(-5, 50)
+    cpp.drive_distance(-5, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmMid, 25)
     m.claw_to_position(c.motorMid, 25)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown - 120, 25)
@@ -136,8 +136,8 @@ def driveToSecondDateBin():
     # driveTilBlackLCliffAndSquareUp(-30)
     m.claw_move(40)
     moveServo(c.servoBotGuyClaw, c.clawClosed, 20)
-    cpp.rotate(90, 30)
-    cpp.drive_distance(14, 50)
+    cpp.rotate(88, 30)
+    cpp.drive_distance(13, 50) #14
     cpp.rotate(-89, 30)
     moveServo(c.servoCrateArm, c.crateArmVeryHigh, 15)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 20)
@@ -164,7 +164,7 @@ def driveToCenterSeeding():
     moveServo(c.servoBotGuyClaw, c.clawClosed, 20)
     cpp.rotate(-90, 30)
     cpp.drive_conditional(cpp.get_black_right, -40, state=False)
-    cpp.drive_distance(-4, 40)
+    cpp.drive_distance(-3.5, 40)
     p.set_second_position()
     p.set_final_positions()
 
@@ -185,7 +185,7 @@ def getCrates():  # break this function into smaller bites... make driveToCrates
     driveTilBlackLCliffAndSquareUp(50)
     # cpp.drive(0, 0)
     cpp.drive_distance(2, 35)
-    moveServo(c.servoCrateArm, c.crateArmUp, 15)
+    moveServo(c.servoCrateArm, c.crateArmUp, 25)
     cpp.rotate(90, 45)
     cpp.drive_distance(3, 40) #2
     cpp.rotate(90, 40)
@@ -197,21 +197,21 @@ def getBotGuy():
     m.claw_move(40)
     cpp.drive_distance(-4, 40)
     msleep(10000)
-    driveTilBlackLCliffAndSquareUp(20)
+    driveTilBlackLCliffAndSquareUp(30)
     msleep(500)
     cpp.drive_distance(-2.5, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown)
-    driveTilBlackLCliffAndSquareUp(20)
+    driveTilBlackLCliffAndSquareUp(30)
     msleep(500)
     cpp.drive_distance(3, 40)
-    m.claw_to_position(c.motorMid, 20)
+    m.claw_to_position(c.motorMid, 30)
     msleep(500)
     cpp.drive_distance(7.5, 40)
     msleep(500)
     m.claw_move(40)
     msleep(1000)
-    cpp.drive_distance(-15, 35)
-    moveServo(c.servoCrateArm, c.crateArmUp, 15)
+    cpp.drive_distance(-15, 40)
+    moveServo(c.servoCrateArm, c.crateArmUp, 25)
 
 
 def driveToYellow():
@@ -318,7 +318,7 @@ def goYellowThird():
     cpp.drive_distance(14, 25)
     cpp.rotate(90, 35)
     cpp.drive_distance(10.5, 30)
-    cpp.rotate(-90, 35)
+    cpp.rotate(-88, 35)
     moveServo(c.servoCrateArm, c.crateArmMid, 15)
     cpp.drive_distance(-9, 35)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
@@ -365,7 +365,7 @@ def goRedFirst(): # when red is in first position drop botguy off there
 
 
 def goRedSecond():  # when red is in second position drop botguy off there
-    cpp.rotate(10, 40)
+    cpp.rotate(12, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=False)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=True)

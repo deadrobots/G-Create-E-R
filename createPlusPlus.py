@@ -221,6 +221,9 @@ class Create:
         def get_black_front_right(self):
             return robot.cliff_front_right_signal < 2200
 
+        def set_led(self, state):
+            robot.set_leds(state)
+
         def _set_initial_counts(self):
             """Set the initial encoder counts."""
             self._verify()  # Check if create is connected
