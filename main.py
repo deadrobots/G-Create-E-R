@@ -8,6 +8,7 @@ import utilities as u
 import movement as m
 import motorz
 from camera import determineOrder
+import Shutdown
 
 def main():
     # motorz.test()
@@ -15,16 +16,18 @@ def main():
         print("Running!")
         act.init(cpp)
         # act.temp_init(cpp)
-        act.getOutOfStartBoxSeeding()
-        act.pickUpDateBinsExperiment()
-        act.driveToSecondDateBin()
-        act.driveToCenterSeeding()
-        act.getCrates()
-        act.getBotGuy()
-        act.driveToYellow()
-        act.driveToRed()
-        u.DEBUG()
+        Shutdown.die_after_time(main_two, 118)
 
+def main_two():
+    act.getOutOfStartBoxSeeding()
+    act.pickUpDateBinsExperiment()
+    act.driveToSecondDateBin()
+    act.driveToCenterSeeding()
+    act.getCrates()
+    act.getBotGuy()
+    act.driveToYellow()
+    act.driveToRed()
+    u.DEBUG()
 
 
 

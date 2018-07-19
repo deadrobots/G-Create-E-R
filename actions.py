@@ -185,7 +185,7 @@ def getCrates():  # break this function into smaller bites... make driveToCrates
     driveTilBlackLCliffAndSquareUp(50)
     # cpp.drive(0, 0)
     cpp.drive_distance(2, 35)
-    moveServo(c.servoCrateArm, c.crateArmUp, 25)
+    moveServo(c.servoCrateArm, c.crateArmCarry, 25)  #crateArmUp is too high
     cpp.rotate(90, 45)
     cpp.drive_distance(3, 40) #2
     cpp.rotate(90, 40)
@@ -266,7 +266,7 @@ def goYellowFirst():
 
 def goYellowSecond():
     print "Yellow is in second position"
-    cpp.rotate(21, 30)  #15
+    cpp.rotate(23, 30)  #15
     cpp.drive_distance(-8, 15)
     # Deliver Blocks
     cpp.drive_distance(3, 35)
@@ -302,7 +302,7 @@ def goYellowThird():
     lineFollowLeftFrontTilRightFrontBlack(250)
     cpp.drive_distance(1, 30)
     cpp.rotate(90, 35)
-    cpp.drive_distance(16, 35)
+    cpp.drive_distance(15, 35)
     cpp.rotate(-90, 35)
     driveTilBlackLCliffAndSquareUp(30)
     cpp.drive_distance(-12.5, 35)
