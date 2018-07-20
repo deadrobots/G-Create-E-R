@@ -80,6 +80,6 @@ def claw_move(power):
 def test():
     rotate_until_stalled(20)
     rotate_until_stalled(-20)
-    set_claw_open()
-    claw_to_position(600, 20)
+    while True:
+        print(get_motor_position_counter(clawMotor))
     exit(0)

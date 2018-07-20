@@ -44,7 +44,7 @@ FIRST_RGY_AREA = 40
 
 INCHES_TO_TICKS = 560
 # Botguy claw is now motor
-clawBotguy = 400
+clawBotguy = 500
 
 # Botguy Arm Servo Values
 botGuyArmHigh = 600
