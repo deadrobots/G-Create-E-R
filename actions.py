@@ -167,6 +167,7 @@ def driveToCenterSeeding():
     cpp.drive_distance(-3.5, 40)
     p.set_second_position()
     p.set_final_positions()
+    wait_for_button()
 
 
 def getCrates():  # break this function into smaller bites... make driveToCrates, getCrates, turnAround,etc
@@ -185,7 +186,7 @@ def getCrates():  # break this function into smaller bites... make driveToCrates
     driveTilBlackLCliffAndSquareUp(50)
     # cpp.drive(0, 0)
     cpp.drive_distance(2, 35)
-    moveServo(c.servoCrateArm, c.crateArmCarry, 25)  #crateArmUp is too high
+    moveServo(c.servoCrateArm, c.crateArmUp, 25)
     cpp.rotate(90, 45)
     cpp.drive_distance(3, 40) #2
     cpp.rotate(90, 40)
@@ -206,12 +207,12 @@ def getBotGuy():
     cpp.drive_distance(3, 40)
     m.claw_to_position(c.motorMid, 30)
     msleep(500)
-    cpp.drive_distance(7.5, 40)
+    cpp.drive_distance(6, 40)  #7.5
     msleep(500)
     m.claw_move(40)
     msleep(1000)
     cpp.drive_distance(-15, 40)
-    moveServo(c.servoCrateArm, c.crateArmUp, 25)
+    moveServo(c.servoCrateArm, c.crateArmCarry, 25)  #Armup
 
 
 def driveToYellow():
@@ -266,7 +267,7 @@ def goYellowFirst():
 
 def goYellowSecond():
     print "Yellow is in second position"
-    cpp.rotate(23, 30)  #15
+    cpp.rotate(20, 30)  #15
     cpp.drive_distance(-8, 15)
     # Deliver Blocks
     cpp.drive_distance(3, 35)
@@ -375,7 +376,7 @@ def goRedSecond():  # when red is in second position drop botguy off there
 
 def goRedThird():  # when red is in third position drop botguy off there
     cpp.rotate(-90, 30)
-    cpp.drive_distance(20, 30) #15
+    cpp.drive_distance(17, 30) #15
     cpp.rotate(90, 30)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=False)

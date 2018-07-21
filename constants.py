@@ -69,10 +69,10 @@ cogPegTwo = 500
 cogStart = 800
 cogGrab = 800
 
-crateArmUp = 1450  #1400
+crateArmUp = 1300  #1400
 crateArmMid = 1050
 crateArmDeStack = 1400
-crateArmCarry = 1000
+crateArmCarry = 1100
 crateArmDown = 900  #830
 crateArmAlmostDown = 962
 crateArmLiftCrate = 1600
