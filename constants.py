@@ -71,7 +71,7 @@ cogGrab = 800
 
 crateArmUp = 1300  #1400
 crateArmMid = 1050
-crateArmDeStack = 1400
+crateArmDeStack = 1300  #1400
 crateArmCarry = 1100
 crateArmDown = 900  #830
 crateArmAlmostDown = 962

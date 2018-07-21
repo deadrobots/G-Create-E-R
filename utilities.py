@@ -53,7 +53,7 @@ def wait_for_selection(force=False):
 
 def wait_4_light(ignore=False):
     if ignore:
-        wait_for_button()
+        wait_for_button_blink()
         return
     while not calibrate(c.STARTLIGHT):
         pass
@@ -68,7 +68,7 @@ def calibrate(port):
         pass
     lightOn = analog(port)
     print("On value =", lightOn)
-    if lightOn > 200:
+    if lightOn > 1500:
         print("Bad calibration")
         return False
     msleep(1000)
@@ -79,15 +79,16 @@ def calibrate(port):
         pass
     lightOff = analog(port)
     print("Off value =", lightOff)
-    if lightOff < 3000:
+    if lightOff < 1500:
         print("Bad calibration")
         return False
 
-    if (lightOff - lightOn) < 2000:
+    if (lightOff - lightOn) < 1000:
         print("Bad calibration")
         return False
-    c.startLightThresh = (lightOff - lightOn) / 2
+    c.startLightThresh = (lightOff + lightOn) / 2
     print("Good calibration! ", c.startLightThresh)
+    print('{} {} {}'.format(lightOff, lightOn, c.startLightThresh))
     return True
 
 def _wait_4(port):

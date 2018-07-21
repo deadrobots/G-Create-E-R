@@ -12,7 +12,7 @@ import Shutdown
 
 def main():
     # motorz.test()
-    with createPlusPlus.Create(full=False) as cpp:
+    with createPlusPlus.Create(full=True) as cpp:
         print("Running!")
         act.init(cpp)
         # act.temp_init(cpp)
