@@ -5,6 +5,7 @@ from wallaby import *
 import camera as p
 import createPlusPlus as cpp
 import motorz as m
+import multiprocessing
 
 colorOrder = []
 
@@ -60,7 +61,7 @@ def init(icpp):
     selfTest()  # tests each function of the robot
     p.cameraInit()
     print("Press a button to continue")
-    wait_4_light(ignore=True)
+    wait_4_light(ignore=False)
     shut_down_in(119.0)
     c.START_TIME = seconds()
 
@@ -213,7 +214,7 @@ def getBotGuy():
     msleep(500)
     m.claw_move(40)
     msleep(1000)
-    cpp.drive_distance(-15, 60)
+    cpp.drive_distance(-10, 60)
     moveServo(c.servoBotGuyArm, c.botGuyArmStart, 10)
 
 
@@ -256,7 +257,7 @@ def goYellowFirst():
     cpp.drive_distance(-9, 60)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
     moveServo(c.servoCrateClaw, c.crateClawOpen, 15)
-    moveServo(c.servoCrateArm, c.crateArmUp)
+    moveServo(c.servoCrateArm, c.crateArmLiftCrate, 10)
     cpp.drive_distance(-4, 40)
     # driving back to center after dropping off crates
     moveServo(c.servoCrateClaw, c.crateClawClosed)
@@ -290,7 +291,7 @@ def goYellowSecond():
     moveServo(c.servoCrateArm, c.crateArmUp)
     moveServo(c.servoCrateClaw, c.crateClawClosed, 15)
     cpp.drive_distance(-4, 50)
-    moveServo(c.servoCrateArm, c.crateArmVeryHigh, 20)
+    moveServo(c.servoCrateArm, c.crateArmLiftCrate, 20)
     cpp.drive_distance(5, 30)
     cpp.rotate(30, 40)
     # drive back to the center position to then go and drop off bot guy
@@ -303,7 +304,7 @@ def goYellowSecond():
 def goYellowThird():
     print "Yellow is in third position"
     # if yellow cube is in third zone (farthest from startbox)
-    cpp.drive_distance(-4, 50)
+    cpp.drive_distance(-3, 50)
     lineFollowLeftFrontTilRightFrontBlack(250)
     cpp.drive_distance(1, 30)
     moveServo(c.servoCrateArm, c.crateArmGrab, 20)
@@ -311,7 +312,7 @@ def goYellowThird():
     cpp.drive_distance(15, 60)
     cpp.rotate(-90, 30)
     driveTilBlackLCliffAndSquareUp(30)
-    cpp.drive_distance(-12.5, 50)
+    cpp.drive_distance(-11, 50)
     # Drop blocks below
     cpp.drive_distance(2.5, 40)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
@@ -326,10 +327,10 @@ def goYellowThird():
     cpp.drive_distance(10.5, 50)
     cpp.rotate(-88, 35)
     moveServo(c.servoCrateArm, c.crateArmCarry, 15) #Mid
-    cpp.drive_distance(-9, 50)
+    cpp.drive_distance(-8, 50)
     moveServo(c.servoCrateArm, c.crateArmDown, 15)
     moveServo(c.servoCrateClaw, c.crateClawSlightlyOpen, 15)
-    moveServo(c.servoCrateArm, c.crateArmDeStack)   #not actually detacking, just need value to move under cog railway
+    moveServo(c.servoCrateArm, c.crateArmLiftCrate, 10)   #not actually detacking, just need value to move under cog railway
     cpp.drive_distance(-4, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp, 10)
     cpp.drive_distance(11, 50)
@@ -369,11 +370,12 @@ def goRedFirst(): # when red is in first position drop botguy off there
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=True)
     cpp.drive_distance(2, 35)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown)
+    cpp.rotate(7, 20)
 
 
 def goRedSecond():  # when red is in second position drop botguy off there
     moveServo(c.servoCrateArm, c.crateArmLiftCrate, 20)
-    cpp.rotate(10, 40)
+    cpp.rotate(-3, 40)
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=False)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=True)
@@ -389,5 +391,5 @@ def goRedThird():  # when red is in third position drop botguy off there
     moveServo(c.servoBotGuyArm, c.botGuyArmUp)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=False)
     cpp.drive_conditional(cpp.get_black_front_left, 30, state=True)
-    cpp.drive_distance(4, 30)
+    cpp.drive_distance(3, 30)
     moveServo(c.servoBotGuyArm, c.botGuyArmDown)
