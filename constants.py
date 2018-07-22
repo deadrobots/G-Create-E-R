@@ -50,8 +50,9 @@ clawBotguy = 500
 botGuyArmHigh = 600
 botGuyArmUp = 700
 botGuyArmMid = 800
-botGuyArmDown = 1075
+botGuyArmDown = 1050
 botGuyArmStart = 0
+
 
 # CrateArm Servo Values
 crateArmDown = 880
@@ -64,11 +65,12 @@ crateArmUp = 2047
 crateArmVeryHigh = 2000
 
 #Crate Claw Servo Values
-crateClawClosed = 200 #500
+crateClawClosed = 280 #500
 crateGrab = 750
 crateClawOpen = 1650
 crateClawStart = 1800
 crateClawSlightlyOpen = 810
+
 
 COLOR_PROXIMITY = 20
 ORANGE_AREA = 500

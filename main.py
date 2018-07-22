@@ -7,18 +7,23 @@ from wallaby import *
 import utilities as u
 import movement as m
 from camera import determineOrder
+import Shutdown
 
 def main():
-    with createPlusPlus.Create(full=False) as cpp:
+    with createPlusPlus.Create(full=True) as cpp:
         act.init(cpp)
-        act.centerPipeRunAndBotGuyGrab()
-        act.headToSecondBlock()
-        act.getCrates()
-        act.driveToYellow()
-        act.driveToRed()
-        u.DEBUG()
-        # cpp.disconnect()
-        # exit(0)
+        Shutdown.die_after_time(main_two, 118)
+
+
+def main_two():
+    act.centerPipeRunAndBotGuyGrab()
+    act.headToSecondBlock()
+    act.getCrates()
+    act.driveToYellow()
+    act.driveToRed()
+    u.DEBUG()
+    # cpp.disconnect()
+    # exit(0)
 
 
 

@@ -26,8 +26,11 @@ def _getCenterColorAvg():
     #Determines what color block is within the orange card
     #This uses mode of the returned colors..
     i = 0
-    while (i < 5):
-        camera_update()
+    while (i < 5): # bad code - shame on you
+        cam = camera_update()
+        if type(cam) is not int or cam != 1:
+            print("camera not responding... giving up")
+            return None
         i += 1
         msleep(60)
     redCount = 0
@@ -60,6 +63,7 @@ def _getCenterColorAvg():
     print("what it returns is:")
 
     if max(redCount, greenCount, yellowCount)==0:
+        print "No color seen in block"
         return None
     elif max(redCount, greenCount, yellowCount) == greenCount:
         return c.GREEN
@@ -73,7 +77,10 @@ def _readColorWithoutOrange():
     # This uses mode of the returned colors..
     i = 0
     while (i < 5):
-        camera_update()
+        cam = camera_update()
+        if type(cam) is not int or cam != 1:
+            print("camera not responding... giving up")
+            return None
         i += 1
         msleep(60)
     redCount = 0
@@ -101,7 +108,7 @@ def _readColorWithoutOrange():
     print("what it returns is:")
 
     if max(redCount, greenCount, yellowCount) == 0:
-        print "No color seen in first block; ending run due to inconclusive reading"
+        print "No color seen in block"
         return None
     elif max(redCount, greenCount, yellowCount) == greenCount:
         return c.GREEN
