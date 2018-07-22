@@ -1,7 +1,6 @@
 import multiprocessing
 from wallaby import *
 
-
 def die_after_time(function, time, post_function=None):
     p = multiprocessing.Process(target=function)
     p.start()
